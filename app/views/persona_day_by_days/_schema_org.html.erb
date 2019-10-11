@@ -1,0 +1,27 @@
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "TouristTrip",
+    "name": "<%= (t 'persona_day_by_day.day_by_day_for') + ' ' + @persona_locale.nome + ' ' + (t 'persona_day_by_day.in_bonito_ms') %>",
+    "description": "<%= @meta_description %>",
+    "touristType": <%= raw touristType_array.to_json %>,
+    "url": "<%= persona_persona_day_by_days_url(@persona) %>",
+    "itinerary": <%= raw @itinerary_hash.to_json %>,
+    "offers": {
+      "@type": "Offer",
+      "name": "<%= (t 'persona_day_by_day.day_by_day_for') + ' ' + @persona_locale.nome + ' ' + (t 'persona_day_by_day.in_bonito_ms') %>",
+      "description": "<%= @tour_list_all %>",
+      "priceCurrency": "BRL",
+      "price": "<%= @sum_day_by_day_prices %>",
+      "priceValidUntil": "<%= @end_date.strftime('%Y-%m-%d') %>",
+      "url": "<%= persona_persona_day_by_days_url(@persona) %>",
+      "offeredBy": {
+        "@type": "Organization",
+        "name": "Agência H2O",
+        "email": "reservas@h2oecoturismo.com.br",
+        "telephone": ["+55 (67) 3255-3535", "+55 (67) 3042-7082"],
+        "url": "https://www.h2oecoturismo.com.br"
+      }
+    }
+  }
+</script>

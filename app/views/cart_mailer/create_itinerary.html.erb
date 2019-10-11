@@ -1,0 +1,29 @@
+<%
+  @this_locale = I18n.locale.to_s
+  @this_locale = 'en-US' if I18n.locale.to_s == 'en'
+%>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
+  <%= render 'create_itinerary_header' %>
+  <%= render 'create_itinerary_body' %>
+  <%= render 'body_stamps' %>
+
+  <tr bgcolor="white">
+    <td colspan="2" valign="middle" align="left" style="padding: 6% 2% 4% 2%;">
+      <div style="color:#0097f5;font-size:200%;font-family:Arial;letter-spacing:5px;">
+        <%= (t 'cart_mailer.reservations_summary').upcase %>
+      </div>
+      <div style="color:black;font-size:150%;font-family:Arial;">
+        <%= (t 'trip_dates').upcase %>:
+        <b><%= l @itinerary.inicio_da_viagem %></b>
+        <%= (t 'thru_date').upcase %>
+        <b><%= l @itinerary.fim_da_viagem %></b>
+      </div>
+    </td>
+  </tr>
+
+  <%= render 'create_itinerary_tours' %>
+  <%= render 'create_itinerary_hotels' %>
+
+  <%= render 'create_itinerary_totals' %>
+  <%= render 'create_itinerary_footer' %>
+</table>

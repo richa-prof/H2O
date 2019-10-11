@@ -1,0 +1,74 @@
+<% @cart.cart_hotels.each do |ch| %>
+  <tr bgcolor="#f2f2f2">
+    <td colspan="2">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
+        <tr>
+          <td width="80%" valign="top" align="left" style="padding: 1% 1% 1% 1%;">
+            <table width="100%" style="color:grey;font-family:Arial;">
+              <tr>
+                <td valign="top" width="15%" align="center" style="padding: 1% 1% 1% 1%;">
+                  <div style="font-size:125%;">
+                    <%= t 'start_date' %>
+                    <br/>
+                    <%= l ch.start_date %>
+                  </div>
+                </td>
+                <td valign="top" width="15%" align="center" style="padding: 1% 1% 1% 1%;">
+                  <div style="font-size:125%;">
+                    <%= t 'end_date' %>
+                    <br/>
+                    <%= l ch.end_date %>
+                  </div>
+                </td>
+                <td valign="top" width="45%" align="left" style="padding: 1% 1% 1% 1%;">
+                  <div style="font-family:Arial;color:grey;">
+                    <b style="color:black;font-size:125%;">
+                      <%= ch.hotel.hotel_locales.where(locale: @this_locale).first.nome %>
+                      -
+                      <%= ch.room_type_name %>
+                    </b>
+                  </div>
+
+                  <%= ch.adults %> <%= t 'adults' %>
+                  <br/>
+                  <% children_ages = ch.children_ages.split(' ').map{ |age| age.to_i } %>
+                  <% children_ages.each do |child_age| %>
+                    1 <%= t 'child' %> <%= child_age %> <%= t 'yrs_old' %>
+                    <br/>
+                  <% end %>
+                  TOTAL: <%= ch.adults + children_ages.size %> <%= t 'persons' %>
+                </td>
+                <td valign="top" width="20%" align="right" style="padding: 1% 1% 1% 1%;">
+                  <div style="font-size:125%;">
+                    <%= ch.number_of_nights %> <%= t 'nights' %> <%= t 'for' %>
+                    <br/>
+                    <%= number_to_currency ch.sale_price %>
+                  </div>
+                </td>
+                <td width="5%">
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td width="20%" valign="top">
+            <%= image_tag 'https://admin.h2oecoturismo.com.br/'+ch.hotel.ploomes_img.to_s, width: '100%' %>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="top">
+      <div style="color:black;font-size:90%;font-family:Arial;">
+        <% if @this_locale == 'en-US' %>
+          <%= link_to (t 'cart_mailer.see_page'), hotel_en_url(ch.hotel) %>
+        <% else %>
+          <%= ch.hotel.ploomes_descricao %>
+          <%= link_to (t 'cart_mailer.see_page'), hotel_pt_br_url(ch.hotel) %>
+        <% end %>
+        <br/>
+        <br/>
+      </div>
+    </td>
+  </tr>
+<% end %>

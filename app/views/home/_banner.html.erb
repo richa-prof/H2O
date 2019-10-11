@@ -1,0 +1,33 @@
+<section class="banner-bg">
+  <div class="owl-carousel">
+    <% @banners.each do |b| %>
+      <div class="item">
+        <div class="banner-box">
+          <div class="img">
+            <%= image_tag b.face_image_url, width: '100%' %>
+          </div>
+          <div class="content">
+            <div class="container h-100">
+              <div class="row h-100">
+                <div class="col-12 my-auto text-center">
+                  <h1><%= b.banner_locales.first.titulo %></h1>
+                  <h2><%= b.banner_locales.first.subtitulo %></h2>
+                  <h3><%= b.banner_locales.first.texto %></h3>
+                  <% unless b.banner_locales.first.link.empty? %>
+                    <%= link_to (t 'read_more'), b.banner_locales.first.link, class: 'btn btn-success' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="owl-controls">
+    <div class="owl-nav">
+      <div class="owl-prev">prev</div>
+      <div class="owl-next">next</div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+<tr bgcolor="#bdeda4">
+  <td colspan="2" style="padding: 2% 2% 2% 2%;">
+    <div style="color:white;font-size:200%;font-family:Arial;letter-spacing:5px;margin-bottom: 1%;">
+      EU VOU PARA BONITO
+    </div>
+    <div style="color:grey;font-size:150%;font-family:Arial;margin-bottom: 2%;">
+      CA <%= @cart.id %>
+    </div>
+  </td>
+</tr>
+<tr bgcolor="#bdeda4">
+  <td width="50%" valign="bottom" align="right" style="padding: 2% 2% 2% 2%;">
+    <div style="font-size:200%;font-family:Arial;">
+      <b><%= @cart.user.nome %></b>
+    </div>
+    <div style="color:grey;font-family:Arial;">
+      <b><%= @cart.user.email %></b>
+    </div>
+    <br/>
+    <br/>
+    <div style="font-family:Arial;">
+      <b><%= t 'cart_mailer.pax_list' %></b>
+    </div>
+    <% @cart.cart_passengers.each do |pax| %>
+      <div style="color:grey;font-family:Arial;">
+        <%= pax.nome %> - <%= pax.idade %> <%= t 'cart_mailer.years_old' %>
+      </div>
+    <% end %>
+    <br/>
+    <br/>
+    <div style="font-family:Arial;">
+      <b><%= t 'cart_mailer.location' %></b>
+    </div>
+    <div style="color:grey;font-family:Arial;">
+      <%= @cart.localizacao %>
+    </div>
+  </td>
+  <td width="50%" valign="bottom" align="right" style="padding: 2% 2% 2% 2%;">
+    <img src="https://admin.h2oecoturismo.com.br/files/arquivos/email-h2o-eco-ex-green_73567384.png" width="75%;">
+  </td>
+</tr>
+<tr bgcolor="grey">
+  <td colspan="2" valign="middle" align="center" style="padding: 2% 2% 2% 2%;">
+    <div style="color:white;font-size:200%;font-family:Arial;letter-spacing:5px;">
+      <%= t 'cart_mailer.online_purchase' %>
+    </div>
+  </td>
+</tr>

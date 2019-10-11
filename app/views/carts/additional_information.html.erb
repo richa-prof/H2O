@@ -1,0 +1,40 @@
+<% @title = 'Agência H2O - '+(t 'additional_information') %>
+<%= render 'menu', step: 'additional_information' %>
+
+<section class="login cart-step-3">
+  <div class="container">
+    <%= form_for(@cart) do |f| %>
+      <div class="login-form">
+        <div class=" row">
+          <div class="col-md-6 form-group">
+            <label><%= t 'location' %></label>
+            <muted><%= t 'location_blurb' %></muted>
+            <%= f.select :localizacao, options_for_select(Location.all.order(:nome).pluck(:nome), 'Bonito: Agência H2O Ecoturismo'), {}, class: 'form-control' %>
+
+          </div>
+          <div class="col-md-6 form-group">
+            <label><%= t 'phone_number' %></label>
+            <muted><%= t 'phone_number_blurb' %></muted>
+            <%= text_field_tag :telefone, current_user.telefone, class: 'form-control', placeholder: '+55 (XX) X XXXX-XXXX' %>
+          </div>
+        </div>
+        <div class="add-person">
+          <label class="add-person-label">
+            <%= t 'pax_info' %>
+            <br/>
+            <%= link_to_add_row((t 'add'), f, :cart_passengers, class: '') %>
+          </label>
+          <div class="fields">
+            <%= f.fields_for :cart_passengers, @cart.cart_passengers.count > 0 ? @cart.cart_passengers : @cart.cart_passengers.build do |builder| %>
+              <%= render "cart_passenger", :f => builder %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="cart-step-footer mt-5 w-100">
+        <a href="<%= add_to_cart_carts_path %>" class="btn btn-default back-button"><%= t 'back' %></a>
+        <button type="submit" class="btn btn-success float-right"><%= t 'next' %></button>
+      </div>
+    <% end %>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+<section class="testimonials-bg">
+  <div class="row">
+    <div class="col-12 text-center">
+      <%= image_tag 'estrelas-depoimentos-h2o.png', alt: 'estrelas depoimentos agência h2o', title: 'estrelas depoimentos agência h2o', class: 'top-stars' %>
+      <h1><%= t 'activerecord.models.testimonial.other' %></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="owl-carousel">
+        <% @testimonials.each do |t| %>
+          <% if t.texto.size > 250 && t.texto.size < 750 %>
+            <div class="item">
+              <div><i class="fas fa-quote-left"></i></div>
+              <div class="t-texto"><%= t.texto %></div>
+              <div class="bottom"><i class="fas fa-quote-right"></i></div>
+              <h2><%= t.nome %>&nbsp;</h2>
+              <h3><%= t.cidade %>&nbsp;</h3>
+              <h4><%= l t.created.to_date unless t.created.blank? %>&nbsp;</h4>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="owl-controls">
+        <div class="owl-nav">
+          <div class="owl-prev"></div>
+          <div class="owl-next"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

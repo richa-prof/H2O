@@ -1,0 +1,28 @@
+en:
+  persona_day_by_day:
+
+    day_by_day_suggestions: Day by Day Suggestions
+
+    day_by_day_for: Day by day for
+    in_bonito_ms: in Bonito MS
+    you: you
+    select_a_persona: Select a traveler style
+
+    start_date: Arrival
+    end_date: Departure
+    persona_select: What group best describes you?
+
+    day: Day
+    minutes: minutes
+
+    talk_to_our_staff: ask our staff
+
+    update: Update
+
+    arrival_day_info: This is the day you arrive. Let's leave it open for you to walk around, see downtown, etc.
+    departure_day_info: The end... This is the day you leave. :-( We'll leave it open so that you can plan your departure.
+    request_options: Ask our staff for options that fit your very own style!
+
+    per_adult: per adult
+    price_not_avialable: (price not available)
+    sum: Sum of displayed prices

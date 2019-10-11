@@ -1,0 +1,87 @@
+<% if @availability.present? %>
+  <div class="row">
+    <div class="col-12">
+      <% if @availability['room_rates'].present? %>
+        <ul class="rooms">
+          <% @availability['room_rates'].each do |room_rate| %>
+            <% room_info = room_rate.first.split('-') %>
+            <% room_id = room_info.first %>
+            <% rate_plan_id = room_info.second %>
+            <% if room_rate.last['is_marked_up'] %>
+              <% sale_price = room_rate.last['rate'] %>
+              <% net_price = 0 %>
+            <% else %>
+              <% sale_price = (room_rate.last['rate'] / 0.8) %>
+              <% net_price = room_rate.last['rate'] %>
+            <% end %>
+            <li class="room-info">
+              <a class="room-rate pointer" value="<%= room_rate.first %>" sale-price="<%= sale_price %>">
+                <div class="row">
+                  <div class="col-12 col-md-3 room-type-name">
+                    <%= @availability['room_types'][room_id]['name'] %>
+                  </div>
+                  <div class="col-12 col-md-6 room-type-description">
+                    <%= @availability['room_types'][room_id]['description'] %>
+                  </div>
+                  <div class="col-12 col-md-3 nights-and-price">
+                    <span class="number-of-nights">
+                      <%= @number_of_nights %> <%= t 'nights' %> <%= t 'for' %>
+                    </span>
+                    <span class="price">
+                      <%= number_to_currency sale_price %>
+                    </span>
+                    <% if room_rate.last.dig('taxes') > 0 %>
+                      <div class="room-type-description text-center">
+                        <%= t 'included_taxes' %>: <%= number_to_currency room_rate.last['taxes'] %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <div class="col-12 details">
+                    <strong><%= t 'meals' %></strong>
+                    <%= @availability['rate_plans'][rate_plan_id]['meal'] %>
+                    <strong><%= @availability['rate_plans'][rate_plan_id]['additional_info_name'] %></strong>
+                    <%= @availability['rate_plans'][rate_plan_id]['additional_info_description'] %>
+                    <strong><%= @availability['rate_plans'][rate_plan_id]['cancelation_name'] %></strong>
+                    <%= @availability['rate_plans'][rate_plan_id]['cancelation_description'] %>
+                  </div>
+                </div>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+        <%= form_tag add_to_cart_carts_path, id: 'cart-form', method: :get do %>
+          <%= hidden_field_tag :hotel_id, @hotel.id %>
+          <%= hidden_field_tag :request_echo_token, @availability['request_echo_token'] %>
+          <%= hidden_field_tag :start_date, Date.parse(@availability['start_date']).strftime('%d/%m/%Y') %>
+          <%= hidden_field_tag :end_date, Date.parse(@availability['end_date']).strftime('%d/%m/%Y') %>
+          <%= hidden_field_tag :adults, @adults %>
+          <%= hidden_field_tag :children_ages, @children_ages %>
+          <%= hidden_field_tag :number_of_nights, @number_of_nights %>
+          <%= hidden_field_tag :room_type_name %>
+          <%= hidden_field_tag :room_selected %>
+          <%= hidden_field_tag :sale_price %>
+        <% end %>
+      <% else %>
+        <div class="row">
+          <div class="col-12 text-center">
+            <h5><%= t 'hotel_not_available' %></h5>
+            <h5><%= t 'try_different_dates_or_contact_directly' %>:</h5>
+            <div class="disk-passeio-box">
+              <div>
+                <%= t 'phone_or_whatsapp' %>:
+                <%= render 'application/phone_numbers_whatsapp_link' %>
+              </div>
+              <div>
+                <%= t 'send_an_email_to' %>:
+                <span>reservas@h2oecoturismo.com.br</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%= image_tag 'loading.gif', class: 'hide', id: 'hotel_availability_loading', alt: 'loading hotel availability', title: 'loading hotel availability' %>
+<% else %>
+  <%= image_tag 'loading.gif', id: 'hotel_availability_loading', alt: 'loading hotel availability', title: 'loading hotel availability' %>
+<% end %>

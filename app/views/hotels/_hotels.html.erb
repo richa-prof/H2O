@@ -1,0 +1,56 @@
+<% @hotels.each do |h| %>
+  <div id="hotel_<%= h.id %>" class="col-12 col-lg-4">
+    <div class="product-list-box">
+      <a href="<%= hotel_path(h) %>">
+        <div class="img">
+          <%= image_tag h.face_image_url, :height => "200", :style => 'object-fit: cover;', lazy: true %>
+        </div>
+      <div class="content">
+        <a href="<%= hotel_path(h) %>">
+          <h4><%= h.hotel_locales&.first&.nome %></h4>
+        </a>
+        <p>
+          <%= number_to_human(h.distancia_do_centro, units: :distance) %>
+          <%= t 'from_downtown' %>
+          <%= h.centro_de %>
+        </p>
+        <div class="d-flex flex-wrap">
+          <h5 class="mr-auto"><%= t 'facilities' %></h5>
+          <a href="<%= hotel_path(h) %>"><%= t 'see_more' %>...</a>
+        </div>
+        <ul>
+          <% h.hotel_facilities.sample(3).each do |f| %>
+            <li class="mt-1">
+              <% if f.facility.icon_name.blank? %>
+                <%= image_tag 'blank-icon.png' %>
+              <% else %>
+                <%= image_tag (f.facility.icon_name+'-icon.png'), class: 'mt-1', style: 'opacity: 0.5;' %>
+              <% end %>
+              <div>
+                <%= f.facility&.facility_locales&.first&.nome %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="footer">
+        <div class="price">
+          <!-- prices will go here -->
+        </div>
+        <a href="<%= hotel_path(h) %>" class="btn btn-success"><%= t 'see_more' %></a>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div class="col-12">
+  <% if @hotels.next_page.present? %>
+    <ul class="pagination">
+      <li class="page-item">
+        <%= link_to "Load More", hotels_path(search: params[:search], categories: params[:categories], page: @hotels.next_page), remote: true, class: "page-link" %>
+      </li>
+    </ul>
+  <% else %>
+    <% if @hotels.count > 0 %><h5>No more <%= t 'activerecord.models.hotel.one' %></h5><% end %>
+  <% end %>
+</div>
+<% if @hotels.count == 0 %><h4>No <%= t 'activerecord.models.hotel.one' %> found</h4><% end %>

@@ -1,0 +1,16 @@
+en:
+
+  activerecord:
+    models:
+      cart_item:
+        one: Item
+        other: Items
+    attributes:
+      cart_item:
+        passeio_data: Date
+        passeio_hora: Time
+        qtde_adulto: Adults
+        qtde_crianca: Children
+        qtde_crianca2: Children
+        preco_total: Price
+        produto_id: Tour

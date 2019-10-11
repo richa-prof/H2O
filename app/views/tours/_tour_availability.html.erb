@@ -1,0 +1,27 @@
+<% if @availability.present? %>
+  <% if @availability == 'not available' %>
+    <div class="row">
+      <div class="col-12 text-center">
+        <h5><%= t 'date_with_no_availability' %></h5>
+        <h5><%= t 'try_another_date_or_contact_directly' %>:</h5>
+        <div class="disk-passeio-box">
+          <div>Disk Passeios: <span>(67) 9 9860-9808</span></div>
+          <div>E-mail: <span>reservas@h2oecoturismo.com.br</span></div>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <ul class="time">
+      <% @availability.each do |availability_detail| %>
+        <li>
+          <a class="tour_time pointer" value="<%= availability_detail['time'] %>" system="<%= availability_detail['system'] %>">
+            <%= availability_detail['time'] %><span><%= availability_detail['slots'] %></span>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= image_tag 'loading.gif', class: 'hide', id: 'tour_availability_loading', alt: 'loading tour availability', title: 'loading tour availability' %>
+<% else %>
+  <%= image_tag 'loading.gif', id: 'tour_availability_loading', alt: 'loading tour availability', title: 'loading tour availability' %>
+<% end %>

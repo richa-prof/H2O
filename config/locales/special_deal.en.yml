@@ -1,0 +1,21 @@
+en:
+  special_deal_tag_line: better prices and payment conditions
+
+  activerecord:
+    models:
+      special_deal:
+        one: Special Deal
+        other: Special Deals
+        either: Special Deal(s)
+    attributes:
+      special_deal:
+        name: Name
+        start_date: Start Date
+        end_date: End Date
+        video: Video
+        photo_1: Photo 1
+        photo_2: Photo 2
+        photo_3: Photo 3
+        photo_4: Photo 4
+        true_price: True Price
+        discounted_price: Discounted Price

@@ -1,0 +1,19 @@
+<section class="staff-bg">
+  <div class="container">
+    <div class="row">
+      <% @institutional.staff.includes(:staff_locales).where('equipes_locales.locale = ?', params[:locale]).references(:staff_locales).order('contratado').each do |s| %>
+      <div class="col-12 col-lg-4">
+        <div class="staff-box">
+          <div class="images">
+            <%= image_tag 'https://admin.h2oecoturismo.com.br/'+s.imagem, alt: s.nome, title: s.nome, lazy: true %>
+          </div>
+          <h4><%= s.nome %></h4>
+          <h6><%= s.staff_locales.first.cargo %></h6>
+          <p class="time"><%= time_ago_in_words(s.contratado) %> <%= t 'with_us' %></p>
+          <%= s.staff_locales.first.texto.html_safe %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</section>

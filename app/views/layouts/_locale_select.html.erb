@@ -1,0 +1,3 @@
+<% I18n.available_locales.each do |each_locale| %>
+  <%= link_to each_locale, url_for(locale: each_locale.to_s) %>
+<% end %>

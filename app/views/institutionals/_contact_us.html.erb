@@ -1,0 +1,109 @@
+<div class="col-12 col-lg-6">
+  <%= render 'rd_station_form' %>
+</div>
+
+<div class="col-12 col-lg-6">
+  <div class="contact-detail">
+    <ul>
+      <li>
+        <i class="fas fa-mobile-alt"></i>
+        <% if params[:locale] == 'pt-BR' %>
+          <span><h2>Disk Passeios</h2></span>
+          <span>(67) 9 9860-9808<i class="fab fa-whatsapp"></i></span>
+        <% else %>
+          <span><h2>Tour Hotline</h2></span>
+          <span>+55 (67) 9 9860-9808<i class="fab fa-whatsapp"></i></span>
+        <% end %>
+      </li>
+      <li>
+        <i class="fas fa-envelope"></i>
+        <span><h2>E-mail</h2></span>
+        <span>reservas@h2oecoturismo.com.br</span>
+      </li>
+      <li>
+        <i class="fas fa-exclamation-circle"></i>
+        <% if params[:locale] == 'pt-BR' %>
+          <span><h2>Plantão 24 horas para emergências</h2></span>
+          <span>(67) 9 9297-5794<i class="fab fa-whatsapp"></i></span>
+        <% else %>
+          <span><h2>24-hour number for emergencies</h2></span>
+          <span>+55 (67) 9 9297-5794<i class="fab fa-whatsapp"></i></span>
+        <% end %>
+      </li>
+      <li>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>
+          <% if params[:locale] == 'pt-BR' %>
+            <h2>Agência em Bonito</h2>
+            Rua 24 de fevereiro, 2101<br/>
+            <small>(Uma quadra atrás do Banco do Brasil)</small><br/>
+            (67) 3255-3636<br/>
+            (67) 9 9931-8257<i class="fab fa-whatsapp"></i><br/>
+            Todos os dias das 07h00 às 19h00
+          <% else %>
+            <h2>Bonito Office</h2>
+            Rua 24 de fevereiro, 2101<br/>
+            <small>(Near the main square, one block from Banco do Brasil)</small><br/>
+            +55 (67) 3255-3535<br/>
+            +55 (67) 9 9931-8257<i class="fab fa-whatsapp"></i><br/>
+            Everyday from 7 am to 7 pm
+          <% end %>
+        </span>
+      </li>
+      <li>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>
+          <% if params[:locale] == 'pt-BR' %>
+            <h2>Agência em Campo Grande</h2>
+            Rua Eduardo Santos Pereira, 2209<br/>
+            <small>(Próximo ao cruzamento da Av. Mato Grosso com a R. Ceará)</small><br/>
+            (67) 3042-7082<br/>
+            (67) 9 9240-7484<i class="fab fa-whatsapp"></i><br/>
+            De segunda a sexta das 08h00 às 18h00<br/>
+            Aos sábados das 08h00 às 12h00<br/>
+            Fechado nos domingos e feriados
+          <% else %>
+            <h2>Campo Grande Office</h2>
+            Rua Eduardo Santos Pereira, 2209<br/>
+            <small>(Near the R. Ceará and Av. Mato Grosso crossing)</small><br/>
+            +55 (67) 3042-7082<br/>
+            +55 (67) 9 9240-7484<i class="fab fa-whatsapp"></i><br/>
+            Monday thru Friday from 8 am to 6 pm<br/>
+            Saturdays from 8 am to 12 noon<br/>
+            Closed on Sundays and holidays
+          <% end %>
+        </span>
+      </li>
+      <li>
+        <i class="fas fa-user-tie"></i>
+        <span>
+          <% if params[:locale] == 'pt-BR' %>
+            <h2>Quer fazer parte da nossa equipe?</h2>
+            Envie seu CV para <b>cv@h2oecoturismo.com.br</b><br/>
+            e agende uma entrevista.
+          <% else %>
+            <h2>Interested in working with us?</h2>
+            Send your resumé to <b>cv@h2oecoturismo.com.br</b><br/>
+            and schedule an interview!
+          <% end %>
+        </span>
+      </li>
+      <li>
+        <i class="fas fa-bullhorn"></i>
+        <span>
+          <% if params[:locale] == 'pt-BR' %>
+            <h2>Contato sobre parcerias?</h2>
+            Tem feedback para o nosso site?<br/>
+            Envie um e-mail para nossa equipe de marketing:<br/>
+            <b>marketing@h2oecoturismo.com.br</b>
+          <% else %>
+            <h2>Do you want to talk new business?</h2>
+            Do you have feedback for our website?<br/>
+            E-mail our marketing team at<br/>
+            <b>marketing@h2oecoturismo.com.br</b>
+          <% end %>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>

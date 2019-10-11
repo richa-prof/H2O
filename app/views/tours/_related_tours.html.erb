@@ -1,0 +1,37 @@
+<section class="product-list">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-12">
+        <h2 class="text-center"><%= t 'we_think_you_will_also_like' %></h2>
+      </div>
+      <% @related_tours.each do |tour| %>
+      <div class="col-12 col-lg-2">
+        <div class="product-list-box">
+          <a href="<%= tour_path(tour) %>">
+            <div class="img">
+              <%= image_tag tour.face_image_url, :height => "125", :style => 'object-fit: cover;', lazy: true %>
+            </div>
+          </a>
+          <div class="content">
+            <a href="<%= tour_path(tour) %>">
+              <div class="tours-show-bottom-tour-name">
+                <%= tour.tour_locales.first.nome %>
+              </div>
+            </a>
+            <div class="text-center">
+              <%= tour.localidade %>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="price">
+              <% price = tour.tour_prices&.first %><%= price ? number_to_currency(price.preco_adulto) : '' %>
+            </div>
+            <a href="<%= tour_path(tour) %>" class="btn btn-success"><%= t 'see_more' %></a>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</section>

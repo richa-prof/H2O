@@ -1,0 +1,20 @@
+en:
+
+  activerecord:
+    models:
+      cart_hotel:
+        one: Lodging
+        other: Lodging
+    attributes:
+      cart_hotel:
+        cart: Cart
+        hotel: Hotel
+        request_echo_token: Request Token
+        start_date: Check-in
+        end_date: Check-out
+        adults: Adults
+        children_ages: Children Ages
+        number_of_nights: Number of Nights
+        room_type_name: Room Type
+        room_selected: Room Selected
+        sale_price: Total Price

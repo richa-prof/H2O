@@ -1,0 +1,28 @@
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "TouristTrip",
+    "name": "<%= @special_deal.name %>",
+    "description": "<%= strip_tags(@special_deal.descricao).split('NÃO INCLUSO NO PACOTE').first unless @special_deal.descricao.blank? %>",
+    "image": "<%= @special_deal.cover_image_url %>",
+    "touristType": <%= raw touristType_array.to_json %>,
+    "url": "<%= special_deal_url(@special_deal) %>",
+    "itinerary": <%= raw @itinerary_array.to_json %>,
+    "offers": {
+      "@type": "Offer",
+      "name": "<%= @special_deal.name %>",
+      "description": "<%= strip_tags(@special_deal.descricao).split('NÃO INCLUSO NO PACOTE').first unless @special_deal.descricao.blank? %>",
+      "priceCurrency": "BRL",
+      "price": "<%= @special_deal.discounted_price %>",
+      "priceValidUntil": "<%= @special_deal.end_date.strftime('%Y-%m-%d') %>",
+      "url": "<%= special_deal_url(@special_deal) %>",
+      "offeredBy": {
+        "@type": "Organization",
+        "name": "Agência H2O",
+        "email": "reservas@h2oecoturismo.com.br",
+        "telephone": ["+55 (67) 3255-3535", "+55 (67) 3042-7082"],
+        "url": "https://www.h2oecoturismo.com.br"
+      }
+    }
+  }
+</script>

@@ -1,0 +1,62 @@
+<div class="col-12 col-lg-3">
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default main-btn-number btn-number" disabled="disabled" data-type="minus" data-field="adults">
+          <span class="fas fa-minus"></span>
+        </button>
+      </span>
+      <input type="text" id="adults" name="adults" class="form-control input-number main-input-number mt-0 text-center" value="0" data-value="<%= @tour_price.preco_adulto %>" min="0" max="10">
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default main-btn-number btn-number" data-type="plus" data-field="adults">
+          <span class="fas fa-plus"></span>
+        </button>
+      </span>
+    </div>
+  </div>
+</div>
+
+<% if @tour_price.preco_crianca2 %>
+<div class="col-12 col-lg-3">
+  <div class="form-group">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default main-btn-number btn-number" disabled="disabled" data-type="minus" data-field="children2">
+          <span class="fas fa-minus"></span>
+        </button>
+      </span>
+      <input type="text" id="children2" name="children2" class="form-control input-number main-input-number mt-0 text-center" value="0" data-value="<%= @tour_price.preco_crianca2 %>" min="0" max="10">
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default main-btn-number btn-number" data-type="plus" data-field="children2">
+          <span class="fas fa-plus"></span>
+        </button>
+      </span>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<% if @tour_price.preco_crianca %>
+  <div class="col-12 col-lg-3">
+    <div class="form-group">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default main-btn-number btn-number" disabled="disabled" data-type="minus" data-field="children">
+            <span class="fas fa-minus"></span>
+          </button>
+        </span>
+        <input type="text" id="children" name="children" class="form-control input-number main-input-number mt-0 text-center" value="0" data-value="<%= @tour_price.preco_crianca %>" min="0" max="10">
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default main-btn-number btn-number" data-type="plus" data-field="children">
+            <span class="fas fa-plus"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="col-12 col-lg-3 text-center">
+  <h5 class="mb-20">Subtotal</h5>
+  <h5><span id="price">0</span></h5>
+</div>

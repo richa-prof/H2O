@@ -1,0 +1,2 @@
+class SessionCartCount < ApplicationRecord
+end

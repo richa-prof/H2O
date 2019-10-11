@@ -1,0 +1,115 @@
+<% @tour_extras.each do |tour_extra| %>
+  <div class="col-12 col-lg-6">
+    <div class="extra-content">
+      <div class="extracontent-des">
+        <h3 class="title">
+          <%= tour_extra.tour_extra_locales.first.titulo %>
+        </h3>
+        <p>
+          <%= tour_extra.tour_extra_locales.first.descricao.html_safe %>
+        </p>
+        <div class="row mt-3">
+          <% price = 0 %>
+          <% if tour_extra.produtos_passeiosecundarios_tarifas_tipo_id == 1 %>
+            <div class="col-12 col-lg-4 text-center">
+              <div class="form-group">
+                <i class="fas fa-user"></i> <%= t 'adults' %>
+                <br/>
+                <small>
+                  <% if tour_extra.tour_extra_prices.first.idade_crianca2.present? %>
+                    (<%= t 'older_than' %> <%= tour_extra.tour_extra_prices.first.idade_crianca2 %> <%= t 'yrs_old' %>)
+                  <% else %>
+                    <%= (t 'all_ages') %>
+                  <% end %>
+                </small>
+                <span><%= number_to_currency tour_extra.tour_extra_prices.first.preco_adulto %></span>
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="extra_adults_<%= tour_extra.id.to_s %>">
+                      <span class="fas fa-minus"></span>
+                    </button>
+                  </span>
+                  <input type="text" id="extra_adults" name="extra_adults_<%= tour_extra.id.to_s %>" class="form-control input-number extra-input-number mt-0 text-center" value="0" data-type="adults" data-id="<%= tour_extra.id %>" data-value="<%= tour_extra.tour_extra_prices.first.preco_adulto %>" min="0" max="50">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="extra_adults_<%= tour_extra.id.to_s %>">
+                      <span class="fas fa-plus"></span>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <% if tour_extra.tour_extra_prices.first.preco_crianca2 %>
+            <div class="col-12 col-lg-4 text-center">
+              <div class="form-group">
+                <i class="fas fa-child"></i> <%= t 'children' %>
+                <br/>
+                <small>(<%= t 'up_to' %> <%= tour_extra.tour_extra_prices.first.idade_crianca2 %> <%= t 'yrs_old' %>)</small>
+                <span><%= number_to_currency tour_extra.tour_extra_prices.first.preco_crianca2 %></span>
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="extra_children2_<%= tour_extra.id.to_s %>">
+                      <span class="fas fa-minus"></span>
+                    </button>
+                  </span>
+                  <input type="text" id="extra_children2" name="extra_children2_<%= tour_extra.id.to_s %>" class="form-control input-number extra-input-number mt-0 text-center" value="0" data-type="children2" data-id="<%= tour_extra.id %>" data-value="<%= tour_extra.tour_extra_prices.first.preco_crianca2 %>" min="0" max="50">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="extra_children2_<%= tour_extra.id.to_s %>">
+                      <span class="fas fa-plus"></span>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <% end %>
+            <% if tour_extra.tour_extra_prices.first.preco_crianca %>
+              <div class="col-12 col-lg-4 text-center">
+                <div class="form-group">
+                  <i class="fas fa-child"></i> <%= t 'children' %>
+                  <br/>
+                  <small>(<%= t 'up_to' %> <%= tour_extra.tour_extra_prices.first.idade_crianca %> <%= t 'yrs_old' %>)</small>
+                  <span><%= number_to_currency tour_extra.tour_extra_prices.first.preco_crianca %></span>
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="extra_children_<%= tour_extra.id.to_s %>">
+                        <span class="fas fa-minus"></span>
+                      </button>
+                    </span>
+                    <input type="text" id="extra_children" name="extra_children_<%= tour_extra.id.to_s %>" class="form-control input-number extra-input-number mt-0 text-center" value="0" data-type="children" data-id="<%= tour_extra.id %>" data-value="<%= tour_extra.tour_extra_prices.first.preco_crianca %>" min="0" max="50">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="extra_children_<%= tour_extra.id.to_s %>">
+                        <span class="fas fa-plus"></span>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="col-12 col-lg-4 text-center">
+            </div>
+            <div class="col-12 col-lg-4 text-center">
+              <div class="form-group">
+                <span><%= number_to_currency tour_extra.tour_extra_prices.first.preco_unidade %></span>
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="extra_unit_<%= tour_extra.id.to_s %>">
+                      <span class="fas fa-minus"></span>
+                    </button>
+                  </span>
+                  <input type="text" id="extra_unit" name="extra_unit_<%= tour_extra.id.to_s %>" class="form-control input-number extra-input-number mt-0 text-center" value="0" data-type="unit" data-id="<%= tour_extra.id %>" data-value="<%= tour_extra.tour_extra_prices.first.preco_unidade %>" min="0" max="50">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="extra_unit_<%= tour_extra.id.to_s %>">
+                      <span class="fas fa-plus"></span>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 text-center">
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

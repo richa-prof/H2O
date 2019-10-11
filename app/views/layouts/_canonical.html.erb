@@ -1,0 +1,11 @@
+<%
+  preferred_base_url = 'https://www.h2oecoturismo.com.br'
+  if controller_name == 'blogs' && action_name == 'show'
+    canonical_link = preferred_base_url + (link_to_blog_post params[:locale], @blog_post['id'], @blog_post['url'])
+  else
+    canonical_link = preferred_base_url + request.fullpath
+  end
+%>
+<br/>
+
+<link rel="canonical" href="<%= canonical_link %>"/>

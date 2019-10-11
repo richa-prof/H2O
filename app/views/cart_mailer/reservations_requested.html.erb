@@ -1,0 +1,23 @@
+<%
+  @this_locale = I18n.locale.to_s
+  @this_locale = 'en-US' if I18n.locale.to_s == 'en'
+%>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
+  <%= render 'reservations_requested_header' %>
+  <%= render 'reservations_requested_body' %>
+  <%= render 'body_stamps' %>
+
+  <tr bgcolor="white">
+    <td colspan="2" valign="middle" align="left" style="padding: 6% 2% 4% 2%;">
+      <div style="color:grey;font-size:200%;font-family:Arial;letter-spacing:5px;">
+        <%= t 'cart_mailer.items_requested' %>
+      </div>
+    </td>
+  </tr>
+
+  <%= render 'reservations_requested_tours' %>
+  <%= render 'reservations_requested_hotels' %>
+
+  <%= render 'reservations_requested_totals' %>
+  <%= render 'reservations_requested_footer' %>
+</table>

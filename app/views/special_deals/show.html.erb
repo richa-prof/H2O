@@ -1,0 +1,236 @@
+<% @title = @special_deal.name %>
+
+<section class="special-banner" style="background: #fff url(<%= @special_deal.background_image_url %>) no-repeat center top; background-size: cover;">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <div class="special-banner-box">
+          <h3 class="text-center">
+            <%= @special_deal.name %>
+            <span><%= @special_deal.tag_line %></span>
+          </h3>
+          <div class="date">
+            <div class="date-text">
+              <i class="far fa-calendar-alt"></i>
+              Período de Validade:
+              <div>
+                <span class="date-text">
+                  <h2 style="display: inline;"><%= l @special_deal.start_date %></h2>
+                </span>
+                à
+                <span class="date-text">
+                  <h2 style="display: inline;"><%= l @special_deal.end_date %></h2>
+                </span>
+              </div>
+            </div>
+            <span>Veja detalhes abaixo para possíveis restrições em algumas datas.</span>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-lg-12 text-center">
+              <h5>Indicado para:</h5>
+              <div class="special-box">
+                <% @special_deal.special_deal_personas.sample(5).each do |sdp| %>
+                  <span class="persona">
+                    <span class="icon">
+                      <i class="fas fa-<%= sdp.persona.icon_name %>"></i>
+                    </span>
+                    <h5>
+                      <span>
+                        <%= sdp.persona.persona_locales.where('locale = ?', params[:locale]).first.nome %>
+                      </span>
+                    </h5>
+                  </span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="whattake-box">
+            <h4 class="text-center">O QUE LEVAR</h4>
+            <div class="owl-carousel">
+              <% @special_deal.special_deal_brings.each do |sdb| %>
+                <div class="item">
+                  <div class="whattake-item">
+                    <i class="icon icon-<%= sdb.bring.icon_name %>"></i>
+                    <span><%= sdb.bring.bring_locales.where('locale = ?', params[:locale]).first.nome %></span>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="whattake-box">
+            <h4 class="text-center">INCLUI</h4>
+            <div class="owl-carousel text-center">
+              <% @special_deal.special_deal_incluis.each do |sdi| %>
+                <div class="item">
+                  <div class="whattake-item does-box">
+                    <i class="icon icon-<%= sdi.inclui.icon_name %>"></i>
+                    <span><%= sdi.inclui.nome %></span>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="price mt-5 mr-auto text-center">
+            Economize
+            <span class="save"><%= number_to_currency(@special_deal.true_price - @special_deal.discounted_price) %></span>!
+            <div class="comparison">
+              Antes por
+              <span class="true"><%= number_to_currency @special_deal.true_price %></span>,
+              agora a partir de
+              <span class="discounted"><%= number_to_currency @special_deal.discounted_price  %></span>.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="special-included-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center">Passeios inclusos</h2>
+        <div class="owl-carousel">
+          <% @itinerary_array = [] %>
+          <% @special_deal.special_deal_tours.each_with_index do |sdt,index| %>
+            <% itinerary_item = {
+              "@type": "TouristAttraction",
+              "name": sdt.tour.tour_locales.where('locale = ?', params[:locale]).first.nome,
+              "description": sdt.tour.tour_locales&.first&.metatag_descricao,
+              "isAccessibleForFree": "false",
+              "photo": sdt.tour.face_image_url,
+              "url": tour_url(sdt.tour)
+            } %>
+            <% @itinerary_array << itinerary_item %>
+
+            <div class="item">
+              <div class="included-box">
+                <a href="<%= tour_path(sdt.tour) %>">
+                  <div class="images">
+                    <%= image_tag sdt.tour.face_image_url, :height => "200", lazy: true %>
+                  </div>
+                  <h4><%= sdt.tour.tour_locales.where('locale = ?', params[:locale]).first.nome %></h4>
+                </a>
+                <h6><%= sdt.tour.localidade %></h6>
+                <ul>
+                  <li>
+                    <i class="fas fa-utensils"></i>
+                    <% if sdt.tour.lunch %>
+                      <%= sdt.tour.lunch.lunch_locales.where('locale = ?', params[:locale]).first.nome_menu %>
+                    <% else %>
+                      <h6 style="display:inline;">Consulte nossa equipe</h6>
+                    <% end %>
+                  </li>
+                  <li>
+                    <i class="far fa-clock"></i>
+                    <% if sdt.tour.duration_in_min %>
+                    <%= sdt.tour.duration_in_min %> minutos
+                    <% else %>
+                      <h6 style="display:inline;">Consulte nossa equipe</h6>
+                    <% end %>
+                  </li>
+                  <li>
+                    <i class="fas fa-child"></i>
+                    <% if sdt.tour.child %>
+                      <%= sdt.tour.child.child_locales.where('locale = ?', params[:locale]).first.nome %>
+                    <% else %>
+                      <h6 style="display:inline;">Consulte nossa equipe</h6>
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if @special_deal.hotel.present? %>
+  <% itinerary_item = {
+    "@type": "Hotel",
+    "name": @special_deal.hotel.hotel_locales.where('locale = ?', params[:locale]).first.nome,
+    "description": @special_deal.hotel.hotel_locales&.first&.metatag_descricao,
+    "image": @special_deal.hotel.face_image_url,
+    "url": hotel_url(@special_deal.hotel)
+  } %>
+  <% @itinerary_array << itinerary_item %>
+
+  <section class="special-included-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="text-center">Hotel</h2>
+          <div class="owl-carousel-hotel">
+            <div class="item">
+              <div class="included-box">
+                <div class="row">
+                  <div class="col-4">
+                    <a href="<%= hotel_path(@special_deal.hotel) %>">
+                      <div class="images">
+                        <%= image_tag @special_deal.hotel.face_image_url, :height => "225", lazy: true %>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="col-8">
+                    <a href="<%= hotel_path(@special_deal.hotel) %>">
+                      <h3><%= @special_deal.hotel.hotel_locales.where('locale = ?', params[:locale]).first.nome %></h3>
+                    </a>
+                    <h6 class="mt-2">
+                      <%= @special_deal.hotel.distancia_do_centro %>
+                      <%= t 'meters' %>
+                      <%= t 'from_downtown' %>
+                      <%= @special_deal.hotel.centro_de %>
+                    </h6>
+                    <div class="d-flex flex-wrap">
+                      <h5 class="mt-3"><%= t 'facilities' %></h5>
+                    </div>
+                    <ul>
+                      <% @special_deal.hotel.facilities.each do |f| %>
+                        <li class="mt-1 mr-3">
+                          <% if f.icon_name.blank? %>
+                            <%= image_tag 'blank-icon.png' %>
+                          <% else %>
+                            <%= image_tag (f.icon_name+'-icon.png'), class: 'mt-1', style: 'opacity: 0.5;' %>
+                          <% end %>
+                          <div>
+                            <%= f.facility_locales.where('locale = ?', params[:locale]).first.nome %>
+                          </div>
+                        </li>
+                      <% end %>
+                    </ul>
+                    <a href="<%= hotel_path(@special_deal.hotel) %>"><%= t 'see_more' %></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
+
+<section class="container">
+  <%= render 'call_to_action' %>
+</section>
+
+<section class="special-description-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center"><%= t 'get_every_detail' %></h2>
+        <%= raw(@special_deal.descricao) %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= render 'schema_org' %>

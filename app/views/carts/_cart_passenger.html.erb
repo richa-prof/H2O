@@ -1,0 +1,21 @@
+<div class="row form-group">
+  <div class="col-12 col-md-11">
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.text_field :nome, class: 'form-control', placeholder: (t 'activerecord.attributes.cart_passenger.nome') %>
+      </div>
+      <div class="col-md-4 col-6">
+        <%= f.number_field :idade, class: 'form-control', placeholder: (t 'activerecord.attributes.cart_passenger.idade'), min: 1, max: 100 %>
+      </div>
+      <div class="col-md-4 col-6">
+        <%= f.text_field :doc, class: 'form-control', placeholder: (t 'activerecord.attributes.cart_passenger.doc') %>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-1 addbutton_col">
+    <%= f.hidden_field :_destroy %>
+    <%= link_to "#", title: "Delete person", class: "remove_record addbutton" do %>
+      <%= image_tag "remove.png" %>
+    <% end %>
+  </div>
+</div>

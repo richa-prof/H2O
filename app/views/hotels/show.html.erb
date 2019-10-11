@@ -1,0 +1,310 @@
+<% @title = @hotel.hotel_locales&.first&.metatag_titulo %>
+<% content_for :meta_description, @hotel.hotel_locales&.first&.metatag_descricao %>
+
+<section class="product-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/"><%= t 'home' %></a></li>
+          <li class="breadcrumb-item"><a href="<%= hotels_path %>"><%= t 'activerecord.models.hotel.other' %></a></li>
+          <li class="breadcrumb-item active"><%= @title %></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= render 'images' %>
+
+<section class="product-detail">
+  <div class="container">
+    <div class="row">
+      <div class="col-<%= @hotel.ta_location.blank? ? '12' : '10' %> text-center">
+        <h1><%= @hotel.hotel_locales&.first&.nome %></h1>
+      </div>
+      <% unless @hotel.ta_location.blank? %>
+        <div class="col-2 text-center">
+          <div id="TA_cdsratingsonlynarrow791" class="TA_cdsratingsonlynarrow">
+            <ul id="iyuRVZr65vDT" class="TA_links 7KxSJIXjY">
+              <li id="1CBynVB" class="pCniB1AS">
+                <a target="_blank" href="http://www.tripadvisor.com/">
+                    <img src="http://www.tripadvisor.com/img/cdsi/img2/branding/tripadvisor_logo_transp_340x80-18034-2.png" alt="TripAdvisor" />
+                </a>
+              </li>
+            </ul>
+          </div>
+          <script src="https://www.jscache.com/wejs?wtype=cdsratingsonlynarrow&amp;uniq=791&amp;locationId=<%= @hotel.ta_location %>&amp;lang=<%= params[:locale] == 'en-US' ? 'en_US' : 'pt_BR' %>&amp;border=true">
+          </script>
+        </div>
+      <% end %>
+
+      <% unless @hotel.hotels_api_code.blank? %>
+        <div class="col-12">
+          <div class="trip-box">
+            <div class="row mb-5">
+              <div class="col-12 text-center">
+                <h2 class="mb-2">Compre online!</h2>
+                <%= image_tag 'hotel-steps.png', alt: 'Compra Online H2O', title: 'Compre hospedagem online com a agência H2O', width: '75%' %>
+              </div>
+            </div>
+            <%= form_tag availability_hotel_path(@hotel), method: :get, remote: true, id: 'hotel_availability_frm' do %>
+              <div class="row">
+                <div class="col-12 col-lg-6">
+                  <div class="row input-daterange">
+                    <div class="col-12 col-lg-6">
+                      <div class="form-group">
+                        <label for="start_date"><%= t 'start_date' %></label>
+                        <%= text_field_tag :start_date, @start_date.strftime('%d/%m/%Y'), placeholder: (t 'start_date'), class: 'form-control text-center' %>
+                        <span id="start_date_icon" class="icon" style="cursor: pointer"><i class="far fa-calendar-alt"></i></span>
+                      </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                      <div class="form-group">
+                        <label for="end_date"><%= t 'end_date' %></label>
+                        <%= text_field_tag :end_date, @end_date.strftime('%d/%m/%Y'), placeholder: (t 'end_date'), class: 'form-control text-center' %>
+                        <span id="end_date_icon" class="icon" style="cursor: pointer"><i class="far fa-calendar-alt"></i></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-2">
+                  <div class="form-group">
+                    <label for="adults"><%= t 'adults' %></label>
+                    <%= text_field_tag :adults, @adults, placeholder: (t 'adults'), class: 'form-control text-center' %>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-2">
+                  <div class="form-group">
+                    <label for="children"><%= t 'children' %></label>
+                    <%= text_field_tag :children, @children, placeholder: (t 'children'), class: 'form-control text-center' %>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-2">
+                  <div class="form-group">
+                    <%= submit_tag (t 'update'), class: 'btn btn-success btn-md' %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <%= hidden_field_tag :children_ages %>
+                <div class="col-6 text-right age-prompt"></div>
+                <div class="col-6 ages-wrapper"></div>
+              </div>
+            <% end %>
+
+            <div class="row">
+              <div class="col-12">
+                <div id="hotel_availability" class="text-center">
+                  <%= render 'hotel_availability' %>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="availability-box text-right">
+                  <a id="add_to_trip_btn" class="btn btn-primary btn-md pointer hide"><%= t 'buy_now' %></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="col-12 col-lg-12">
+        <div class="facilities-box">
+          <h2><%= t 'facilities' %></h2>
+          <ul>
+            <% @hotel.facilities.each do |f| %>
+              <% name_this_thing = f.facility_locales.where('locale = ?', params[:locale]).first.nome %>
+              <li class="text-center">
+                <% if f.icon_name.blank? %>
+                  <%= image_tag 'blank-icon.png', alt: name_this_thing, title: name_this_thing %>
+                <% else %>
+                  <%= image_tag (f.icon_name+'-icon.png'), alt: name_this_thing, title: name_this_thing %>
+                <% end %>
+                <div>
+                  <%= name_this_thing %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <div class="facilities-box">
+          <h2><%= t 'meals' %></h2>
+          <% if @hotel.meal %>
+            <%= @hotel.meal.meal_locales.where('locale = ?', params[:locale]).first.nome %>
+          <% else %>
+            <%= t 'get_every_detail' %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <div class="facilities-box">
+          <h2><%= t 'location' %></h2>
+          <div class="text-center">
+            <%= number_to_human(@hotel.distancia_do_centro, units: :distance) %>
+            <%= t 'from_downtown' %>
+            <%= @hotel.centro_de %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <div class="facilities-box">
+          <h2><%= t 'rooms' %></h2>
+          <div class="text-center">
+            <%= @hotel.numero_de_apartamentos %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <%= render 'call_to_action' if @hotel.hotels_api_code.blank? %>
+      </div>
+
+      <div class="col-12">
+        <h2><%= t 'get_every_detail' %>:</h2>
+        <div class="mt-3">
+          <%= raw(@hotel.hotel_locales&.first&.descricao) %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="product-list">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center"><%= t 'we_think_you_will_also_like' %></h2>
+      </div>
+      <% @hotel.related_hotels(params[:locale]).each do |hotel| %>
+        <div class="col-12 col-lg-2">
+          <div class="product-list-box">
+            <a href="<%= hotel_path(hotel) %>">
+              <div class="img">
+                <%= image_tag hotel.face_image_url, :height => "125", :style => 'object-fit: cover;', lazy: true %>
+              </div>
+            </a>
+            <div class="content">
+              <a href="<%= hotel_path(hotel) %>">
+                <div class="hotels-show-bottom-hotel-name">
+                  <%= hotel.hotel_locales.first.nome %>
+                </div>
+              </a>
+              <div class="text-center">
+                <%= number_to_human(hotel.distancia_do_centro, units: :distance) %>
+                <br/>
+                <%= t 'from_downtown' %>
+                <%= hotel.centro_de %>
+              </div>
+            </div>
+            <div class="footer">
+              <div class="price">
+              </div>
+              <a href="<%= hotel_path(hotel) %>" class="btn btn-success"><%= t 'see_more' %></a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<script>
+
+params_locale = '<%= params[:locale] %>';
+
+if ( params_locale == 'en-US' ) {
+  age_prompt_text = "Please, inform each child's age:"
+  age_label = 'Age';
+} else {
+  age_prompt_text = "Por favor, informe a idade de cada criança:"
+  age_label = 'Idade';
+}
+
+$(document).ready(function() {
+  $('.rooms').hide();
+  $('#hotel_availability_loading').show();
+  $('form#hotel_availability_frm').submit();
+});
+
+$(document).on('click', 'li.room-info', function () {
+  $('li.room-info').removeClass('active');
+  $(this).addClass('active');
+
+  $('#room_type_name').val( $('li.room-info.active a.room-rate div.room-type-name').html() );
+  $('#room_selected').val( $('li.room-info.active a.room-rate').attr('value') );
+  $('#sale_price').val( $('li.room-info.active a.room-rate').attr('sale-price') );
+
+  $("#add_to_trip_btn").show();
+});
+
+$('form#hotel_availability_frm').on('submit', function() {
+  if ( $('input#children').val() != $('input.ages').length ) { return false; }
+
+  children_ages_array = []
+  $('input.ages').each(function() {
+    children_ages_array.push( $(this).val() );
+  });
+  $('#children_ages').val(children_ages_array);
+
+  $('.rooms').hide();
+  $("#add_to_trip_btn").hide();
+  $('#hotel_availability_loading').show();
+});
+
+$('input#children').on('change', function() {
+  number_of_children = $(this).val();
+  $('.age-prompt').html('');
+  $('.ages').remove();
+
+  if (number_of_children > 0) {
+    $('.age-prompt').html(age_prompt_text);
+
+    while ($('input.ages').length < number_of_children) {
+      new_label = $('<label for="age_'+ $('input.ages').length +'" class="ages">' + age_label + ':</label>');
+      new_input = $('<input id="age_'+ $('input.ages').length +'" class="form-control ages">');
+
+      $('.ages-wrapper').append(new_label);
+      $(new_label).after(new_input);
+    }
+  }
+});
+
+$('#start_date_icon').click(function() {
+  $('#start_date').datepicker( 'show' );
+});
+
+$('#end_date_icon').click(function() {
+  $('#end_date').datepicker( 'show' );
+});
+
+$('.input-daterange').each(function() {
+  $(this).datepicker({
+    language: 'pt-BR',
+    autoclose: true,
+    format: 'dd/mm/yyyy'
+  });
+});
+
+$("#add_to_trip_btn").click(function() {
+  $("#cart-form").submit();
+});
+
+$('#hotel_availability_frm').on('input', function() {
+  clear_availability_info();
+});
+
+function clear_availability_info() {
+  $('.rooms').hide()
+  $("#add_to_trip_btn").hide()
+}
+</script>

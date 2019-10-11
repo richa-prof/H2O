@@ -1,0 +1,113 @@
+<% @title = t 'client_area' %>
+<section class="product-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/"><%= t 'home' %></a></li>
+          <li class="breadcrumb-item active"><%= t 'client_area' %></li>
+        </ol>
+      </div>
+      <div class="col-12">
+        <h1><span><%= t 'client_area' %></span></h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="my-panel">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="my-pane-info">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">
+                <%= t 'my_info' %>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#my-purchases" role="tab" data-toggle="tab">
+                <%= t 'my_trips' %>
+              </a>
+            </li>
+            <li class="nav-item">
+              <%= link_to (t 'cart'), add_to_cart_carts_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to (t 'logout'), destroy_user_session_path, method: :delete, class: 'nav-link' %>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="profile">
+              <h4><%= t 'keep_info_up_to_date' %></h4>
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+                <%= devise_error_messages! %>
+                <div class="form-group text-left">
+                  <%= f.label :nome %>
+                  <%= f.text_field :nome, autofocus: true, class: 'form-control', placeholder: 'John' %>
+                </div>
+                <div class="form-group text-left">
+                  <%= f.label :telefone %>
+                  <%= f.text_field :telefone, autofocus: true, class: 'form-control', placeholder: '+55 (XX) X XXXX-XXXX' %>
+                </div>
+                <div class="form-group text-left">
+                  <%= f.label :email %>
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "abc@gmail.com", readonly: true %>
+                </div>
+
+                <h4><%= t 'if_reset_password' %>:</h4>
+                <div class="form-group text-left">
+                  <label><%= t 'current_password' %></label>
+                  <%= f.password_field :current_password, autocomplete: "off", class:"form-control", placeholder: "*****" %>
+                </div>
+                <div class="form-group text-left">
+                  <label><%= t 'new_password' %></label>
+                  <%= f.password_field :password, autocomplete: "off", class:"form-control", placeholder: "*****" %>
+                </div>
+                <div class="form-group text-left">
+                  <label><%= t 'confirm_new_password' %></label>
+                  <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", placeholder: "*****" %>
+                </div>
+                <button type="submit" class="btn btn-success btn-md">
+                  <%= t 'update_info' %>
+                </button>
+              <% end %>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="my-purchases">
+              <div class="purchases-info">
+                <h3><%= t 'my_trips' %></h3>
+                <div class="table-responsive-sm">
+                  <% if resource.itineraries.any? %>
+                    <table class="table text-center">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col"><%= t 'activerecord.attributes.itinerary.inicio_da_viagem' %></th>
+                          <th scope="col"><%= t 'activerecord.attributes.itinerary.fim_da_viagem' %></th>
+                          <th scope="col"><%= t 'activerecord.attributes.itinerary.total' %></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% resource.itineraries.order('fim_da_viagem DESC').each do |i| %>
+                          <tr>
+                            <td>PD <%= i.id %></td>
+                            <td><%= l i.inicio_da_viagem unless i.inicio_da_viagem.nil? %></td>
+                            <td><%= l i.fim_da_viagem unless i.inicio_da_viagem.nil? %></td>
+                            <td><%= number_to_currency i.total %></td>
+                          </tr>
+                        <% end %>
+                      </tbody>
+                    </table>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

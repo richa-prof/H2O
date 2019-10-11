@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Oraqle Script';
+    src: url( asset_path('OraqleScript.eot') );
+    src: url( asset_path('OraqleScript.eot?#iefix') ) format('embedded-opentype'),
+        url( asset_path('OraqleScript.woff2') ) format('woff2'),
+        url( asset_path('OraqleScript.woff') ) format('woff'),
+        url( asset_path('OraqleScript.ttf') ) format('truetype'),
+        url( asset_path('OraqleScript.svg#OraqleScript') ) format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Oraqle Script';
+    src: url( asset_path('OraqleScript_1.eot') );
+    src: url( asset_path('OraqleScript_1.eot?#iefix') ) format('embedded-opentype'),
+        url( asset_path('OraqleScript_1.woff2') ) format('woff2'),
+        url( asset_path('OraqleScript_1.woff') ) format('woff'),
+        url( asset_path('OraqleScript_1.ttf') ) format('truetype'),
+        url( asset_path('OraqleScript_1.svg#OraqleScript') ) format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

@@ -1,0 +1,16 @@
+<div id="accordion">
+  <% @institutional.questions.where('locale = ?', params[:locale]).each do |question| %>
+    <div class="card">
+      <div class="card-header">
+        <a class="card-link" data-toggle="collapse" href="#faq_<%= question.id %>">
+          <h3><%= question.titulo %></h3>
+        </a>
+      </div>
+      <div id="faq_<%= question.id %>" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+          <%= question.texto.html_safe %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

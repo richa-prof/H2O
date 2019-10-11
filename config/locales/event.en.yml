@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models:
+      event:
+        one: Event
+        other: Events
+        either: Event(s)
+    attributes:
+      event:
+        name: Name
+        number_participants: Number of Participants
+        start_date: Start Date
+        end_date: End Date
+        banner: Banner

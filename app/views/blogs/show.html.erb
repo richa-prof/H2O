@@ -1,0 +1,28 @@
+<% @title = (t 'blog') + ' - ' + @blog_post["title"] %>
+
+<section class="product-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/"><%= t 'home' %></a></a></li>
+          <li class="breadcrumb-item"><a href="<%= blogs_path %>"><%= t 'blog' %></a></li>
+          <li class="breadcrumb-item active"><%= @blog_post["title"] %></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blogdetails-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <%= l Date.parse(@blog_post["published"]) %>
+        <h1><%= @blog_post["title"] %></h1>
+        <%= @blog_post["content"].html_safe %>
+        <%= image_tag @blog_post["author"]["image"]["url"], alt: "Autor deste conteúdo: #{@blog_post["author"]["displayName"]}", title: "Autor deste conteúdo: #{@blog_post["author"]["displayName"]}" %> <%= @blog_post["author"]["displayName"] %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,61 @@
+pt-BR:
+  cart: Carrinho
+  identification: Identificação
+  additional_information: Informações Adicionais
+  payment: Pagamento
+  confirmation: Confirmação
+
+  more_tours: Acrescentar Passeios
+  more_hotels: Acrescentar Hospedagem
+  finish: Finalizar
+  back: Voltar
+  next: Continuar
+  child: Criança
+  persons: Pessoa(s)
+
+  tour_too_soon: A data selecionada está muito próxima para compras online. Fale com o nosso time!
+  chat_or_email: Estamos à disposição aqui mesmo no chat online ou pelo e-mail reservas@h2oecoturismo.com.br
+  removed_from_cart_successfully: Item removido com sucesso
+  remove_from_cart_unsuccessful: Problemas ao excluir item
+  included: Incluídos
+  location: Localização
+  location_blurb: Este é o local para onde a H2O vai enviar seus vouchers (ingressos) e outras informações de chegada. Se a sua compra incluir transporte, provavelmente este será o local de embarque.
+  phone_number: Telefone
+  phone_number_blurb: Para qualquer contato que seja necessário antes, durante, e/ou depois da viagem. Dê preferência para um núemro de celular com WhatsApp.
+  pax_info: Informações dos Passageiros
+  add: Acrescentar
+  enter_info: Preencha as informações
+  add_people: Acrescente pessoas à lista
+  trip_dates: Período da Viagem
+  thru_date: a
+  subtotal: Subtotal
+  discount: Desconto
+  total: Total
+  successfully_updated_info: Informações atualizadas.
+  do_you_have_promocode: Você tem um promocode H2O?
+  use: Usar
+
+  payment_info: Informações de Pagamento
+  card_number: Número do Cartão
+  card_brand: Bandeira
+  card_expiration: Vencimento
+  card_security_code: Código de Segurança
+  card_holder_name: Nome do Titular (conforme impresso no cartão)
+  payment_plan: Parcelamento
+  terms: Clique aqui para ver os termos e condições gerais da Agência H2O.
+  changes: Clique aqui para ver os termos e condições da Agência H2O em casos de alterações.
+  terms_and_conditions: Eu aceito todos os termos e condições publicados nos links acima.
+
+  reservations_unsuccessful: Problemas com 1 ou mais solicitações de reservas. Veja os detalhes.
+  reservation_with_problems: Reserva com problemas
+  select_new_date_time: Escolher nova data e horário
+  select_new_dates: Escolher outro período
+  remove_from_cart: Remover do carrinho
+  payment_successful: Pagamento aprovado. Suas reservas estão confirmadas!
+  payment_unsuccessful: Problemas com o pagamento. Entre em contato com a nossa equipe!
+  empty_cart: Seu carrinho está vazio. Acrescente itens.
+  applied_successfully: Promocode aplicado à compra.
+  congratulations_prize: Parabéns! Você ganhou um brinde!
+  reached_limit: O limite de uso deste promocode já foi atingido.
+  promocode_expired: Este promocode já venceu.
+  invalid_promocode: Promocode inválido

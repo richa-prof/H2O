@@ -1,0 +1,268 @@
+<% @title = 'Agência H2O - '+(t 'payment') %>
+<%= render 'menu', step: 'payment' %>
+
+<section class="login cart-step-4">
+  <div class="container">
+    <div class="cart-step-card">
+      <div class="cart-header">
+        <h3>
+          <%= t 'activerecord.models.user.one' %>:
+          <span class="strong">
+            <%= current_user.nome %> (<%= current_user.email %>)
+          </span>
+          <span class="float-right">
+            <%= t 'trip_dates' %>:
+            <span class="strong">
+              <%= l @cart.start_date unless @cart.start_date.blank? %>
+              <%= t 'thru_date' %>
+              <%= l @cart.end_date unless @cart.end_date.blank? %>
+            </span>
+          </span>
+        </h3>
+      </div>
+      <div class="table-content">
+        <h3><%= (t 'activerecord.models.cart_passenger.other').upcase %></h3>
+        <table class="table table-hover payment-table">
+          <thead>
+            <tr>
+              <th class="text-left"><%= (t 'activerecord.attributes.cart_passenger.nome').upcase %></th>
+              <th class="text-center"><%= (t 'activerecord.attributes.cart_passenger.idade').upcase %></th>
+              <th class="text-center"><%= (t 'activerecord.attributes.cart_passenger.doc').upcase %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @cart.cart_passengers.each do |p| %>
+              <tr>
+                <td class="text-left"><%= p.nome %></td>
+                <td class="text-center"><%= p.idade %></td>
+                <td class="text-center"><%= p.doc %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <% if @cart.cart_items.any? %>
+          <h3><%= (t 'activerecord.models.itinerary.one').upcase %></h3>
+          <table id="cart_items" class="table table-hover payment-table">
+            <thead>
+              <tr>
+                <th class="text-center"><%= t 'activerecord.attributes.cart_item.passeio_data' %></th>
+                <th class="text-center"><%= t 'activerecord.attributes.cart_item.passeio_hora' %></th>
+                <th class="text-left"><%= t 'activerecord.attributes.cart_item.produto_id' %></th>
+                <th class="text-center"><%= t 'activerecord.attributes.cart_item.preco_total' %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @cart.cart_items.order(:passeio_data).each do |i| %>
+                <tr>
+                  <td class="text-center"><%= l i.passeio_data %></td>
+                  <td class="text-center"><%= i.passeio_hora %></td>
+                  <td class="text-left">
+                    <%= i.tour.tour_locales.where(locale: params[:locale]).first.nome %>
+                    <br/>
+                    <%= t 'included' %>:
+                    <% i.tour.tour_extras.where(id: i.cart.cart_tour_extras.pluck(:tour_extra_id)).each do |tour_extra| %>
+                      <% if tour_extra.tour_extra_locales.where(locale: params[:locale]).any? %>
+                        <span class="label-tag">
+                          <%= tour_extra.tour_extra_locales.where(locale: params[:locale]).first.titulo %>
+                        </span>
+                      <% end %>
+                    <% end %>
+                  </td>
+                  <td class="text-right"><%= number_to_currency i.preco_total %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+
+        <% if @cart.cart_hotels.any? %>
+          <h3><%= (t 'activerecord.models.cart_hotel.one').upcase %></h3>
+          <table id="cart_hotels" class="table table-hover payment-table">
+            <thead>
+              <tr>
+                <th class="text-center"><%= t 'activerecord.attributes.cart_hotel.start_date' %></th>
+                <th class="text-center"><%= t 'activerecord.attributes.cart_hotel.end_date' %></th>
+                <th class="text-left"><%= t 'activerecord.attributes.cart_hotel.room_type_name' %></th>
+                <th class="text-center"><%= t 'activerecord.attributes.cart_hotel.sale_price' %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @cart.cart_hotels.order(:start_date).each do |h| %>
+                <tr>
+                  <td class="text-center"><%= l h.start_date %></td>
+                  <td class="text-center"><%= l h.end_date %></td>
+                  <td class="text-left">
+                    <%= h.hotel.hotel_locales.where(locale: params[:locale]).first.nome %>
+                    -
+                    <%= h.room_type_name %>
+                  </td>
+                  <td class="text-right">
+                    <%= h.number_of_nights %> <%= t 'nights' %> <%= t 'for' %>
+                    <%= number_to_currency h.sale_price %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+
+        <table class="table-borderless payment-table">
+          <tr>
+            <td><%= (t 'subtotal').upcase %></td>
+            <td><%= number_to_currency @cart.subtotal %></td>
+          </tr>
+          <% if @cart.desconto.to_f > 0.0 %>
+            <tr>
+              <td><%= (t 'discount').upcase %></td>
+              <td><%= number_to_currency @cart.desconto.to_f %></td>
+            </tr>
+          <% end %>
+          <tr class="subtotal">
+            <td>
+              <h2><%= (t 'total').upcase %></h2>
+            </td>
+            <td>
+              <h2><%= number_to_currency @cart.total %></h2>
+            </td>
+          </tr>
+        </table>
+
+        <div class="row">
+          <div class="col-12 col-md-8">
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="promocode">
+              <p><%= t 'do_you_have_promocode' %></p>
+              <%= form_tag check_promocode_carts_path, { class: 'form-inline' } do %>
+                <%= hidden_field_tag :id, @cart.id %>
+                <%= text_field_tag :cupom_id, @cart.cupon.try(:chave), class: "form-control", placeholder: "Promocode" %>
+                <button type="submit" class="btn btn-success"><%= t 'use' %></button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <%= form_tag charge_cart_path(@cart), id: 'charge_form' do %>
+        <div class="card-details mt-5">
+          <h3 class="mb-4"><%= t 'payment_info' %></h3>
+          <div class="row">
+            <div class="col-12 col-lg-6 mt-3">
+              <div class="form-group">
+                <label><%= t 'card_number' %></label>
+                <%= number_field_tag :card_number, nil, class: "form-control", placeholder: "**** **** **** ****", required: true %>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 mt-3">
+              <div class="form-group">
+                <label><%= t 'card_brand' %></label>
+                <label for="card_brand_visa" class="credit-card">
+                  <input type="radio" class="credit-card-radio" name="brand" value="Visa" id="card_brand_visa"/>
+                  <%= image_tag "card-1.png" %>
+                </label>
+                <label for="card_brand_master" class="credit-card">
+                  <input type="radio" class="credit-card-radio" name="brand" value="Master" id="card_brand_master"/>
+                  <%= image_tag "card-2.png" %>
+                </label>
+                <label for="card_brand_amex" class="credit-card">
+                  <input type="radio" class="credit-card-radio" name="brand" value="Amex" id="card_brand_amex"/>
+                  <%= image_tag "card-3.png" %>
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 mt-3">
+              <div class="form-group">
+                <label><%= t 'card_expiration' %></label>
+                <%= select_tag :month, options_for_select((1..12).map {|n| "%02d" % n}), include_blank: (t 'datetime.prompts.month'), class: "form-control small-field", required: true %>
+                <span class="m-4">/</span>
+                <%= select_tag :year, options_for_select(Date.current.year..(Date.current.year + 20)), include_blank: (t 'datetime.prompts.year'), class: "form-control small-field", required: true %>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 mt-3">
+              <div class="form-group">
+                <label><%= t 'card_security_code' %></label>
+                <%= text_field_tag :cvv, nil, class: "form-control small-field mr-3", placeholder: "***", required: true %>
+                <%= image_tag "card-4.png" %>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 mt-3">
+              <div class="form-group">
+                <label><%= t 'card_holder_name' %></label>
+                <%= text_field_tag :holder, nil, class: "form-control", required: true %>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6 mt-3">
+              <div class="form-group">
+                <label><%= t 'payment_plan' %></label>
+                <select name="installments" id="installments" class="form-control">
+                  <% if params[:locale] == 'pt-BR' %>
+                    <option value="1">1 x <%= number_to_currency @cart.total %></option>
+                    <% (2..6).each do |i| %>
+                      <% unless @cart.total / i < 50 %>
+                        <option value="<%= i %>">
+                          <%= i %> x <%= number_to_currency @cart.total / i %>
+                        </option>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <option value="1"><%= number_to_currency @cart.total %> at once</option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+            <div class="col-12 mt-3">
+              <div class="terms-links">
+                <p><%= link_to (t 'terms'), institutional_path('termos') %></p>
+                <p><%= link_to (t 'changes'), institutional_path('alteracoes') %></p>
+              </div>
+              <div class="d-flex flex-wrap col-12">
+                <div class="checkbox mt-3">
+                  <input type="checkbox" name="terms" id="terms">
+                  <label for="terms" id="terms_text">
+                    <%= t 'terms_and_conditions' %>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cart-step-footer mt-5 w-100">
+      <a href="<%= additional_information_carts_path %>" class="btn btn-default back-button"><%= t 'back' %></a>
+      <button type="submit" class="btn btn-success float-right"><%= t 'next' %></button>
+    </div>
+    <% end %>
+  </div>
+</section>
+
+<script>
+
+$('#card_number').keyup(function() {
+
+  $('input[type="radio"][name="brand"]').prop('checked', false);
+  $('label.credit-card').removeClass('selected');
+
+  credit_card_brand = check_credit_card_number( $(this).val() );
+
+  if(credit_card_brand) {
+    $('input[type="radio"][value="'+credit_card_brand+'"]').prop('checked', true);
+    $('input[type="radio"][value="'+credit_card_brand+'"]').parent().addClass('selected');
+  }
+
+});
+
+$('input[type="radio"][name="brand"]').change(function() {
+  $('label.credit-card').removeClass('selected');
+  $(this).parent().addClass('selected');
+});
+
+$('#charge_form').submit(function(){
+  if( ! $('#terms').is(':checked') ) {
+    $('#terms_text').css('color', 'red');
+    $('#terms_text').css('font-size', '16px');
+    return false;
+  }
+});
+
+</script>

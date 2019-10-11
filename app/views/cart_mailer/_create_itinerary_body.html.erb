@@ -1,0 +1,11 @@
+<tr bgcolor="#e6e6e6">
+  <td colspan="2" valign="top" style="padding: 4% 4% 4% 4%;">
+    <div style="color:grey;font-family:Arial;margin-top: 2%;">
+      <%= t 'hello' %>, <b><%= @itinerary.user.nome %></b>!
+    </div>
+    <div style="color:grey;font-family:Arial;margin-top: 2%;">
+      <%= raw(@confirmation_text.institutional_locales.where('locale = ?', @this_locale).first.texto) %>
+    </div>
+    <%= render 'staff_signature' %>
+  </td>
+</tr>

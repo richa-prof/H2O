@@ -1,0 +1,6 @@
+<%= form_tag search_path, method: 'get', id: 'menu_search' do %>
+  <div class="form-group menu-search-box">
+    <%= text_field_tag :search_box, params[:search_box], class: "form-control", placeholder: "#{t 'search_here'}" %>
+    <a class="icon" onclick="$('#menu_search').submit();"><i class="fas fa-search"></i></a>
+  </div>
+<% end %>

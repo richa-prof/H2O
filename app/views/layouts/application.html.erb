@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= @title %></title>
+    <meta name="description" content="<%= meta_description %>" />
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/hreflang' %>
+    <%= render 'layouts/canonical' %>
+    <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <% if Rails.env.production? %>
+      <%= render 'layouts/schema_org' %>
+      <%= render 'layouts/google_tag_manager_head' %>
+      <%= render 'layouts/rd_station' %>
+      <%= render 'layouts/facebook_pixel' %>
+    <% end %>
+  </head>
+  <body>
+    <%= render 'layouts/google_tag_manager_body' if Rails.env.production? %>
+
+    <%= render :partial => 'flash_messages', :flash => flash %>
+    <%= render "home_header" %>
+  	<%= yield %>
+  	<%= render "home_footer" %>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<% @title = @event_locale.name %>
+<% if params[:locale] == 'pt-BR' %>
+  <% meta_description_intro = 'Agência Oficial do Evento: Agência H2O' %>
+<% else %>
+  <% meta_description_intro = 'Oficial Event Operator: Agência H2O' %>
+<% end %>
+<% content_for :meta_description, (meta_description_intro+' - '+@event_locale.description) %>
+
+<section class="product-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/"><%= t 'home' %></a></a></li>
+          <li class="breadcrumb-item"><a href="<%= events_path %>"><%= t 'activerecord.models.event.other' %></a></li>
+          <li class="breadcrumb-item active"><%= @title %></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product-thumbnails">
+  <%= image_tag 'https://admin.h2oecoturismo.com.br/'+@event.banner_img, width: '100%', alt: @event_locale.name, title: @event_locale.name %>
+</section>
+
+<section class="product-detail">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1><%= @event_locale.name %></h1>
+      </div>
+
+      <div class="col-12">
+        <div class="trip-box">
+          <ul class="prices-box">
+            <li>
+              <i class="fas fa-calendar-alt"></i>
+              <%= t 'activerecord.attributes.event.start_date' %>:
+              <span><%= l @event.start_date %></span>
+            </li>
+            <li>
+              <i class="fas fa-calendar-alt"></i>
+              <%= t 'activerecord.attributes.event.end_date' %>:
+              <span><%= l @event.end_date %></span>
+            </li>
+            <li>
+              <i class="fas fa-users"></i>
+              <%= t 'activerecord.attributes.event.number_participants' %>:
+              <span><%= @event.number_participants %></span>
+            </li>
+          </ul>
+
+          <div class="col-12 mt-5 event-description">
+            <%= @event_locale.description %>
+          </div>
+
+          <div class="col-12 mt-5">
+            <%= meta_description_intro %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  $(document).ready(function() {
+    var text_to_url = $('div.event-description').html();
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    urled_text = text_to_url.replace(urlRegex, function(url) {
+      return '<a href="' + url + '">' + url + '</a>';
+    })
+    $('div.event-description').html(urled_text);
+  });
+</script>

@@ -1,0 +1,56 @@
+<% @title = (t 'persona_day_by_day.day_by_day_for') + ' ' + (t 'persona_day_by_day.you') + ' ' + (t 'persona_day_by_day.in_bonito_ms') %>
+<% if params[:locale] == 'pt-BR' %>
+  <% meta_description = 'Com tantos passeios em Bonito MS, fica difícil ter certeza que seu roteiro é o ideal para o seu perfil, não é mesmo? Confira aqui as sugestões da agência H2O já organizadas por perfil!' %>
+<% else %>
+  <% meta_description = "With so many tours in Bonito MS Brazil, it's hard to be sure your plans are ideal for your style of traveling, isn't it? Check out the suggestions H2O has put together for you, based on each kind of traveler!" %>
+<% end %>
+<% content_for :meta_description, meta_description %>
+
+<section class="day-by-day-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="/"><%= t 'home' %></a>
+          </li>
+          <li class="breadcrumb-item">
+            <%= t 'persona_day_by_day.day_by_day_suggestions' %>
+          </li>
+        </ol>
+      </div>
+
+      <div class="col-12 my-5">
+        <h1>
+          <span class="before-after">
+            <%= (t 'persona_day_by_day.day_by_day_for') %>
+          </span>
+          <span class="persona-nome">
+            <%= (t 'persona_day_by_day.you') %>
+          </span>
+          <span class="before-after">
+            <%= (t 'persona_day_by_day.in_bonito_ms') %>
+          </span>
+        </h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="personas">
+  <div class="col-12 my-3 text-center">
+    <h2><%= (t 'persona_day_by_day.select_a_persona') %></h2>
+  </div>
+  <% @personas.each do |persona| %>
+    <a href="<%= persona_persona_day_by_days_path(persona) %>"
+      <span class="persona">
+        <div class="icon">
+          <i class="fas fa-<%= persona.icon_name %>"></i>
+        </div>
+        <h3>
+          <%= persona.persona_locales.where('locale = ?', params[:locale]).first.nome %>
+        </h3>
+      </span>
+    </a>
+    <% end %>
+</section>

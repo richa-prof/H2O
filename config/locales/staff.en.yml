@@ -1,0 +1,12 @@
+en:
+  with_us: at H2O
+  activerecord:
+    models:
+      staff:
+        one: Staff
+        other: Staff
+    attributes:
+      staff:
+        nome: Name
+        contratado: Date Hired
+        imagem: Photo

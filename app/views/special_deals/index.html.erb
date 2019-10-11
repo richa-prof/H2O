@@ -1,0 +1,76 @@
+<% @title = t 'activerecord.models.special_deal.other' %>
+<% if params[:locale] == 'pt-BR' %>
+  <% meta_description = 'Aproveite as ofertas e promoções da Agência H2O para você conhecer Bonito! Pacotes completos com passeios e hospedagem por preços inacreditáveis e com condições de pagamento diferenciadas!' %>
+<% else %>
+  <% meta_description = "Checkout Agência H2O's special deals and packages for you to save when you come to Bonito! These package specials include activities, tours, lodging, and have prices that may blow you away!" %>
+<% end %>
+<% content_for :meta_description, meta_description %>
+
+<section class="product-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/"><%= t 'home' %></a></li>
+          <li class="breadcrumb-item active"><%= @title %></li>
+        </ol>
+      </div>
+
+      <div class="col-12">
+        <h1><span><%= @title %></span></h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="special-included-bg mb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="owl-carousel">
+          <% @special_deals.each do |s| %>
+            <div class="item">
+              <div class="included-box text-center">
+                <a href="<%= special_deal_path(s) %>">
+                  <div class="images">
+                    <%= image_tag s.cover_image_url, lazy: true %>
+                  </div>
+                  <h4><%= s.name %></h4>
+                </a>
+                <h6><%= s.tag_line %></h6>
+                <h5 class="mt-5 mb-2">Indicado para:</h5>
+                <div class="special-box">
+                  <% s.special_deal_personas.sample(3).each do |sdp| %>
+                    <div>
+                      <span class="icon">
+                        <i class="fas fa-<%= sdp.persona.icon_name %>"></i>
+                      </span>
+                      <h5>
+                        <span>
+                          <%= sdp.persona.persona_locales.where('locale = ?', params[:locale]).first.nome %>
+                        </span>
+                      </h5>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="price mt-5 mr-auto">
+                  <div class="true"><%= number_to_currency s.true_price %></div>
+                  <div class="discounted"><%= number_to_currency s.discounted_price  %></div>
+                  <div>
+                    Economize
+                    <span class="save"><%= number_to_currency(s.true_price - s.discounted_price) %></span>!
+                  </div>
+                </div>
+                <div class="mt-5">
+                  <a class="special-deal-link" href="<%= special_deal_path(s) %>">
+                    Mais informações
+                  </a>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

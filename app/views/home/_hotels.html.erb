@@ -1,0 +1,28 @@
+<section class="hotels-bg container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-4 my-auto">
+      <h1 class="mb-0">
+        <%= link_to (t 'activerecord.models.hotel.other'), hotels_path %>
+      </h1>
+      <h5><%= link_to (t 'see_all_m'), hotels_path, class: 'green_link' %></h5>
+    </div>
+    <div class="col-12 col-lg-7">
+      <div class="row">
+        <% @hotels.each do |h| %>
+          <div class="col-12 col-lg-6 col-md-6">
+            <%= link_to hotel_path(h) do %>
+              <div class="hotels-box">
+                <div class="img">
+                  <%= image_tag h.face_image_url, :height => "200", :style => 'object-fit: cover;', lazy: true %>
+                </div>
+                <div class="text-box">
+                  <div class="text-in-box"><%= h.hotel_locales.first.nome %></div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+<section class="specialdeals-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <% if params[:locale] == 'pt-BR' %>
+          <h1 class="text-center">
+            <%= link_to (t 'activerecord.models.special_deal.other'), special_deals_path %>
+          </h1>
+          <h5 class="text-center">
+            <%= t 'special_deal_tag_line' %>
+            <span style="float:right">
+              <%= link_to (t 'see_all_f'), special_deals_path, class: 'green_link' %>
+            </span>
+          </h5>
+          <div class="owl-carousel">
+            <% @special_deals.each do |sd| %>
+              <%= link_to special_deal_path(sd) do %>
+                <div class="item">
+                  <div class="specialdeals-box">
+                    <div class="img">
+                      <%= image_tag sd.cover_image_url, lazy: true %>
+                    </div>
+                    <div class="price">
+                      <span class="text">A partir de:</span>
+                      <span class="number"><%= number_to_currency sd.discounted_price %></span>
+                    </div>
+                    <div class="content">
+                      <h5><%= sd.name %></h5>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="owl-controls">
+            <div class="owl-nav">
+              <div class="owl-prev"></div>
+              <div class="owl-next"></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

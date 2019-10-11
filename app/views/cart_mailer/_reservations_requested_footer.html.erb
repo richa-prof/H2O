@@ -1,0 +1,24 @@
+<tr bgcolor="#ffe57d">
+  <td colspan="2" valign="middle" align="center" style="padding: 2% 2% 2% 2%;">
+    <div style="font-family:Arial;">
+      <%= t 'cart_mailer.not_reserved' %>
+    </div>
+  </td>
+</tr>
+<% if @cart.cupon %>
+  <tr bgcolor="#fffae6">
+    <td valign="middle" align="center" style="padding: 2% 2% 2% 2%;">
+      <div style="font-family:Arial;">
+        PROMOCODE:
+        <%= @cart.cupon.chave %>
+      </div>
+    </td>
+    <td valign="middle" align="center" style="padding: 2% 2% 2% 2%;">
+      <% unless ['Porcentagem', 'BRL'].include? @cart.cupon.tipo %>
+        <div style="font-family:Arial;">
+          <b><%= (t 'congratulations_prize') + ' ' + @cart.cupon.tipo %></b>
+        </div>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

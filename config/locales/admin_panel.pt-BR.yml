@@ -1,0 +1,19 @@
+pt-BR:
+  admin:
+    scopes:
+      all: Todos
+      display_on_webiste: 100% Online
+      on_footer_menu: No rodapé
+      pt_br_only: pt-BR
+      en_us_only: en-US
+      check_btms: BTMS Vagas
+      handle_btms_temp_reservations: BTMS Reservas Iniciais
+      post_to_wsbtms: BTMS Integração
+      run_payment: Envio de Pagamento
+      cielo_wrapper: Cielo Integração
+      no_results: ZERO Resultados
+      images_pending: Imagens PENDENTE
+      images_ok: Imagens OK
+    table_headers:
+      created_at: Criado
+      updated_at: Atualizado

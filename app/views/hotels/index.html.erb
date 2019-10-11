@@ -1,0 +1,121 @@
+<% @title = (t 'activerecord.models.hotel.index_title') %>
+
+<section class="product-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/"><%= t 'home' %></a></li>
+          <li class="breadcrumb-item active"><%= (t 'activerecord.models.hotel.other') %></li>
+        </ol>
+      </div>
+      <div class="col-12">
+        <h1><span><%= (t 'activerecord.models.hotel.other') %></span></h1>
+        <div class="findyour-main">
+          <%= form_tag hotels_path, :method => 'get', remote: true do %>
+          <div class="row">
+            <div class="col-12 col-md-5">
+              <h3><%= t 'find_your' %> <span><%= t 'activerecord.models.hotel.one' %></span></h3>
+            </div>
+            <div class="col-12 col-md-5 mt-4">
+              <div class="form-group">
+                <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "#{t 'search_here'}" %>
+                <span class="icon"><i class="fas fa-search"></i></span>
+              </div>
+            </div>
+            <div id="toggle_filters" class="col-12 col-md-2 text-center">
+              <a href="#" id="toggle_filters">
+                <i id="toggle_filters_icon" class="fas fa-chevron-down rotate-reset"></i>
+              </a>
+            </div>
+          </div>
+
+            <div class="findyour-box mt-3">
+              <div class="row">
+                <div class="col-12 mt-3">
+                  <h6><%= t 'facilities' %></h6>
+                  <ul>
+                    <div class="row mt-3">
+                      <% @facilities.each do |f| %>
+                        <div class="col-3">
+                          <li>
+                            <input type="checkbox" name="facilities[]" id="facility_<%= f.id %>" class='hotel_facility' value="<%= f.id %>">
+                            <label for="facility_<%= f.id %>">
+                              <span><i class="fas fa-check"></i></span>
+                              <%= f.facility_locales.where('locale = ?', params[:locale]).first.nome %>
+                            </label>
+                          </li>
+                        </div>
+                      <% end %>
+                    </div>
+                  </ul>
+                </div>
+                <div class="col-12 mt-3">
+                  <div class="row">
+                    <div class="col-12 col-md-6">
+                      <h6><%= t 'meals' %></h6>
+                      <div style="padding: 20px">
+                        <div class="radio">
+                          <label><input type="radio" name="meal" value="" class="meal"> <%= t 'see_all_m' %></label>
+                        </div>
+                        <% @meals.each do |m| %>
+                          <div class="radio">
+                            <label><input type="radio" name="meal" value="<%= m.id %>" class="meal"> <%= m.meal_locales.first.nome %></label>
+                          </div>
+                        <% end %>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <div class="row">
+                        <div class="col-12 mt-5">
+                          <div id="distance_div" class="sidebar-box">
+                            <h6><%= t 'distance_from' %></h6>
+                            <input id="distance" name='distance' type="text" class="span2" value="" data-slider-min="0" data-slider-max="12500" data-slider-step="5" data-slider-value="[0,10000]"/>
+                          </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                          <div id="rooms_div" class="sidebar-box">
+                            <h6><%= t 'rooms' %></h6>
+                            <input id="rooms" name='rooms' type="text" class="span2" value="" data-slider-min="0" data-slider-max="175" data-slider-step="5" data-slider-value="[0,150]"/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product-list">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div id="hotels" class="row"><%= render 'hotels' %></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  jQuery('#search').on('input propertychange paste', function() {
+    $(this).closest('form').submit();
+  });
+  $('.meal, .hotel_facility').on('change', function(){
+    $(this).closest('form').submit();
+  });
+  $("#distance_div, #rooms_div").mouseleave(function(){
+    $(this).closest('form').submit();
+  });
+  $('#toggle_filters').click(function(event){
+    event.preventDefault();
+    $('.findyour-box').slideToggle();
+    $('#toggle_filters_icon').toggleClass('rotate');
+    $('#toggle_filters_icon').toggleClass('rotate-reset');
+  });
+  $('.findyour-box').toggle();
+</script>

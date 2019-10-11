@@ -1,0 +1,33 @@
+en:
+
+  meals: Meals
+  distance_from: Distance from Downtown (meters)
+  meters: meters
+  from_downtown: from downtown
+  rooms: Number of Rooms
+  location: Location
+
+  start_date: Check In
+  end_date: Check Out
+  adults: Adults
+  children: Children
+  update: Update
+
+  nights: night(s)
+  for: for
+  included_taxes: Included tax(es)
+
+  hotel_not_available: Hotel not available on selected dates
+  try_different_dates_or_contact_directly: Try different dates or get in touch with our team
+
+  activerecord:
+    models:
+      hotel:
+        one: Hotel
+        other: Hotels
+        either: Hotel(s)
+        index_title: Find the best hotel for you
+    attributes:
+      hotel:
+        nome: Name
+        localidade: Location

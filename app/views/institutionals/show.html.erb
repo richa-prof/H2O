@@ -1,0 +1,41 @@
+<% @title = @institutional.institutional_locales.first.metatag_titulo %>
+<% content_for :meta_description, @institutional.institutional_locales.first.metatag_descricao %>
+
+<section class="product-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/"><%= t 'home' %></a></li>
+          <li class="breadcrumb-item active"><%= @institutional.institutional_locales.first.titulo_menu %></li>
+        </ol>
+      </div>
+      <div class="col-12">
+        <h1><span><%= @institutional.institutional_locales.first.titulo_menu %></span></h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="subpages-main">
+  <div class="container">
+    <div class="row">
+      <% if ['Contact Us', 'Contato'].include? @institutional.institutional_locales.first.titulo_menu %>
+        <%= render 'contact_us' %>
+      <% else %>
+        <div class="col-12">
+          <h2><%= @institutional.institutional_locales.first.titulo %></h2>
+          <p><%= raw(@institutional.institutional_locales.first.texto) %></p>
+          <%= render 'faq_accordion' if ['Dúvidas Frequentes', 'FAQ'].include? @institutional.institutional_locales.first.titulo_menu %>
+          <%= render 'staff' if ['Equipe H2O', 'H2O Staff'].include? @institutional.institutional_locales.first.titulo_menu %>
+        </div>
+        <%= render 'testimonials' if ['Depoimentos', 'Testimonials'].include? @institutional.institutional_locales.first.titulo_menu %>
+      <% end %>
+      <% if @institutional.institutional_locales.first.image.attached? %>
+        <div class="institutional-locale-img">
+          <%= image_tag @institutional.institutional_locales.first.image, alt: @institutional.institutional_locales.first.titulo_menu, title: @institutional.institutional_locales.first.titulo_menu, lazy: true %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

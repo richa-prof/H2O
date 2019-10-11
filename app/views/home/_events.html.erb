@@ -1,0 +1,27 @@
+<section class="events-bg container">
+  <div class="row">
+    <div class="col-12 col-lg-4 my-auto">
+      <h1 class="mb-0">
+        <%= link_to (t 'activerecord.models.event.other'), events_path %>
+      </h1>
+      <h5><%= link_to (t 'see_all_m'), events_path, class: 'green_link' %></h5>
+    </div>
+    <% @events.each do |e| %>
+      <div class="col-12 col-lg-4 col-md-6">
+        <div class="events-box">
+          <a href="<%= event_path(e) %>">
+            <div class="img">
+              <%= image_tag 'https://admin.h2oecoturismo.com.br/'+e.banner_img, lazy: true %>
+            </div>
+          </a>
+          <div class="content">
+            <div class="days"><%= e.start_date.strftime("%b") if e.start_date %><span><%= e.start_date.year if e.start_date %></span></div>
+            <a href="<%= event_path(e) %>">
+              <h4><%= e.event_locales.first.name %></h4>
+            </a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

@@ -1,0 +1,78 @@
+<% @cart.cart_items.each do |ci| %>
+  <tr bgcolor="#f2f2f2">
+    <td colspan="2">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
+        <tr>
+          <td width="80%" valign="top" align="left" style="padding: 1% 1% 1% 1%;">
+            <table width="100%" style="color:grey;font-family:Arial;">
+              <tr>
+                <td valign="top" width="15%" align="center" style="padding: 1% 1% 1% 1%;">
+                  <div style="font-size:125%;">
+                    <%= l ci.passeio_data %>
+                  </div>
+                </td>
+                <td valign="top" width="15%" align="center" style="padding: 1% 1% 1% 1%;">
+                  <div style="font-size:125%;">
+                    <%= ci.passeio_hora %>
+                  </div>
+                </td>
+                <td valign="top" width="45%" align="left" style="padding: 1% 1% 1% 1%;">
+                  <div style="font-family:Arial;color:grey;">
+                    <b style="color:black;font-size:125%;">
+                      <%= ci.tour.tour_locales.where('locale = ?', @this_locale).first.nome %>
+                    </b>
+                  </div>
+                  <% if ci.qtde_adulto.present? and ci.qtde_adulto > 0 %>
+                    <%= t 'activerecord.attributes.cart_item.qtde_adulto' %>: <%= ci.qtde_adulto %><br/>
+                  <% end %>
+                  <% if ci.qtde_crianca.present? and ci.qtde_crianca > 0 %>
+                    <%= t 'activerecord.attributes.cart_item.qtde_crianca' %>: <%= ci.qtde_crianca %><br/>
+                  <% end %>
+                  <% if ci.qtde_crianca2.present? and ci.qtde_crianca2 > 0 %>
+                    <%= t 'activerecord.attributes.cart_item.qtde_crianca2' %>: <%= ci.qtde_crianca2 %><br/>
+                  <% end %>
+                  <% if ci.cart.cart_tour_extras.count > 0 %>
+                    <br/>
+                      <b style="color:black;">
+                        <%= t 'included' %>:
+                      </b>
+                    <br/>
+                    <% ci.tour.tour_extras.where(id: ci.cart.cart_tour_extras.pluck(:tour_extra_id)).each do |tour_extra| %>
+                      <% if tour_extra.tour_extra_locales.where('locale = ?', @this_locale).any? %>
+                        - <%= tour_extra.tour_extra_locales.where('locale = ?', @this_locale).first.titulo %><br/>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td valign="top" width="20%" align="right" style="padding: 1% 1% 1% 1%;">
+                  <div style="font-size:125%;">
+                    <%= number_to_currency ci.preco_total %>
+                  </div>
+                </td>
+                <td width="5%">
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td width="20%" valign="top">
+            <%= image_tag 'https://admin.h2oecoturismo.com.br/'+ci.tour.ploomes_img.to_s, width: '100%' %>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="top">
+      <div style="color:black;font-size:90%;font-family:Arial;">
+        <% if @this_locale == 'en-US' %>
+          <%= link_to (t 'cart_mailer.see_page'), tour_en_url(ci.tour) %>
+        <% else %>
+          <%= ci.tour.ploomes_descricao %>
+          <%= link_to (t 'cart_mailer.see_page'), tour_pt_br_url(ci.tour) %>
+        <% end %>
+        <br/>
+        <br/>
+      </div>
+    </td>
+  </tr>
+<% end %>

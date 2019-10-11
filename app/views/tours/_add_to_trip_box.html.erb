@@ -1,0 +1,22 @@
+<%= form_tag add_to_cart_carts_path, id: 'cart-form', method: :get do %>
+  <%= hidden_field_tag :tour_id, @tour.id %>
+  <%= hidden_field_tag :tour_selected_date %>
+  <%= hidden_field_tag :tour_selected_time %>
+  <%= hidden_field_tag :tour_system %>
+  <%= hidden_field_tag :tour_adults %>
+  <%= hidden_field_tag :tour_children %>
+  <%= hidden_field_tag :tour_children2 %>
+  <%= hidden_field_tag :tour_final_price %>
+  <% if @tour_extras.present? %>
+    <% @tour_extras.each do |tour_extra| %>
+      <%= hidden_field_tag "tour_extra[]", tour_extra.id %>
+      <% if tour_extra.produtos_passeiosecundarios_tarifas_tipo_id == 1 %>
+        <%= hidden_field_tag "tour_extra_adults_#{tour_extra.id}" %>
+        <%= hidden_field_tag "tour_extra_children_#{tour_extra.id}" %>
+        <%= hidden_field_tag "tour_extra_children2_#{tour_extra.id}" %>
+      <% else %>
+        <%= hidden_field_tag "tour_extra_unit_#{tour_extra.id}" %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

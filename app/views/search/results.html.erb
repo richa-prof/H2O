@@ -1,0 +1,148 @@
+<% @title = "Agência H2O | #{t 'search_noun'}: #{@search_term}" %>
+<% if params[:locale] == 'pt-BR' %>
+  <% meta_description = 'Encontre o melhor de Bonito, Pantanal, e eventos no Mato Grosso do Sul com a Agência H2O! São quase 20 anos de experiência e excelência!' %>
+<% else %>
+  <% meta_description = "Find the best of the best when it comes to Bonito, Pantanal, and events in Mato Groso do Sul! Agência H2O has close to 20 years of experience!" %>
+<% end %>
+<% content_for :meta_description, meta_description %>
+
+<section class="search-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 py-3">
+        <%= form_tag search_path, method: 'get', id: 'new_search' do %>
+          <div class="form-group menu-search-box">
+            <%= text_field_tag :search_box, params[:search_box], class: "form-control search_history_autocomplete", placeholder: "#{t 'new_search'}" %>
+            <a class="icon" onclick="$('#new_search').submit();">
+              <%= image_tag 'search.png', alt: 'busca-h2o', title: 'busca-h2o' %>
+            </a>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-12">
+        <h1>
+          <%= t 'found' %>:
+          <%= "#{@special_deals.size} #{(t 'activerecord.models.special_deal.either').downcase}" %>,
+          <%= "#{@tours.size} #{(t 'activerecord.models.tour.either').downcase}" %>,
+          <%= "#{@hotels.size} #{(t 'activerecord.models.hotel.either').downcase}" %>, <%= t 'and' %>
+          <%= "#{@events.size} #{(t 'activerecord.models.event.either').downcase}" %>
+          <%= t 'with_term' %>
+          "<%= @search_term %>"
+        </h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="search-results">
+  <% @special_deals.each do |special_deal| %>
+    <div class="container search-result">
+      <div class="row">
+        <div class="col-2 img">
+          <a href="<%= special_deal_path(special_deal) %>">
+            <%= image_tag special_deal.cover_image_url, style: 'object-fit: cover;', lazy: true %>
+          </a>
+        </div>
+        <div class="col-10 content">
+          <a href="<%= special_deal_path(special_deal) %>">
+            <h2><%= special_deal.name %></h2>
+          </a>
+          <h3><%= special_deal.tag_line %></h3>
+          <div class="description"><%= strip_tags special_deal.descricao&.first(300) %>...</div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% @tours.each do |tour| %>
+    <div class="container search-result">
+      <div class="row">
+        <div class="col-2 img">
+          <a href="<%= tour_path(tour) %>">
+            <%= image_tag tour.face_image_url, style: 'object-fit: cover;', lazy: true %>
+          </a>
+        </div>
+        <div class="col-10 content">
+          <a href="<%= tour_path(tour) %>">
+            <h2><%= tour.tour_locales&.first&.nome %></h2>
+          </a>
+          <h3><%= tour.tour_locales&.first&.metatag_titulo %></h3>
+          <div class="description"><%= tour.tour_locales&.first&.metatag_descricao %></div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% @hotels.each do |hotel| %>
+    <div class="container search-result">
+      <div class="row">
+        <div class="col-2 img">
+          <a href="<%= hotel_path(hotel) %>">
+            <%= image_tag hotel.face_image_url, style: 'object-fit: cover;', lazy: true %>
+          </a>
+        </div>
+        <div class="col-10 content">
+          <a href="<%= hotel_path(hotel) %>">
+            <h2><%= hotel.hotel_locales&.first&.nome %></h2>
+          </a>
+          <h3><%= hotel.hotel_locales&.first&.metatag_titulo %></h3>
+          <div class="description"><%= hotel.hotel_locales&.first&.metatag_descricao %></div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% @events.each do |event| %>
+    <div class="container search-result">
+      <div class="row">
+        <div class="col-2 img">
+          <a href="<%= event_path(event) %>">
+            <%= image_tag 'https://admin.h2oecoturismo.com.br/'+event.banner_img, style: 'object-fit: cover;', lazy: true %>
+          </a>
+        </div>
+        <div class="col-10 content">
+          <a href="<%= event_path(event) %>">
+            <h2><%= event.event_locales&.first&.name %></h2>
+          </a>
+          <div class="description"><%= event.event_locales&.first&.description %></div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</section>
+
+<% if @number_of_results < 1 %>
+  <div class="row call-to-action">
+    <div class="col-5"></div>
+    <div class="col-2">
+      <%= image_tag 'call-to-action-customer-support.png', alt: 'equipe-h2o', title: 'equipe-h2o' %>
+    </div>
+    <div class="col-5"></div>
+    <div class="col-12">
+      <div>
+        <%= t 'talk_to_us_here' %> <span><%= t 'online_chat' %></span>,
+        <%= t 'phone_or_whatsapp' %>: <span>(67) 9 9860-9808</span>,
+        <%= t 'send_an_email_to' %>: <span>reservas@h2oecoturismo.com.br</span></div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= render 'call_to_action' %>
+<% end %>
+
+<script>
+  $search_history_autocomplete = $('.search_history_autocomplete');
+  var search_history_autocomplete_options = {
+		theme: 'none',
+		requestDelay: 25,
+    getValue: 'searched_term',
+    url: function(search_box) {
+      return '/autocomplete/search_history.json?search_box=' + search_box
+    },
+		list: {
+			maxNumberOfElements: 10,
+			onChooseEvent: function() {
+				$search_history_autocomplete.val($search_history_autocomplete.getSelectedItemData().searched_term);
+        $('#new_search').submit();
+			}
+		}
+  }
+  $search_history_autocomplete.easyAutocomplete(search_history_autocomplete_options);
+</script>

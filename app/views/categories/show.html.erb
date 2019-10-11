@@ -1,0 +1,111 @@
+<% @title = @category.category_locales&.first&.metatag_titulo %>
+<% content_for :meta_description, @category.category_locales&.first&.metatag_descricao %>
+
+<section class="product-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1><span><%= @category.category_locales&.first&.nome %></span></h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product-list">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-3">
+        <div>
+          <div class="category-list">
+            <h2><%= t 'all_categories' %></h2>
+            <ul>
+              <% @categories.each do |c| %>
+                <% if c.id == @category.id %>
+                  <li class="current">
+                <% else %>
+                  <li>
+                <% end %>
+                  <h3>
+                  <%= link_to c.category_locales&.first&.nome, category_path(c) %>
+                  </h3>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-9">
+        <div class="category-description">
+          <%= raw(@category.category_locales&.first&.descricao) %>
+        </div>
+
+        <% if @tours.size > 0 %>
+          <div class="row">
+            <% @tours.each do |t| %>
+              <div class="col-12 col-lg-4">
+                <div class="product-list-box">
+                  <a href="<%= tour_path(t) %>">
+                    <div class="img">
+                      <%= image_tag t.face_image_url, :height => "150", :style => 'object-fit: cover;', lazy: true %>
+                    </div>
+                  </a>
+                  <div class="content">
+                    <a href="<%= tour_path(t) %>">
+                      <h4><%= t.tour_locales.first.nome %></h4>
+                    </a>
+                    <p><%= t.localidade %></p>
+                    <div class="d-flex flex-wrap">
+                      <h5 class="mr-auto"><%= t 'facilities' %></h5>
+                      <a href="<%= tour_path(t) %>"><%= t 'see_more' %>...</a>
+                    </div>
+                    <ul>
+                      <% t.tour_facilities.sample(3).each do |f| %>
+                        <% name_this_thing = f.facility&.facility_locales.where(locale: params[:locale]).first&.nome %>
+                        <li class="mt-1">
+                          <% if f.facility.icon_name.blank? %>
+                            <%= image_tag 'blank-icon.png', alt: name_this_thing, title: name_this_thing %>
+                          <% else %>
+                            <%= image_tag (f.facility.icon_name+'-icon.png'), class: 'mt-1', style: 'opacity: 0.5;', alt: name_this_thing, title: name_this_thing %>
+                          <% end %>
+                          <div>
+                            <%= name_this_thing %>
+                          </div>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                  <div class="footer">
+                    <div class="price">
+                      <% tour_price = t.check_price Date.current %>
+                      <%= number_to_currency tour_price.preco_adulto if tour_price %>
+                    </div>
+                    <a href="<%= tour_path(t) %>" class="btn btn-success"><%= t 'buy_now' %></a>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <div class="col-12">
+              <% if @tours.next_page.present? %>
+                <ul class="pagination">
+                  <li class="page-item">
+                    <%= link_to (t 'load_more'), tours_path(search: params[:search], categories: params[:categories], price_range: params[:price_range], category: params[:category], page: @tours.next_page), remote: true, class: "page-link" %>
+                  </li>
+                </ul>
+              <% end %>
+            </div>
+            <% if @tours.size == 0 %>
+              <div class="col-12 text-center mt-5 mb-5">
+                <h4><%= t 'no_results' %></h4>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <% if @hotels.size > 0 %>
+          <div id="hotels" class="row"><%= render 'hotels/hotels' %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

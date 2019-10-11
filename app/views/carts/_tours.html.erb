@@ -1,0 +1,186 @@
+<% @tours.each do |t| %>
+  <div class="row d-flex justify-content-between product-row">
+    <div class="col-sm-4 profuct-image">
+      <%= image_tag t.face_image_url %>
+    </div>
+    <div class="col-sm-8 col-md-8 col-lg-8">
+      <div class="content">
+        <div class="row">
+          <div class="col-10">
+            <h4><%= t.tour_locales.first.nome %></h4>
+            <div>
+              <%= link_to (t 'see_page'), tour_path(t) %>
+            </div>
+            <div>
+              <% if session[:cart]['tours'][t.id.to_s]['tour_extra'].present? && session[:cart]['tours'][t.id.to_s]['tour_extra_persons'].present? %>
+                <%= t 'included' %>:
+                <% t.tour_extras.where(id: session[:cart]['tours'][t.id.to_s]['tour_extra']).each do |tour_extra| %>
+                  <% if tour_extra.tour_extra_locales.where('locale = ?', params[:locale]).any? && session[:cart]['tours'][t.id.to_s]['tour_extra_persons'][tour_extra.id.to_s].values.sum > 0 %>
+                    <span class="label-tag">
+                      <%= tour_extra.tour_extra_locales.where('locale = ?', params[:locale]).first.titulo %>
+                    </span>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-2">
+            <%= link_to "", remove_from_cart_cart_path(id: t.id, item_class: 'Tour'), data: { confirm: "Tem certeza que deseja retirar o passeio do carrinho?" }, class: "cart-delete fas fa-trash-alt" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="date-time">
+              <p>
+                <i class="far fa-calendar-alt"></i>
+                <%= l Date.parse(session[:cart]['tours'][t.id.to_s]['tour_selected_date']) %>
+              </p>
+              <p>
+                <i class="far fa-clock"></i>
+                <%= session[:cart]['tours'][t.id.to_s]['tour_selected_time'] %>
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 align-self-center price-col">
+            <div class="price"><%= number_to_currency session[:cart]['tours'][t.id.to_s]['tour_final_price'] %></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 pr-md-0">
+            <label class="box-description-label"><%= t 'selected' %></label>
+            <ul class="box-description d-flex">
+              <li>
+                <i class="fas fa-user"></i> <%= t 'adults' %>
+                <span><%= session[:cart]['tours'][t.id.to_s]['tour_adults'] %></span>
+              </li>
+              <% unless session[:cart]['tours'][t.id.to_s]['tour_children2'].blank? %>
+                <li>
+                  <i class="fas fa-child"></i> <%= t 'children' %>
+                  <%= t 'up_to' %>
+                  <%= t.check_price(Date.parse(session[:cart]['tours'][t.id.to_s]['tour_selected_date'])).idade_crianca2 %>
+                  <%= t 'yrs_old' %>
+                  <span><%= session[:cart]['tours'][t.id.to_s]['tour_children2'].to_i %></span>
+                </li>
+              <% end %>
+              <% unless session[:cart]['tours'][t.id.to_s]['tour_children'].blank? %>
+                <li>
+                  <i class="fas fa-child"></i> <%= t 'children' %>
+                  <%= t 'up_to' %>
+                  <%= t.check_price(Date.parse(session[:cart]['tours'][t.id.to_s]['tour_selected_date'])).idade_crianca %>
+                  <%= t 'yrs_old' %>
+                  <span><%= session[:cart]['tours'][t.id.to_s]['tour_children'].to_i %></span>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="col-md-7   pl-md-0">
+            <label class="box-description-label"><%= t 'facilities' %></label>
+            <ul class="box-description d-flex justify-content-between">
+              <% t.tour_facilities.sample(5).each do |f| %>
+                <li>
+                  <% if f.facility.icon_name.blank? %>
+                    <%= image_tag 'blank-icon.png' %>
+                  <% else %>
+                    <%= image_tag (f.facility.icon_name+'-icon.png') %>
+                  <% end %>
+                  <span><%= f.facility.facility_locales.where('locale = ?', params[:locale]).first.nome %></span>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% @cart.cart_items.where.not(produto_id: @tours.pluck(:id)).order(:passeio_data).each do |t| %>
+  <div class="row d-flex justify-content-between product-row">
+    <div class="col-sm-4 profuct-image">
+      <%= image_tag t.tour.face_image_url %>
+    </div>
+    <div class="col-sm-8 col-md-8 col-lg-8">
+      <div class="content">
+        <div class="row">
+          <div class="col-10">
+            <h4><%= t.tour.tour_locales.first.nome %></h4>
+            <%= link_to (t 'see_more'), tour_path(t.tour) %>
+            <div>
+              <% if t.cart.cart_tour_extras.count > 0 %>
+                <%= t 'included' %>:
+                <% t.tour.tour_extras.where(id: t.cart.cart_tour_extras.pluck(:tour_extra_id)).each do |tour_extra| %>
+                  <% if tour_extra.tour_extra_locales.where('locale = ?', params[:locale]).any? %>
+                    <span class="label-tag">
+                      <%= tour_extra.tour_extra_locales.where('locale = ?', params[:locale]).first.titulo %>
+                    </span>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-2">
+            <%= link_to "", remove_from_cart_cart_path(t.tour.id, item_class: 'Tour'), data: { confirm: "Are you sure, you want to remove this tour from cart?" }, class: "cart-delete fas fa-trash-alt" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="date-time">
+              <p>
+                <i class="far fa-calendar-alt"></i>
+                <%= l t.passeio_data %>
+              </p>
+              <p>
+                <i class="far fa-clock"></i>
+                <%= t.passeio_hora %>
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 align-self-center price-col">
+            <div class="price"><%= number_to_currency t.preco_total %></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 pr-md-0">
+            <label class="box-description-label"><%= t 'selected' %></label>
+            <ul class="box-description d-flex">
+              <li>
+                <i class="fas fa-user"></i> <%= t 'adults' %>
+                <span><%= t.qtde_adulto %></span>
+              </li>
+              <li>
+                <i class="fas fa-child"></i> <%= t 'children' %>
+                <%= t 'up_to' %>
+                <%= t.tour.check_price(t.passeio_data).idade_crianca %>
+                <%= t 'yrs_old' %>
+                <span><%= t.qtde_crianca %></span>
+              </li>
+              <li>
+                <i class="fas fa-child"></i> <%= t 'children' %>
+                <%= t 'up_to' %>
+                <%= t.tour.check_price(t.passeio_data).idade_crianca2 %>
+                <%= t 'yrs_old' %>
+                <span><%= t.qtde_crianca2 %></span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-7   pl-md-0">
+            <label class="box-description-label"><%= t 'facilities' %></label>
+            <ul class="box-description d-flex justify-content-between">
+              <% t.tour.tour_facilities.sample(5).each do |f| %>
+                <li>
+                  <% if f.facility.icon_name.blank? %>
+                    <%= image_tag 'blank-icon.png' %>
+                  <% else %>
+                    <%= image_tag (f.facility.icon_name+'-icon.png') %>
+                  <% end %>
+                  <span><%= f.facility.facility_locales.where('locale = ?', params[:locale]).first.nome %></span>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end if @cart.present? and @cart.cart_items.any? %>

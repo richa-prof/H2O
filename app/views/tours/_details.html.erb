@@ -1,0 +1,91 @@
+<div class="col-12">
+  <div id="facilities" class="facilities-box">
+    <h2><%= t 'facilities' %></h2>
+    <ul>
+      <% @tour_facilities.each do |f| %>
+        <% name_this_thing = f.facility_locales.first.nome %>
+        <li class="text-center">
+          <% if f.facility.icon_name.blank? %>
+            <%= image_tag 'blank-icon.png', alt: name_this_thing, title: name_this_thing %>
+          <% else %>
+            <%= image_tag (f.facility.icon_name+'-icon.png'), alt: name_this_thing, title: name_this_thing %>
+          <% end %>
+          <div>
+            <%= name_this_thing %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="col-12">
+  <div class="facilities-box">
+    <h2><%= t 'what_to_bring' %></h2>
+    <ul>
+      <% @tour_brings.each do |b| %>
+        <li class="text-center">
+          <div class="whattake-item whattake-tour">
+            <i class="icon icon-<%= b.bring.icon_name %>"></i>
+          </div>
+          <div>
+            <%= b.bring_locales.first.nome %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="col-12 col-lg-6">
+  <div class="facilities-box">
+    <h2><%= t 'lunch' %></h2>
+    <% if @tour_lunch.present? %>
+      <%= @tour_lunch.lunch_locales.first.nome %>
+    <% else %>
+      <%= t 'get_every_detail' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="col-12 col-lg-2">
+  <div class="facilities-box">
+    <h2><%= t 'children' %></h2>
+    <div class="text-center">
+      <% if @tour_child.present? %>
+        <%= @tour_child.child_locales.first.nome %>
+      <% else %>
+        <%= t 'get_every_detail' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 col-lg-2">
+  <div class="facilities-box">
+    <h2><%= t 'ability' %></h2>
+    <div class="text-center">
+      <% if @tour_ability.present? %>
+        <%= @tour_ability.ability_locales.first.nome %>
+      <% else %>
+        <%= t 'get_every_detail' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="col-12 col-lg-2">
+  <div class="facilities-box">
+    <h2><%= t 'duration' %></h2>
+    <div class="text-center">
+      <%= @tour.duration_in_min %>
+    </div>
+  </div>
+</div>
+
+<div class="col-12">
+  <h2><%= t 'get_every_detail' %>:</h2>
+  <div class="mt-3">
+    <%= raw(@tour.tour_locales&.first&.descricao) %>
+  </div>
+</div>

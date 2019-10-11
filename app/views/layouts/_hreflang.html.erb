@@ -1,0 +1,4 @@
+<%= link_to '', request.base_url+url_for(locale: I18n.default_locale.to_s), :rel => 'alternate', :hreflang => 'x-default' %>
+<% I18n.available_locales.each do |each_locale| %>
+  <%= link_to '', request.base_url+url_for(locale: each_locale.to_s), :rel => 'alternate', :hreflang => each_locale %>
+<% end %>

@@ -1,0 +1,35 @@
+pt-BR:
+
+  meals: Regime
+  distance_from: Distância do Centro (metros)
+  meters: metros
+  from_downtown: do centro de
+  rooms: Quantidade de Apartamentos
+  location: Localização
+
+  start_date: Entrada
+  end_date: Saída
+  adults: Adultos
+  children: Crianças
+  update: Atualizar
+
+  nights: diária(s)
+  for: por
+  included_taxes: Taxa(s) incluída(s)
+
+  hotel_not_available: Hotel sem disponibilidade no período selecionado
+  try_different_dates_or_contact_directly: Tente outro período ou fale com a nossa equipe
+
+  activerecord:
+    models:
+      hotel:
+        one: Hotel
+        other: Hotéis
+        either: Hotel(éis)
+        index_title: Encontre o melhor hotel para você
+    attributes:
+      hotel:
+        nome: Nome
+        localidade: Localidade
+        images: Imagens
+        hotels_api_code: Vínculo Hotels API

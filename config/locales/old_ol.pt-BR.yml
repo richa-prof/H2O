@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      old_ol:
+        one: OL
+        other: OLs
+    attributes:
+      old_ol:
+        data: Data
+        status: Status
+        total: Total

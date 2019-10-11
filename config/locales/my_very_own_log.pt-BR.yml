@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      my_very_own_log:
+        one: Log
+        other: Logs
+    attributes:
+      my_very_own_log:
+        authoring_class: Classe
+        authoring_method: Método
+        authoring_user_email: E-mail do cliente
+        info: Informações

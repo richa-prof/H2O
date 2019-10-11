@@ -1,0 +1,10 @@
+en:
+  all_categories: All Categories
+  activerecord:
+    models:
+      category:
+        one: Category
+        other: Categories
+    attributes:
+      category:
+        nome: Name

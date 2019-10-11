@@ -1,0 +1,20 @@
+<tr bgcolor="#e6e6e6">
+  <td colspan="2" valign="top" style="padding: 4% 4% 4% 4%;">
+    <div style="color:grey;font-family:Arial;margin-top: 2%;">
+      <%= t 'hello' %>, <b><%= @cart.user.nome %></b>!
+    </div>
+    <div style="color:grey;font-family:Arial;margin-top: 2%;">
+      <%= t 'cart_mailer.thank_you_for_request' %>
+    </div>
+    <div style="color:grey;font-family:Arial;margin-top: 2%;">
+      <%= t 'cart_mailer.payment_warning' %>
+    </div>
+    <div style="color:grey;font-family:Arial;margin-top: 2%;">
+      <%= t 'cart_mailer.mean_time_questions' %>
+    </div>
+    <div style="color:grey;font-family:Arial;margin-top: 2%;">
+      <%= t 'cart_mailer.thank_you' %>
+    </div>
+    <%= render 'staff_signature' %>
+  </td>
+</tr>

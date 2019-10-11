@@ -1,0 +1,35 @@
+<% @title = 'Agência H2O - ' + (t 'cart') %>
+<%= render 'menu', step: 'add_to_trip' %>
+
+<section class="addtocart login cart-step-1">
+  <div class="container">
+    <div class="addtocart-step-content">
+      <div class="top-button text-right">
+        <a href="<%= tours_path %>" class="btn btn-secondary btn-sm mr-2">
+          <%= image_tag 'add_white.png' %>
+          <%= t 'more_tours' %>
+        </a>
+        <a href="<%= hotels_path %>" class="btn btn-secondary btn-sm mr-2">
+          <%= image_tag 'add_white.png' %>
+          <%= t 'more_hotels' %>
+        </a>
+        <a href="<%= additional_information_carts_path %>" class="btn btn-success btn-sm">
+          <%= image_tag 'finish.png' %>
+          <%= t 'finish' %>
+        </a>
+      </div>
+      <div class="cart-productlist">
+        <% if @this_cart_has_items %>
+          <%= render 'tours' %>
+          <%= render 'hotels' %>
+        <% else %>
+          <h4><%= t 'no_results' %></h4>
+        <% end %>
+      </div>
+    </div>
+    <div class="cart-step-footer mt-5 w-100">
+      <a href="javascript:history.back()" class="btn btn-default back-button"><%= t 'back' %></a>
+      <a  href="<%= additional_information_carts_path %>"  class="btn btn-success float-right"><%= t 'next' %></a>
+    </div>
+  </div>
+</section>

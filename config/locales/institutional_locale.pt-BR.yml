@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      institutional_locale:
+        one: Institucional (Idiomas)
+        other: Institucionais (Idiomas)
+    attributes:
+      institutional_locale:
+        institucionai_id: Institucional
+        locale: Idioma
+        titulo: Título da Página
+        titulo_menu: Título no Menu
+        metatag_titulo: Metatag Título
+        metatag_descricao: Metatag Descrição
+        texto: Conteúdo

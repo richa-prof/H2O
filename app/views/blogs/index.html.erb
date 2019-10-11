@@ -1,0 +1,74 @@
+<% @title = t 'blog' %>
+
+<section class="product-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/"><%= t 'home' %></a></li>
+          <li class="breadcrumb-item active"><%= @title %></li>
+        </ol>
+      </div>
+      <div class="col-12">
+        <h1><span><%= @title %></span></h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product-list">
+  <div class="container">
+    <div class="row">
+      <% @blog_posts["items"].each do |blog_post| %>
+        <div class="col-12 col-md-4">
+          <div class="blog-box">
+            <div class="text-center">
+              <%= l Date.parse(blog_post["published"]) %>
+            </div>
+            <% this_link = "/#{params[:locale].downcase}/blog/#{blog_post['id']}/#{blog_post["title"].split(" ").join("-").downcase}" %>
+            <a href="<%= this_link %>">
+              <% unless blog_post["images"].nil? %>
+                <div class="blog-box-image">
+                  <%= image_tag blog_post["images"].first["url"] %>
+                </div>
+              <% end %>
+              <h3 class="blog-box-title">
+                <%= blog_post["title"] %>
+              </h3>
+            </a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<% if @blog_posts_list.present? %>
+  <section class="product-list">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h4 class="mb-3"><%= t 'other_articles' %>:</h4>
+        </div>
+        <div class="col-12">
+          <table class="table table-striped blog-post-list">
+            <% @blog_posts_list["items"].each do |list_item| %>
+              <% if list_item["title"].present? %>
+                <tr>
+                  <td class="text-center">
+                    <%= l Date.parse(list_item["published"]) %>
+                  </td>
+                  <td>
+                    <a href="<%= link_to_blog_post params[:locale], list_item["id"], list_item["url"] %>">
+                      <h6><%= list_item["title"] %><h6>
+                    </a>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

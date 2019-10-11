@@ -1,0 +1,15 @@
+<div class="language">
+  <div><%= t 'language' %>:</div>
+  <div>
+    <% I18n.available_locales.each do |this_locale| %>
+      <%
+        if this_locale == :en
+          img = image_tag 'en-us.png', alt: 'Select English', title: 'Select English'
+        else
+          img = image_tag 'pt-br.png', alt: 'Selecionar Português', title: 'Selecionar Português'
+        end
+      %>
+      <%= link_to img, url_for(locale: this_locale.to_s) %>
+    <% end %>
+  </div>
+</div>

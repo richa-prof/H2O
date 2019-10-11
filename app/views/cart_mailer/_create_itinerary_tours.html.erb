@@ -1,0 +1,64 @@
+<% @itinerary.itinerary_tours.each do |t| %>
+  <tr bgcolor="#f2f2f2">
+    <td colspan="2">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;">
+        <tr>
+          <td width="80%" valign="top" align="left" style="padding: 1% 1% 1% 1%;">
+            <table width="100%" style="color:grey;font-family:Arial;">
+              <tr>
+                <td valign="top" width="15%" align="center" style="padding: 1% 1% 1% 1%;">
+                  <div style="font-size:125%;">
+                    <%= l t.passeio_data %>
+                  </div>
+                </td>
+                <td valign="top" width="15%" align="center" style="padding: 1% 1% 1% 1%;">
+                  <div style="font-size:125%;">
+                    <%= t.passeio_hora.strftime('%H:%M') %>
+                  </div>
+                </td>
+                <td valign="top" width="45%" align="left" style="padding: 1% 1% 1% 1%;">
+                  <div style="font-family:Arial;color:grey;">
+                    <b style="color:black;font-size:125%;">
+                      <%= t.tour.tour_locales.where('locale = ?', @this_locale).first.nome %>
+                    </b>
+                  </div>
+                  <% if t.qtde_adt.present? and t.qtde_adt > 0 %>
+                    <%= t 'activerecord.attributes.itinerary_tour.qtde_adt' %>: <%= t.qtde_adt %><br/>
+                  <% end %>
+                  <% if t.qtde_chd.present? and t.qtde_chd > 0 %>
+                    <%= t 'activerecord.attributes.itinerary_tour.qtde_chd' %>: <%= t.qtde_chd %><br/>
+                  <% end %>
+                  <% if t.qtde_free.present? and t.qtde_free > 0 %>
+                    <%= t 'activerecord.attributes.itinerary_tour.qtde_free' %>: <%= t.qtde_free %><br/>
+                  <% end %>
+                </td>
+                <td valign="top" width="20%" align="right" style="padding: 1% 1% 1% 1%;">
+                  <div style="font-size:125%;">
+                    <%= number_to_currency t.total %>
+                  </div>
+                </td>
+                <td width="5%">
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td width="20%" valign="top">
+            <%= image_tag 'https://admin.h2oecoturismo.com.br/'+t.tour.ploomes_img.to_s, width: '100%' %>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" bgcolor="#f2f2f2" style="font-size:90%;font-family:Arial;color:grey;padding: 0 1% 0 1%;">
+      <div style="color:black;font-size:90%;font-family:Arial;">
+        <% if @this_locale == 'en-US' %>
+          <%= link_to (t 'cart_mailer.see_details'), tour_en_url(t.tour) %>
+        <% else %>
+          <%= link_to (t 'cart_mailer.see_details'), tour_pt_br_url(t.tour) %>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+  <tr><td colspan="2"><br/></td></tr>
+<% end %>

@@ -1,0 +1,26 @@
+<section class="login">
+   <div class="container">
+      <div class="row">
+         <div class="col-12 col-lg-6 offset-lg-3 text-center">
+            <h2 class="text-center"><%= t 'change_password' %></h2>
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+            <%= f.hidden_field :reset_password_token %>
+              <div class="login-form">
+                <%= devise_error_messages! %>
+                 <div class="form-group text-left">
+                   <label><%= t 'new_password' %></label>
+                   <%= f.password_field :password, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "******" %>
+                 </div>
+                 <div class="form-group text-left">
+                   <label><%= t 'confirm_new_password' %></label>
+                   <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", placeholder: "******" %>
+                 </div>
+                 <button type="submit" class="btn btn-success btn-md"><%= t 'update_password' %></button>
+                 <a href="<%= new_session_path(resource_name) %>" class="back mt-4"><%= t 'back' %></a>
+                 <a href="<%= new_confirmation_path(resource_name) %>" class="confirm mt-2"><%= t 'retrieve' %></a>
+              </div>
+            <% end %>
+         </div>
+      </div>
+   </div>
+</section>

@@ -1,0 +1,18 @@
+.green_link{
+  color: #a8cf45;
+}
+.green_link:hover {
+  color: #383336;
+}
+.specialdeals-box img, .hotels-box img{
+  min-height: 230px;
+}
+.pull-right{
+  float: right
+}
+.pointer{
+  cursor: pointer;
+}
+.hide{
+  display: none;
+}

@@ -1,0 +1,12 @@
+pt-BR:
+
+  activerecord:
+    models:
+      cart_passenger:
+        one: Passageiro
+        other: Passageiros
+    attributes:
+      cart_passenger:
+        nome: Nome
+        idade: Idade
+        doc: Documento

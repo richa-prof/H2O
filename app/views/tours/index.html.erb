@@ -1,0 +1,103 @@
+<% @title = (t 'activerecord.models.tour.index_title') %>
+
+<section class="product-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/"><%= t 'home' %></a></li>
+          <li class="breadcrumb-item active"><%= (t 'activerecord.models.tour.other') %></li>
+        </ol>
+      </div>
+      <div class="col-12">
+        <h1><span><%= (t 'activerecord.models.tour.other') %></span></h1>
+        <div class="findyour-main">
+          <%= form_tag tours_path, :method => 'get', remote: true do %>
+            <div class="row">
+              <div class="col-12 col-md-5">
+                <h3><%= t 'find_your' %> <span><%= t 'activerecord.models.tour.one' %></span></h3>
+              </div>
+              <div class="col-12 col-md-5 mt-4">
+                <div class="form-group">
+                  <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "#{t 'search_here'}" %>
+                  <span class="icon"><i class="fas fa-search"></i></span>
+                </div>
+              </div>
+              <div id="toggle_filters" class="col-12 col-md-2 text-center">
+                <a href="#" id="toggle_filters">
+                  <i id="toggle_filters_icon" class="fas fa-chevron-down rotate-reset"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="findyour-box mt-3">
+                <div class="row">
+                  <div class="col-12 col-md-3">
+                    <h6><%= t 'ability' %></h6>
+                    <div style="padding: 20px">
+                      <div class="radio">
+                        <label><input type="radio" name="ability" value=""> <%= t 'see_all_m' %></label>
+                      </div>
+                      <% @abilities.each do |a| %>
+                        <div class="radio">
+                          <label><input type="radio" name="ability" value="<%= a.id %>"> <%= a.ability_locales.first.nome %></label>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-9">
+                    <h6><%= t 'activerecord.models.category.other' %></h6>
+                    <ul>
+                      <div class="row">
+                        <% @categories.each do |c| %>
+                          <div class="col-12 col-md-4">
+                            <li>
+                              <input type="checkbox" name="categories[]" id="cat_<%= c.id %>" class='tour_cat' value="<%= c.id %>">
+                              <label for="cat_<%= c.id %>">
+                                <span><i class="fas fa-check"></i></span>
+                                <%= c.category_locales&.first&.nome %>
+                              </label>
+                            </li>
+                          </div>
+                        <% end %>
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product-list">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-12">
+        <div id="tours" class="row"><%= render 'tours' %></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  jQuery('#search').on('input propertychange paste', function() {
+    $(this).closest('form').submit();
+  });
+  $('.tour_cat').on('change', function(){
+    $(this).closest('form').submit();
+  });
+  $('.radio').on('change', function(){
+    $(this).closest('form').submit();
+  });
+  $('#toggle_filters').click(function(event){
+    event.preventDefault();
+    $('.findyour-box').slideToggle();
+    $('#toggle_filters_icon').toggleClass('rotate');
+    $('#toggle_filters_icon').toggleClass('rotate-reset');
+  });
+  $('.findyour-box').toggle();
+</script>

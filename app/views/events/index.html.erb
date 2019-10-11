@@ -1,0 +1,56 @@
+<% @title = @event_info_locale.titulo %>
+<% content_for :meta_description, @event_info_locale.metatag_descricao %>
+
+<section class="product-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/"><%= t 'home' %></a></li>
+          <li class="breadcrumb-item active"><%= @title %></li>
+        </ol>
+      </div>
+      <div class="col-12">
+        <h1><span><%= @title %></span></h1>
+        <div class="findyour-main">
+          <%= form_tag events_path, :method => 'get', remote: true do %>
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <h3><%= t 'find_your' %> <span><%= t 'activerecord.models.event.one' %></span></h3>
+              </div>
+              <div class="col-12 col-md-6 mt-4">
+                <div class="form-group">
+                  <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "#{t 'search_here'}" %>
+                  <span class="icon"><i class="fas fa-search"></i></span>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product-list">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div id="events" class="row"><%= render 'events' %></div>
+      </div>
+    </div>
+  </div>
+  <div class="container mt-5">
+    <div class="col-12">
+      <h2><%= @event_info_locale.metatag_titulo %></h2>
+      <div class="events-raw">
+        <%= raw(@event_info_locale.texto) %>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  jQuery('#search').on('input propertychange paste', function() {
+    $(this).closest('form').submit();
+  });
+</script>

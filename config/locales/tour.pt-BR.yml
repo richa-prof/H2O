@@ -1,0 +1,36 @@
+pt-BR:
+  more_information: Mais Informações
+  express_booking_call_now: Reserva Rápida - Ligue agora!
+  possible_activities: Possíveis passeios
+  what_to_bring: O que levar
+  special_holiday_rates: Promoções especiais de férias!
+  we_think_you_will_also_like: Acreditamos que você também vai gostar
+
+  tour_date: Data
+  date_with_no_availability: Passeio sem disponibilidade na data selecionada
+  try_another_date_or_contact_directly: Tente outra data ou fale com a nossa equipe
+  prices_good_for: Preços válidos para
+  adults: Adultos
+  children: Crianças
+  older_than: acima de
+  yrs_old: anos
+  up_to: até
+  all_ages: Todas as idades
+
+  activerecord:
+    models:
+      tour:
+        one: Passeio
+        other: Passeios
+        either: Passeio(s)
+        index_title: Encontre o melhor passeio para você
+    attributes:
+      tour:
+        nome: Nome
+        localidade: Localidade
+        exibir_site: Exibir Site
+        status: Status
+        lunch: Almoço
+        child: Crianças
+        ability: Habilidade
+        images: Imagens

@@ -1,0 +1,24 @@
+<tr>
+  <td valign="middle" align="right" style="padding: 2% 2% 2% 2%;">
+    <div style="color:#00ad88;font-size:200%;font-family:Arial;letter-spacing:5px;">
+      TOTAL
+    </div>
+  </td>
+  <td bgcolor="#81c7c7" valign="middle" align="left" style="padding: 2% 2% 2% 2%;">
+    <% if @itinerary.desconto.present? and @itinerary.desconto > 0 %>
+      <span style="font-family:Arial;">
+        <%= number_to_currency @itinerary.subtotal %>
+        -
+        <%= number_to_currency @itinerary.desconto %>
+        =
+      </span>
+      <span style="font-size:200%;font-family:Arial;">
+        <%= number_to_currency @itinerary.total %>
+      </span>
+    <% else %>
+      <div style="font-size:200%;font-family:Arial;">
+        <%= number_to_currency @itinerary.total %>
+      </div>
+    <% end %>
+  </td>
+</tr>

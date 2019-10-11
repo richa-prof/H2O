@@ -1,0 +1,261 @@
+<% @title = (t 'persona_day_by_day.day_by_day_for') + ' ' + @persona_locale.nome + ' ' + (t 'persona_day_by_day.in_bonito_ms') %>
+<% if params[:locale] == 'pt-BR' %>
+  <% @meta_description = 'São tantos passeios em Bonito, que as vezes é difícil escolher! Se pensar também no Pantanal e no hotel, então? É bastante informação! Aproveite o site da agência H2O para encontrar tudo de forma fácil e prática!' %>
+<% else %>
+  <% @meta_description = "Bonito has so many tours and options, that sometimes it can be hard to know which ones are best for you! Considering Pantanal and hotels, as well, the decision making process can be a challenge! These pages are here because H2O wants to help you!" %>
+<% end %>
+<% content_for :meta_description, @meta_description %>
+
+<section class="day-by-day-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="/"><%= t 'home' %></a>
+          </li>
+          <li class="breadcrumb-item">
+            <%= link_to (t 'persona_day_by_day.day_by_day_suggestions'), personas_path %>
+          </li>
+          <li class="breadcrumb-item active">
+            <%= @persona_locale.nome %>
+          </li>
+        </ol>
+      </div>
+
+      <div class="col-12 my-5 text-center">
+        <h1>
+          <span class="before-after">
+            <%= (t 'persona_day_by_day.day_by_day_for') %>
+          </span>
+          <span class="persona-nome">
+            <%= @persona_locale.nome %>
+          </span>
+          <span class="before-after">
+            <%= (t 'persona_day_by_day.in_bonito_ms') %>
+          </span>
+        </h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="container day-by-day-form">
+        <%= form_tag persona_persona_day_by_days_path(@persona), method: :get do %>
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="row input-daterange">
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label for="start_date"><%= t 'start_date' %></label>
+                    <%= text_field_tag :start_date, @start_date.strftime('%d/%m/%Y'), placeholder: (t 'start_date'), class: 'form-control text-center' %>
+                    <span id="start_date_icon" class="icon" style="cursor: pointer"><i class="far fa-calendar-alt"></i></span>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label for="end_date"><%= t 'end_date' %></label>
+                    <%= text_field_tag :end_date, @end_date.strftime('%d/%m/%Y'), placeholder: (t 'end_date'), class: 'form-control text-center' %>
+                    <span id="end_date_icon" class="icon" style="cursor: pointer"><i class="far fa-calendar-alt"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-3 form-group">
+              <label for="adults"><i class="fas fa-user"></i> <%= t 'adults' %></label>
+              <input type="text" name="adults" id="adults" class="form-control text-center" value="<%= @adults %>">
+            </div>
+            <div class="col-12 col-lg-3">
+              <button type="submit" class="btn btn-success">
+                <%= t 'persona_day_by_day.update' %>
+              </button>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="day-by-day">
+  <% @sum_day_by_day_prices = 0 %>
+  <% @tour_list_all = '' %>
+  <% itemListElement_day = [] %>
+  <% (@start_date..@end_date).each_with_index do |date,date_index| %>
+    <div id="day_<%= date_index %>" class="container day-by-day">
+      <div class="row">
+        <div class="col-12">
+          <h2>
+            <%= t 'persona_day_by_day.day' %> <%= date_index + 1 %> - <%= l date %>
+          </h2>
+        </div>
+      </div>
+      <div class="row">
+          <% if date_index == 0 %>
+            <div class="col-12">
+              <span class="block-name">
+                <%= t 'persona_day_by_day.start_date' %>:
+              </span>
+              <%= t 'persona_day_by_day.arrival_day_info' %>
+            </div>
+            <% day_hash = {
+              "@type": "ListItem",
+              "position": date_index + 1,
+              "name": "#{t 'persona_day_by_day.day'} #{date_index + 1}",
+              "description": "#{t 'persona_day_by_day.start_date'}: #{t 'persona_day_by_day.arrival_day_info'}"
+            } %>
+          <% elsif date_index < (@start_date..@end_date).count - 1 %>
+            <% if @days.where(day_order: date_index).any? %>
+              <% tours_array = [] %>
+              <% @tour_list_day = '' %>
+              <% @days.where(day_order: date_index).each_with_index do |day,day_index| %>
+                <% day_block_name = day.block.block_locales.where('locale = ?', params[:locale]).first.nome %>
+                <% tour_price_for_this_date = day.tour.check_price date %>
+                <% tour_name = day.tour.tour_locales.where('locale = ?', params[:locale]).first.nome %>
+                <div class="col-12 col-md-3 mt-3">
+                  <a href="<%= tour_path(day.tour) %>">
+                    <%= image_tag day.tour.face_image_url, alt: tour_name, title: tour_name, lazy: true %>
+                  </a>
+                </div>
+                <div class="col-12 col-md-5 mt-3">
+                  <a href="<%= tour_path(day.tour) %>">
+                    <h3>
+                      <div class="tour-name">
+                        <span class="block-name">
+                          <%= day_block_name %>:
+                        </span>
+                        <%= tour_name %>
+                        <% @tour_list_all << "#{tour_name}, " %>
+                        <% @tour_list_day << "#{day_block_name}: #{tour_name}, " %>
+                      </div>
+                    </h3>
+                  </a>
+                  <ul>
+                    <li>
+                      <i class="fas fa-utensils"></i>
+                      <% if day.tour.lunch %>
+                        <%= day.tour.lunch.lunch_locales.where('locale = ?', params[:locale]).first.nome_menu %>
+                      <% else %>
+                        <h4 style="display:inline;"><%= t 'persona_day_by_day.talk_to_our_staff' %></h4>
+                      <% end %>
+                    </li>
+                    <li>
+                      <i class="far fa-clock"></i>
+                      <% if day.tour.duration_in_min %>
+                      <%= day.tour.duration_in_min %> <%= t 'persona_day_by_day.minutes' %>
+                      <% else %>
+                        <h4 style="display:inline;"><%= t 'persona_day_by_day.talk_to_our_staff' %></h4>
+                      <% end %>
+                    </li>
+                    <li>
+                      <i class="fas fa-child"></i>
+                      <% if day.tour.child %>
+                        <%= day.tour.child.child_locales.where('locale = ?', params[:locale]).first.nome %>
+                      <% else %>
+                        <h4 style="display:inline;"><%= t 'persona_day_by_day.talk_to_our_staff' %></h4>
+                      <% end %>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-12 col-md-4 text-right">
+                  <div class="tour-name">
+                    <% if tour_price_for_this_date.present? %>
+                      <% @sum_day_by_day_prices += tour_price_for_this_date.preco_adulto %>
+                      <span class="block-name">
+                        <%= number_to_currency tour_price_for_this_date.preco_adulto %>
+                      </span>
+                      <%= t 'persona_day_by_day.per_adult' %>
+                    <% else %>
+                      <%= t 'persona_day_by_day.price_not_avialable' %>
+                    <% end %>
+                  </div>
+                </div>
+                <% tour_hash = {
+                  "@type": "ListItem",
+                  "name": day.block.block_locales.where('locale = ?', params[:locale]).first.nome,
+                  "position": day_index + 1,
+                  "item": {
+                    "@type": "TouristAttraction",
+                    "name": tour_name,
+                    "description": day.tour.tour_locales.where('locale = ?', params[:locale]).first.metatag_descricao,
+                    "isAccessibleForFree": "false",
+                    "photo": [day.tour.face_image_url],
+                    "url": tour_url(day.tour)
+                  }
+                } %>
+                <% tours_array << tour_hash %>
+              <% end %>
+              <% day_hash = {
+                "@type": ["ItemList","ListItem"],
+                "name": "#{t 'persona_day_by_day.day'} #{date_index + 1}",
+                "description": @tour_list_day[0...-2],
+                "position": date_index + 1,
+                "numberOfItems": @days.where(day_order: date_index).count,
+                "itemListElement": tours_array
+              } %>
+            <% else %>
+              <div class="col-12">
+                <%= t 'persona_day_by_day.request_options' %>
+              </div>
+              <% day_hash = {
+                "@type": "ListItem",
+                "position": date_index + 1,
+                "name": "#{t 'persona_day_by_day.day'} #{date_index + 1}",
+                "description": (t 'persona_day_by_day.request_options')
+              } %>
+            <% end %>
+          <% elsif date_index < (@start_date..@end_date).count %>
+            <div class="col-12">
+              <span class="block-name">
+                <%= t 'persona_day_by_day.end_date' %>:
+              </span>
+              <%= t 'persona_day_by_day.departure_day_info' %>
+            </div>
+            <% day_hash = {
+              "@type": "ListItem",
+              "position": date_index + 1,
+              "name": "#{t 'persona_day_by_day.day'} #{date_index + 1}",
+              "description": "#{t 'persona_day_by_day.end_date'}: #{t 'persona_day_by_day.departure_day_info'}"
+            } %>
+        <% end %>
+      </div>
+      <% itemListElement_day << day_hash %>
+    </div>
+  <% end %>
+  <div id="day_by_day_prices_sum" class="container day-by-day">
+    <div class="row">
+      <div class="col-12 col-md-9 mt-3 text-right">
+        <h4>
+          <%= t 'persona_day_by_day.sum' %>:
+        </h4>
+      </div>
+      <div class="col-12 col-md-3 text-right">
+        <div class="tour-name">
+          <%= number_to_currency @sum_day_by_day_prices %> <%= t 'persona_day_by_day.per_adult' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <%= render 'call_to_action' %>
+  </div>
+</section>
+<% @tour_list_all << '...' %>
+<% @itinerary_hash = {
+  "@type": "ItemList",
+  "numberOfItems": (@start_date..@end_date).count,
+  "itemListElement": itemListElement_day
+} %>
+<%= render 'schema_org' %>
+<script>
+  $('#start_date_icon, #end_date_icon').click(function() {
+    $('#start_date').datepicker( 'show' );
+  });
+
+  $('.input-daterange').each(function() {
+    $(this).datepicker({
+      language: 'pt-BR',
+      autoclose: true,
+      format: 'dd/mm/yyyy'
+    });
+  });
+</script>

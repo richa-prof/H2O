@@ -1,0 +1,16 @@
+pt-BR:
+
+  activerecord:
+    models:
+      cart_item:
+        one: Ítem
+        other: Ítens
+    attributes:
+      cart_item:
+        passeio_data: Data
+        passeio_hora: Hora
+        qtde_adulto: Adultos
+        qtde_crianca: Crianças
+        qtde_crianca2: Crianças
+        preco_total: Preço
+        produto_id: Passeio

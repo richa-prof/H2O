@@ -1,0 +1,29 @@
+<% @title = 'Agência H2O - '+(t 'identification') %>
+<section class="login">
+  <div class="container">
+    <div class="row">
+      <div id="login_side" class="col-12 col-lg-6">
+        <h2><%= t 'login' %></h2>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="login-form">
+          <div class="form-group">
+            <label><%= t 'activerecord.attributes.user.email' %></label>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: "abc@gmail.com" %>
+          </div>
+          <div class="form-group">
+            <label><%= t 'activerecord.attributes.user.password' %></label>
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "******" %>
+          </div>
+          <button type="submit" class="btn btn-success btn-md btn-big"><%= t 'login' %></button>
+          <a href="<%= new_password_path(resource_name) %>" class="forgot float-right"><%= t 'forgot' %></a>
+          <a href="<%= new_confirmation_path(resource_name) %>" class="confirm mt-5 text-center"><%= t 'retrieve' %></a>
+        </div>
+        <% end %>
+      </div>
+      <div id="register_side" class="col-12 col-lg-6">
+        <h2><%= t 'register' %></h2>
+        <div id="signup_form"><%= render 'devise/registrations/form' %></div>
+      </div>
+    </div>
+  </div>
+</section>

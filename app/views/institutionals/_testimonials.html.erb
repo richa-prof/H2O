@@ -1,0 +1,57 @@
+<div class="col-12 col-lg-6">
+  <% testimonials = @institutional.testimonials.paginate(:page => params[:page], per_page: 15) %>
+  <% testimonials.each do |t| %>
+    <div class="testimonial-bg">
+      <ul>
+        <li>
+          <h3><%= t.nome %></h3>
+          <h5><%= t.cidade %></h5>
+          <h6><%= time_ago_in_words(t.created) %></h6>
+          <p><%= t.texto %></p>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+  <% if testimonials.next_page.present? %>
+    <ul class="pagination">
+      <li class="page-item">
+        <%= link_to (t 'load_more'), institutional_path(id: @institutional.tag, page: testimonials.next_page), class: "page-link" %>
+      </li>
+    </ul>
+  <% end %>
+  <% if testimonials.count == 0 %>
+    <div class="col-12 text-center mt-5 mb-5">
+      <h4><%= t 'no_results' %></h4>
+    </div>
+  <% end %>
+</div>
+<div class="col-12 col-lg-6">
+  <div class="contact-form">
+    <%= form_for(Testimonial.new) do |f| %>
+      <%= f.hidden_field :institucionai_id, value: @institutional.id %>
+      <h3 class="text-center">
+        <%= t 'post_question' %>
+      </h3>
+      <p class="text-center mb-5">
+        <%= t 'post_instructions' %>:
+      </p>
+      <div class="form-group">
+        <label><%= t 'activerecord.attributes.testimonial.nome' %></label>
+        <%= f.text_field :nome, class: 'form-control', required: true %>
+      </div>
+      <div class="form-group">
+        <label><%= t 'activerecord.attributes.testimonial.email' %></label>
+        <%= f.email_field :email, class: 'form-control', required: true %>
+      </div>
+      <div class="form-group">
+        <label><%= t 'activerecord.attributes.testimonial.cidade' %></label>
+        <%= f.text_field :cidade, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <label><%= t 'activerecord.attributes.testimonial.texto' %></label>
+        <%= f.text_area :texto, class: 'form-control', required: true %>
+      </div>
+      <input type="submit" name="register" id="register" class="btn btn-success btn-md" value="<%= t 'send_testimonial' %>">
+    <% end %>
+  </div>
+</div>

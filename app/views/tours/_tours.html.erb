@@ -1,0 +1,57 @@
+<% @tours.each do |t| %>
+  <div id="tour_<%= t.id %>" class="col-12 col-lg-4">
+    <div class="product-list-box">
+      <a href="<%= tour_path(t) %>">
+        <div class="img">
+          <%= image_tag t.face_image_url, :height => "200", :style => 'object-fit: cover;', lazy: true %>
+        </div>
+      </a>
+      <div class="content">
+        <a href="<%= tour_path(t) %>">
+          <h4><%= t.tour_locales.first.nome %></h4>
+        </a>
+        <p><%= t.localidade %></p>
+        <div class="d-flex flex-wrap">
+          <h5 class="mr-auto"><%= t 'facilities' %></h5>
+          <a href="<%= tour_path(t) %>"><%= t 'see_more' %>...</a>
+        </div>
+        <ul>
+          <% t.tour_facilities.sample(3).each do |f| %>
+            <% name_this_thing = f.facility&.facility_locales.where(locale: params[:locale]).first&.nome %>
+            <li class="mt-1">
+              <% if f.facility.icon_name.blank? %>
+                <%= image_tag 'blank-icon.png', alt: name_this_thing, title: name_this_thing %>
+              <% else %>
+                <%= image_tag (f.facility.icon_name+'-icon.png'), class: 'mt-1', style: 'opacity: 0.5;', alt: name_this_thing, title: name_this_thing %>
+              <% end %>
+              <div>
+                <%= name_this_thing %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="footer">
+        <div class="price">
+          <%= number_to_currency t.todays_price.preco_adulto unless t.todays_price.blank? %>
+        </div>
+        <a href="<%= tour_path(t) %>" class="btn btn-success"><%= t 'buy_now' %></a>
+      </div>
+    </div>
+  </div>
+  <%= render 'schema_org_index', t: t %>
+<% end %>
+<div class="col-12">
+  <% if @tours.next_page.present? %>
+    <ul class="pagination">
+      <li class="page-item">
+        <%= link_to (t 'load_more'), tours_path(search: params[:search], categories: params[:categories], price_range: params[:price_range], category: params[:category], page: @tours.next_page), remote: true, class: "page-link" %>
+      </li>
+    </ul>
+  <% end %>
+</div>
+<% if @tours.count == 0 %>
+  <div class="col-12 text-center mt-5 mb-5">
+    <h4><%= t 'no_results' %></h4>
+  </div>
+<% end %>

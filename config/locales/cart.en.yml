@@ -1,0 +1,61 @@
+en:
+  cart: Cart
+  identification: Identification
+  additional_information: Additional Information
+  payment: Payment
+  confirmation: Confirmation
+
+  more_tours: Add Tours
+  more_hotels: Add Lodging
+  finish: Finish
+  back: Back
+  next: Next
+  child: Child
+  persons: Person(s)
+
+  tour_too_soon: The date selected is too soon for online purchases. Contact our team!
+  chat_or_email: We're available right here to chat online or by e-mail on reservas@h2oecoturismo.com.br
+  removed_from_cart_successfully: Item successfully removed
+  remove_from_cart_unsuccessful: Problems when trying to remove item
+  included: Included
+  location: Location
+  location_blurb: This is the location H2O will send your vouchers (tickets) and other arrival iformation. If your purchase includes transportation services, this will likely be your pick up spot.
+  phone_number: Phone Number
+  phone_number_blurb: In case we need to get in touch with you before, during, and/or after your trip. Ideally this will be a cell phone number with WhatsApp.
+  pax_info: Passengers Information
+  add: Add
+  enter_info: Enter information
+  add_people: Add people to list
+  trip_dates: Trip dates
+  thru_date: thru
+  subtotal: Subtotal
+  discount: Discount
+  total: Total
+  successfully_updated_info: Sucessfully updated info.
+  do_you_have_promocode: Do you have an H2O promocode?
+  use: Use
+
+  payment_info: Payment Details
+  card_number: Card Number
+  card_brand: Brand
+  card_expiration: Expiration
+  card_security_code: Security Code - CVV
+  card_holder_name: Card Holder Name
+  payment_plan: Payment Plan
+  terms: Click here to see Agência H2O's general terms and conditions.
+  changes: Click here to see Agência H2O's terms and conditions in cases when change is needed.
+  terms_and_conditions: I accept all terms and conditions posted on the links above.
+
+  reservations_unsuccessful: Problems with 1 or more reservation requests. Please see details.
+  reservation_with_problems: Reservation with problems
+  select_new_date_time: Select new date and time
+  select_new_dates: Select new dates
+  remove_from_cart: Remove from cart
+  payment_successful: Payment approved. Your resservations are confirmed!
+  payment_unsuccessful: Problems with payment. Please contact our team!
+  empty_cart: Your cart is empty. Add items to it first.
+  applied_successfully: Promocode applied successfully.
+  congratulations_prize: Congratulations! You've won a prize!
+  reached_limit: This promocode's limit has been reached.
+  promocode_expired: This promocode has expired.
+  invalid_promocode: Invalid Promocode

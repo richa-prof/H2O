@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      itinerary:
+        one: Roteiro
+        other: Roteiros
+    attributes:
+      itinerary:
+        inicio_da_viagem: Início
+        fim_da_viagem: Fim
+        total: Total

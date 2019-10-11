@@ -1,0 +1,16 @@
+en:
+  post_question: Would you like to post your testimonial?
+  post_instructions: It's easy! Just use the form below
+  send_testimonial: Send
+
+  activerecord:
+    models:
+      testimonial:
+        one: Testimonial
+        other: Testimonials
+    attributes:
+      testimonial:
+        nome: Name
+        email: E-mail
+        texto: Text
+        cidade: Hometown

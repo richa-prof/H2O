@@ -1,0 +1,33 @@
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-2">
+        <a href="/" class="logo"><%= image_tag 'footer-logo.png', alt: 'Eco Experiência H2O', title: 'Eco Experiência H2O' %></a>
+      </div>
+      <div class="col-12 col-md-8 text-center">
+        <ul class="menu">
+          <% @institutionals.each do |i| %>
+            <li><%= link_to i.institutional_locales.first.titulo_menu, institutional_path(i) %></li>
+          <% end %>
+          <li><%= link_to (t 'activerecord.models.category.other'), categories_path %></li>
+          <li><%= link_to (t 'blog'), blogs_path %></li>
+          <li><%= link_to (t 'activerecord.models.event.other'), events_path %></li>
+        </ul>
+      </div>
+      <div class="col-12 col-md-2">
+        <%= render 'social_links' %>
+      </div>
+    </div>
+  </div>
+  <div class="copyright-bg text-center">
+    © <%= Date.current.year %> - Agência H2O - Bonito MS <%= t 'brazil' %> - <%= t 'all_rights_reserved' %>
+  </div>
+</footer>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+<%= render 'tawk_script' if Rails.env.production? %>
+<script>
+  $('img').Lazy();
+  $('div.owl-carousel img').lazy({
+    appendScroll: $('div.owl-carousel')
+  });
+</script>

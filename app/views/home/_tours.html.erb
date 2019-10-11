@@ -1,0 +1,26 @@
+<section class="tours-bg">
+  <div class="text-center">
+    <h1>
+      <span>
+        <%= link_to (t 'activerecord.models.tour.other'), tours_path %>
+      </span>
+    </h1>
+    <h5><%= link_to (t 'see_all_m'), tours_path, class: 'green_link' %></h5>
+  </div>
+  <div class="grid">
+    <% @tours.each do |t| %>
+        <div id="tour_<%= t.id %>" class="grid-item">
+          <%= link_to tour_path(t) do %>
+          <div class="tours-box">
+            <div class="img">
+              <%= image_tag t.face_image_url, :height => "200", :style => 'object-fit: cover;', lazy: true %>
+            </div>
+            <div class="text-box">
+              <div class="text-in-box"><%= t.tour_locales.first.nome %></div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+</section>

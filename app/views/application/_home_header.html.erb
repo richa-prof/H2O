@@ -1,0 +1,76 @@
+<header>
+  <div class="navbar">
+    <a class="navbar-brand" href="<%= root_path %>">
+      <%= image_tag 'logo-agencia-h2o-bonito-ms.png', alt: 'Agência H2O', title: 'Agência H2O', height: '50px', class: 'my-2' %>
+    </a>
+
+    <div class="call">
+      <%= render 'phone_numbers_whatsapp_link' %>
+    </div>
+
+    <div>
+      <%= render 'social_validation' %>
+    </div>
+
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+      <span class="text-menu"><%= t 'menu' %></span>
+    </button>
+
+    <div>
+      <%= render 'language_flags' %>
+    </div>
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            <%= t 'home' %>
+          </a>
+        </li>
+        <li class="nav-item">
+          <%= render 'search_box' %>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="personas_path" href="<%= personas_path %>">
+            <%= t 'persona_day_by_day.day_by_day_suggestions' %>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= special_deals_path %>">
+            <%= t 'activerecord.models.special_deal.other' %>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= tours_path %>">
+            <%= t 'activerecord.models.tour.other' %>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= hotels_path %>"><%= t 'activerecord.models.hotel.other' %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= events_path %>"><%= t 'activerecord.models.event.other' %></a>
+        </li>
+        <% if @contact_us.present? %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= institutional_path(@contact_us) %>"><%= t 'contact_us' %></a>
+          </li>
+        <% end %>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= add_to_cart_carts_path %>"><%= t 'cart' %></a>
+        </li>
+        <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to (t 'client_area'), edit_user_registration_path, class: 'nav-link', id: 'client_area' %>
+        </li>
+        <li class="nav-item"><%= link_to (t 'logout'), destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
+        <% else %>
+        <li class="nav-item">
+          <%= link_to (t 'login_sign_up'), new_user_session_path, class: 'nav-link', id: 'login_sign_up' %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</header>

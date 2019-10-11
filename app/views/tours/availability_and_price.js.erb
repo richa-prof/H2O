@@ -1,0 +1,13 @@
+<% if @availability.present? %>
+  $("#tour_availability").html("<%= escape_javascript(render("tour_availability")) %>");
+<% end %>
+<% if @tour_price.present? %>
+  $("#tour_price").html("<%= escape_javascript(render("tour_price")) %>");
+  $("#tour_persons").html("<%= escape_javascript(render("tour_persons")) %>");
+<% end %>
+<% if @tour_extras.present? %>
+  $("#tour_extras").html("<%= escape_javascript(render("tour_extras")) %>");
+<% end %>
+$("#add_to_trip_box").html("<%= escape_javascript(render("add_to_trip_box")) %>");
+assign_input_number_btn_functions();
+$("#tour_persons, #tour_extras").hide();

@@ -1,0 +1,3 @@
+<% if @availability.present? %>
+  $("#hotel_availability").html("<%= escape_javascript(render("hotel_availability")) %>");
+<% end %>

@@ -1,0 +1,38 @@
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "TouristTrip",
+    "name": "<%= t.tour_locales.first.nome %>",
+    "description": "<%= t.tour_locales.first.metatag_descricao %>",
+    "image": "<%= t.face_image_url %>",
+    "touristType": <%= raw touristType_array.to_json %>,
+    "url": "<%= tour_url(t) %>",
+    "offers": {
+      "@type": "Offer",
+      "name": "<%= t.tour_locales&.first&.metatag_titulo %>",
+      "description": "<%= t.tour_locales&.first&.metatag_descricao %>",
+      "priceCurrency": "BRL",
+      "price": "<%= t.todays_price.preco_adulto unless t.todays_price.blank? %>",
+      "priceValidUntil": "<%= t.todays_price.fim.strftime('%Y-%m-%d') unless t.todays_price.blank? %>",
+      "url": "<%= tour_url(t) %>",
+      "offeredBy": {
+        "@type": "Organization",
+        "name": "Agência H2O",
+        "email": "reservas@h2oecoturismo.com.br",
+        "telephone": ["+55 (67) 3255-3535", "+55 (67) 3042-7082"],
+        "url": "https://www.h2oecoturismo.com.br"
+      }
+    }
+  }
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TouristAttraction",
+  "name": "<%= t.tour_locales.first.nome %>",
+  "description": "<%= t.tour_locales.first.metatag_descricao %>",
+  "isAccessibleForFree": "false",
+  "photo": ["<%= t.face_image_url %>"],
+  "url": "<%= tour_url(t) %>"
+}
+</script>

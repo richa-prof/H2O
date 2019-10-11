@@ -1,0 +1,48 @@
+<section class="product-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/"><%= t 'home' %></a></li>
+          <li class="breadcrumb-item"><a href="<%= add_to_cart_carts_path %>"><%= t 'cart' %></a></li>
+          <li class="breadcrumb-item active"><%= t step %></li>
+        </ol>
+      </div>
+      <div class="col-12">
+        <h1><span><%= t step %></span></h1>
+        <div class="d-flex justify-content-around  addcartmenu">
+          <div class="menu-box <% if step == 'add_to_trip' %>active<% end %>">
+            <a href="<%= add_to_cart_carts_path %>">
+              <%= image_tag 'shopping-cart.png' %>
+              <p><%= t 'cart' %></p>
+            </a>
+          </div>
+          <div class="menu-box <% if step == 'identification' %>active<% end %>">
+            <a href="<%= additional_information_carts_path %>">
+              <%= image_tag 'id-card.png' %>
+              <p><%= t 'identification' %></p>
+            </a>
+          </div>
+          <div class="menu-box <% if step == 'additional_information' %>active<% end %>">
+            <a href="<%= additional_information_carts_path %>">
+              <%= image_tag 'id-cardadd.png' %>
+              <p><%= t 'additional_information' %></p>
+            </a>
+          </div>
+          <div class="menu-box <% if step == 'payment' %>active<% end %>">
+            <a href="<%= payment_carts_path(id: (@cart.id if @cart)) %>">
+              <%= image_tag 'payment.png' %>
+              <p><%= t 'payment' %></p>
+            </a>
+          </div>
+          <div class="menu-box <% if step == 'confirmation' %>active<% end %>">
+            <a href="<%= confirmation_carts_path(id: (@cart.id if @cart)) %>">
+              <%= image_tag 'shopping-cart.png' %>
+              <p><%= t 'confirmation' %></p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,71 @@
+<div class="col-12">
+  <form id="persona_select_frm">
+    <section class="plan-your-trip-bg">
+      <div class="container">
+        <div class="planyour-box">
+          <h3><%= t 'plan_your_trip' %></h3>
+          <div class="row">
+            <div class="col-12 col-lg-8">
+              <div class="row input-daterange">
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label for="start_date"><%= t 'start_date' %></label>
+                    <%= text_field_tag :start_date, @start_date.strftime('%d/%m/%Y'), placeholder: (t 'start_date'), class: 'form-control text-center' %>
+                    <span id="start_date_icon" class="icon" style="cursor: pointer"><i class="far fa-calendar-alt"></i></span>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label for="end_date"><%= t 'end_date' %></label>
+                    <%= text_field_tag :end_date, @end_date.strftime('%d/%m/%Y'), placeholder: (t 'end_date'), class: 'form-control text-center' %>
+                    <span id="end_date_icon" class="icon" style="cursor: pointer"><i class="far fa-calendar-alt"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4 form-group">
+              <label for="adults"><i class="fas fa-user"></i> <%= t 'adults' %></label>
+              <input type="text" name="adults" id="adults" class="form-control text-center" value="<%= @adults %>">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-9 form-group">
+              <label for="persona_select"><%= t 'persona_day_by_day.persona_select' %></label>
+              <%= select_tag 'persona_select', options_for_select(@personas.collect{ |persona| [persona.persona_locales.first.nome, persona.link] }), include_blank: '', class: "form-control" %>
+            </div>
+            <div class="col-12 col-lg-3">
+              <button type="submit" class="btn btn-success">
+                <%= t 'begin' %>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>
+</div>
+
+<script>
+$('#start_date_icon, #end_date_icon').click(function() {
+  $('#start_date').datepicker( 'show' );
+});
+
+$('.input-daterange').each(function() {
+  $(this).datepicker({
+    language: 'pt-BR',
+    autoclose: true,
+    format: 'dd/mm/yyyy'
+  });
+});
+
+var this_locale = '<%= params[:locale] %>';
+$('#persona_select_frm').submit(function(){
+  if ( !$('#persona_select').val() ) { return false; }
+
+  if ( this_locale == 'en-US' ) {
+    this.action = '/en/personas/'+$('#persona_select').val()+'/persona_day_by_days';
+  } else {
+    this.action = '/perfil_de_pessoa/'+$('#persona_select').val()+'/roteiro_sugerido';
+  }
+});
+</script>
