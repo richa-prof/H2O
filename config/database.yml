@@ -10,16 +10,15 @@ development:
 production:
   adapter: mysql2
   encoding: utf8
-  database: h2o_ror_front_end_production
+  database: ENV['CLEARDB_DATABASE_URL']
   username: 
-  password: 
+  password:  
   host: localhost
-  port: 3300
 
 test:
   adapter: mysql2
   encoding: utf8
-  database: h2o_ror_front_end_test
+  database: ENV['CLEARDB_DATABASE_URL']
   username: root
   password: root
   host: localhost
