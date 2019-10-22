@@ -1,70 +1,76 @@
-<section class="product-thumbnails">
+<section class="regular slider" data-sizes="50vw">
+  <div> <img src="/assets/tour_images/slide.png"> </div>
+  <div> <img src="/assets/tour_images/slide.png"> </div>
+  <div> <img src="/assets/tour_images/slide.png"> </div>
+</section>
+
+<!-- <section class="product-thumbnails">
   <div id="slider" class="flexslider">
     <ul class="slides">
-      <% unless @tour.video.blank? %>
+      <%## unless @tour.video.blank? %>
         <li>
           <div class="video-slider">
-            <iframe src="https://www.youtube.com/embed/<%= @tour.video %>?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/<%#= @tour.video %>?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
           </div>
         </li>
-      <% end %>
-      <% @tour.images.any? do %>
-        <% @tour.images.each do |this_image| %>
-          <li><%= image_tag this_image, lazy: true %></li>
-        <% end %>
-      <% end %>
-      <% unless @tour.imagem_1.blank? %>
+      <%## end %>
+      <%## @tour.images.any? do %>
+        <%## @tour.images.each do |this_image| %>
+          <li><%#= image_tag this_image, lazy: true %></li>
+        <%## end %>
+      <%# end %>
+      <%# unless @tour.imagem_1.blank? %>
          <li>
-           <%= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_1, lazy: true %>
+           <%#= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_1, lazy: true %>
          </li>
-      <% end %>
-      <% unless @tour.imagem_2.blank? %>
+      <%# end %>
+      <%# unless @tour.imagem_2.blank? %>
          <li>
-           <%= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_2, lazy: true %>
+           <%#= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_2, lazy: true %>
          </li>
-      <% end %>
-      <% unless @tour.imagem_3.blank? %>
+      <%# end %>
+      <%# unless @tour.imagem_3.blank? %>
          <li>
-           <%= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_3, lazy: true %>
+           <%#= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_3, lazy: true %>
          </li>
-      <% end %>
-      <% unless @tour.imagem_4.blank? %>
+      <%# end %>
+      <%# unless @tour.imagem_4.blank? %>
          <li>
-           <%= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_4, lazy: true %>
+           <%#= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_4, lazy: true %>
          </li>
-      <% end %>
+      <%# end %>
     </ul>
   </div>
   <div id="carousel" class="flexslider">
     <ul class="slides">
-      <% unless @tour.video.blank? %>
-        <li><img src="https://img.youtube.com/vi/<%= @tour.video %>/0.jpg", lazy: true></li>
-      <% end %>
-      <% @tour.images.any? do %>
-        <% @tour.images.each do |this_image| %>
-          <li><%= image_tag this_image.variant(resize: '600x200^'), lazy: true %></li>
-        <% end %>
-      <% end %>
-      <% unless @tour.imagem_1.blank? %>
+      <%# unless @tour.video.blank? %>
+        <li><img src="https://img.youtube.com/vi/<%#= @tour.video %>/0.jpg", lazy: true></li>
+      <%# end %>
+      <%# @tour.images.any? do %>
+        <%# @tour.images.each do |this_image| %>
+          <li><%#= image_tag this_image.variant(resize: '600x200^'), lazy: true %></li>
+        <%# end %>
+      <%# end %>
+      <%# unless @tour.imagem_1.blank? %>
          <li>
-           <%= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_1, lazy: true %>
+           <%#= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_1, lazy: true %>
          </li>
-      <% end %>
-      <% unless @tour.imagem_2.blank? %>
+      <%# end %>
+      <%# unless @tour.imagem_2.blank? %>
          <li>
-           <%= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_2, lazy: true %>
+           <%#= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_2, lazy: true %>
          </li>
-      <% end %>
-      <% unless @tour.imagem_3.blank? %>
+      <%# end %>
+      <%# unless @tour.imagem_3.blank? %>
          <li>
-           <%= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_3, lazy: true %>
+           <%#= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_3, lazy: true %>
          </li>
-      <% end %>
-      <% unless @tour.imagem_4.blank? %>
+      <%# end %>
+      <%# unless @tour.imagem_4.blank? %>
          <li>
-           <%= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_4, lazy: true %>
+           <%#= image_tag 'https://admin.h2oecoturismo.com.br/'+@tour.imagem_4, lazy: true %>
          </li>
-      <% end %>
+      <%# end %>
     </ul>
   </div>
-</section>
+</section> -->

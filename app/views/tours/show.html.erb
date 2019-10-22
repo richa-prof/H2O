@@ -1,45 +1,97 @@
-<% @title = @tour.tour_locales&.first&.metatag_titulo %>
-<% content_for :meta_description, @tour.tour_locales&.first&.metatag_descricao %>
-<%= render 'schema_org_show' %>
-
-<section class="product-header">
-  <div class="container">
-    <div class="row">
-      <div class="col-auto">
+<script src="/assets/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="/assets/slick.min.js" type="text/javascript" charset="utf-8"></script>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/"><%= t 'home' %></a></li>
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
           <li class="breadcrumb-item"><a href="<%= tours_path %>"><%= t 'activerecord.models.tour.other' %></a></li>
-          <li class="breadcrumb-item active"><%= @title %></li>
+          <li class="breadcrumb-item active"><%= @title.present? ? @title : "Snorkeling at Rio da Prata River in Jardim (Bonito's area) MS Brazil"%></li>
         </ol>
-      </div>
+      </nav>
     </div>
   </div>
-</section>
-
-<%= render 'images' %>
-
-<section class="product-detail">
-  <div class="container">
-    <div class="row">
-      <div class="col-<%= @tour.ta_location.blank? ? '12' : '10' %> total-center">
-        <h1><%= @tour.tour_locales&.first&.nome %></h1>
+</div>
+<section class="carousel">
+<div class="container">
+<div class="row">
+<div class="col-md-6">
+  <%= render 'images' %>
+</div>
+<div class="col-md-6">
+  <h2>Snorkeling at Prata River</h2>
+  <div class="row mb20">
+    <ul class="info">
+      <li> <img src="/assets/tour_images/kids-couple.png"><br>
+        <% if @tour_child.present? %>
+          <%= @tour_child.child_locales.first.nome %>
+        <% else %>
+          <%= t 'get_every_detail' %>
+        <% end %>
+      </li>
+      <li> <img src="/assets/tour_images/speedometer.png"><br>
+        <% if @tour_ability.present? %>
+          <%= @tour_ability.ability_locales.first.nome %>
+        <% else %>
+          <%= t 'get_every_detail' %>
+        <% end %>
+       </li>
+      <li> <img src="/assets/tour_images/clock-circular-outline.png"><br>
+        <%= @tour.duration_in_min %>
+      </li>
+    </ul>
+   <% unless @tour.ta_location.blank? %>
+      <div class="col-2 total-center">
+          <div id="TA_cdsratingsonlynarrow791" class="TA_cdsratingsonlynarrow">
+            <ul id="iyuRVZr65vDT" class="TA_links 7KxSJIXjY">
+              <li id="1CBynVB" class="pCniB1AS">
+                <a target="_blank" href="http://www.tripadvisor.com/">
+                    <img src="http://www.tripadvisor.com/img/cdsi/img2/branding/tripadvisor_logo_transp_340x80-18034-2.png" alt="TripAdvisor" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        <script src="https://www.jscache.com/wejs?wtype=cdsratingsonlynarrow&amp;uniq=791&amp;locationId=<%= @tour.ta_location %>&amp;lang=<%= params[:locale] == 'en-US' ? 'en_US' : 'pt_BR' %>&amp;border=true">
+        </script>
       </div>
-      <% unless @tour.ta_location.blank? %>
-        <div class="col-2 total-center">
-            <div id="TA_cdsratingsonlynarrow791" class="TA_cdsratingsonlynarrow">
-              <ul id="iyuRVZr65vDT" class="TA_links 7KxSJIXjY">
-                <li id="1CBynVB" class="pCniB1AS">
-                  <a target="_blank" href="http://www.tripadvisor.com/">
-                      <img src="http://www.tripadvisor.com/img/cdsi/img2/branding/tripadvisor_logo_transp_340x80-18034-2.png" alt="TripAdvisor" />
-                  </a>
-                </li>
-              </ul>
-            </div>
-          <script src="https://www.jscache.com/wejs?wtype=cdsratingsonlynarrow&amp;uniq=791&amp;locationId=<%= @tour.ta_location %>&amp;lang=<%= params[:locale] == 'en-US' ? 'en_US' : 'pt_BR' %>&amp;border=true">
-          </script>
-        </div>
-      <% end %>
-
+    <% end %>
+  </div>
+  <div class="row facilities-detail">
+    <div class="col-md-12">
+      <h3>Facilities</h3>
+    </div>
+    <div class="col-md-3 mb15"> <img src="/assets/tour_images/dinner.png"> Restauran </div>
+    <div class="col-md-9 mb15"> <img src="/assets/tour_images/shop.png">Souvenirs shop </div>
+    <div class="col-md-3 mb15"> <img src="/assets/tour_images/hammock.png">Hammocks </div>
+    <div class="col-md-9 mb15"> <img src="/assets/tour_images/shower-water-running.png">Bathrooms with showers </div>
+    <div class="col-md-8 text-center mt40">
+      <button type="button" class="btn btn-dark">BOOK NOW</button>
+    </div>
+  </div>
+</div>
+</section>
+<div  id="accordion">
+  <section class="details">
+    <div class="container">
+      <h1 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false">Details</a>
+        <hr>
+      </h1>
+      <div id="collapseOne" class="panel-collapse collapse" role="tabpanel">
+        <p>Prata River (Rio da Prata in Portuguese) is one of the largest rivers in the Bonito and Jardim MS Brazil area. It is the town's border and is home to lots of fish. The river's waters are transparent, but because it is a larger river, in this area they are not as clear as at the spring. This is why most of the famous Rio da Prata snorkeling activity actually happens on Olho d'Água (Water Eye) river.</p>
+        <p>Olho d'Água river has gorgeous springs and unbelievably clear waters. It is the place where snorkeling happens and when it ends at Prata River, depending on weather conditions, people may be able to stay in the water to snorkel the final stretch, which is on Prata River itself.</p>
+        <p>Because it was one of the first established, Rio da Prata is one of the most traditional and popular snorkeling options in Bonito. The property is actually located in Jardim, the next town over from Bonito MS Brazil. While in the river, you will see tons of types of plants and animals. You will also have the opportunity to see an unforgetable upwelling!</p>
+        <p>The word prata means silver, so translating the name literally we get: Silver River or River of Silver.</p>
+        <p><strong>DISTANCE FROM DOWNTOWN BONITO:</strong><br>
+          Around 50 km, out of which 15 are not paved (There is a longer way, around 50 km more, that is completely paved)</p>
+      </div>
+    </div>
+  </section>
+  <section class="book-online">
+    <div class="container">
+      <h1>Book online
+        <hr>
+      </h1>
       <div class="col-12">
         <div class="trip-box">
           <div class="row mb-5">
@@ -90,151 +142,251 @@
                 <a id="add_to_trip_btn" class="btn btn-primary btn-md pointer hide"><%= t 'buy_now' %></a>
               </div>
             </div>
-
           </div>
         </div>
       </div>
-
-      <%= render 'details' %>
-
     </div>
-  </div>
-</section>
-
+  </section>
+  <section class="operation">
+    <div class="container">
+      <h1 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">Operation*</a>
+        <hr>
+      </h1>
+      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel">
+        <ul>
+          <li>- When you arrive at the main areas, hand your voucher to the front desk staff;</li>
+          <li>- Pay attention to the directions about time and group organization, since there are never more than 9 people at once;</li>
+          <li>- At the activity's time, the guide will get the group together to give more directions and hand out the included equipment: Wetsuit, mask, snorkel, and shoes;</li>
+          <li>- The group can change in the restrooms and leave personal belongings in the car;</li>
+          <li>- The guide will put together a pack with what each person wants to have ready right at the end, when the group comes out of the water;</li>
+          <li>- When everyone is ready, the group boards a small safari vehicle that will drive everybody over to the trailhead;</li>
+          <li>- Once at the trail, there will be a 40-minute nature walk where you can see the river bed's forest and hopefully spot animals;</li>
+          <li>- The trail ends at the first deck, which is located at the river's springs and a place for snorkeling practice;</li>
+          <li>- There will be rocks at the bottom of the river, signaling the areas where you may stand with your feet at the bottom so that you can try basic snorkeling techniques;</li>
+          <li>- After explaining how to use the snorkeling equipment, and also the Bonito snorkeling rules to everyone, the guide will lead the group on a lap around the springs, before heading down the river;</li>
+          <li>- Everybody will snorkel down Olho d'Água river behind the guide, about 2000 meters;</li>
+          <li>- The path will include a short walk around to avoid some rapids and also a rest stop at the upwelling, nicknamed "Vulcan";</li>
+          <li>- When Olho d'Água river flows into Rio da Prata, the group hops onto a small boat for the last stretch;</li>
+          <li>- If overall weather conditions and water visibility allow, sometimes it is possible to stay in the water and snorkel the Rio da Prata stretch itself;</li>
+          <li>- At the end of the snorkeling portion, the group finds the things they had set for the end, an area to play more freely for a bit, and the safari vehicle that will drive everyone back to the main building;</li>
+          <li>- Back to the main areas, everyone is free to change and return the equipment;</li>
+          <li>- Lunch, when included, may be before or after activity, depending on the scheduled time;</li>
+        </ul>
+        <p>*This whole operation usually lasts 3 hours and 30 minutes, but it may vary due to weather conditions and/or specific group needs;</p>
+      </div>
+    </div>
+  </section>
+  <section class="facilities">
+    <div class="container">
+      <h1 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false">Facilities</a>
+        <hr>
+      </h1>
+      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel">
+        <div class="row">
+          <div class="col-md-6 mb15"> <img src="/assets/tour_images/dinner.png"> Restaurant </div>
+          <div class="col-md-6 mb15"> <img src="/assets/tour_images/shop.png">Souvenirs shop </div>
+          <div class="col-md-6 mb15"> <img src="/assets/tour_images/hammock.png">Hammocks </div>
+          <div class="col-md-6 mb15"> <img src="/assets/tour_images/shower-water-running.png">Bathrooms with showers </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="what-to">
+    <div class="container">
+      <h1 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false">What to bring </a>
+        <hr>
+      </h1>
+      <div id="collapseFour" class="panel-collapse collapse" role="tabpanel">
+        <div class="row mb20">
+          <div class="col-md-3"><img src="/assets/tour_images/slippers.png"> Swimwear, slippers</div>
+          <div class="col-md-3"><img  src="/assets/tour_images/towel-warmer.png"> Towel</div>
+        </div>
+        <div class="row mb20">
+          <div class="col-md-3"><img src="/assets/tour_images/camera-retro.png"> Underwater camera</div>
+          <div class="col-md-3"><img  src="/assets/tour_images/cash.png"> Cash for general expenses</div>
+        </div>
+        <div class="row">
+          <div class="col-md-8"> <img src="/assets/tour_images/sunscreen.png">Insect repellent and sun lotion<br>
+            <p>(Even though they are not allowed while snorkeling in itself, you may want them during your time at the main areas, before and/or after snorkeling)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="restrictions">
+    <div class="container">
+      <h1 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false">Restrictions </a>
+        <hr>
+      </h1>
+      <div id="collapseFive" class="panel-collapse collapse" role="tabpanel">
+        <ul>
+          <li>- Children must be at least 8 years old.</li>
+          <li>- This activity is only recommended for people who are comfortable in the water.</li>
+          <li>- People who weigh 120 kg or more must bring their own wetsuits.</li>
+        </ul>
+        <p><strong>BEARDS AND MUSTACHES:</strong><br>
+          Diving and snorkeling masks should be in direct contact with the skin in order to seal properly. Hoping to ensure that this happens, we suggest shaving on the days when you have these kinds of activities scheduled.</p>
+      </div>
+    </div>
+  </section>
+  <section class="additional-services">
+    <div class="container">
+      <h1 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false">Additional services </a>
+        <hr>
+      </h1>
+      <div id="collapseSix" class="panel-collapse collapse" role="tabpanel">
+        <ul>
+          <li><strong>- Lunch</strong><br>
+            (Always included for this activity. (The change happened on January 1st, 2018)</li>
+          <li><strong>- Transportation</strong><br>
+            Not included, talk to us about including it.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
 <%= render 'related_tours' %>
 
-<script>
-$(document).ready(function() {
-  update_tour_availability();
-});
-
-$("#add_to_trip_btn, #tour_persons, #tour_extras").hide();
-
-$('#selected_date').on('changeDate', function (ev) {
-  update_tour_availability();
-});
-$(".datepicker_icon").click(function() {
-  $("#selected_date").datepicker( "show" );
-});
-$(document).on('click', '.tour_time', function (event) {
-  $(".tour_time").removeClass('active');
-  $(this).addClass('active');
-  $("#tour_persons, #tour_extras").show();
-  set_total_price();
-  $("#add_to_trip_btn").show();
-  $('.main-input-number').attr('max', $(this).find('span').html());
-  $(".btn-number[data-type='plus']").removeAttr('disabled');
-  $(".btn-number[data-type='minus']").attr('disabled', true);
-});
-$("#add_to_trip_btn").click(function() {
-  var total = 0;
-  $(".main-input-number").each(function() {
-    total += +($(this).val());
-  });
-  if(total > 0){
-    $(".extra-input-number").each(function() {
-      $("#tour_extra_"+$(this).attr('data-type')+"_"+$(this).attr('data-id')).val($(this).val());
+<div class="go_top"> <span class="la la-angle-up"></span> </div>
+<script type="text/javascript">
+  $(document).on('ready', function() {
+      $(".regular").slick({
+        dots: true,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      });
+      // update_tour_availability();
     });
-    $("#tour_selected_date").val($("#selected_date").val());
-    $("#tour_selected_time").val($(".tour_time.active").attr('value'));
-    $("#tour_system").val($(".tour_time.active").attr('system'));
-    $("#tour_adults").val($("#adults").val());
-    $("#tour_children").val($("#children").val());
-    $("#tour_children2").val($("#children2").val());
-    $("#cart-form").submit();
-  } else {
-    alert("Acrescente pessoas");
-  }
-});
-function update_tour_availability() {
-  $(".tour_time").removeClass('active');
-  $(".tour_time, #add_to_trip_btn").hide();
-  $("#tour_price, #tour_persons, #tour_extras").html('');
-  $("#tour_availability_loading").show();
-  $('form#selected_date_frm').submit();
-}
-function assign_input_number_btn_functions() {
-  $('.btn-number').click(function(e){
-    e.preventDefault();
-    fieldName = $(this).attr('data-field');
-    type      = $(this).attr('data-type');
-    var input = $("input[name='"+fieldName+"']");
-    var currentVal = parseInt(input.val());
-    if (!isNaN(currentVal)) {
-      if(type == 'minus') {
-        if(currentVal > input.attr('min')) {
-          input.val(currentVal - 1).change();
-          set_total_price();
-        }
-        if(parseInt(input.val()) == input.attr('min')) {
-          $(this).attr('disabled', true);
-        }
-      } else if(type == 'plus') {
-        if(currentVal < input.attr('max')) {
-          input.val(currentVal + 1).change();
-          set_total_price();
-        }
-        if(parseInt(input.val()) == input.attr('max')) {
-          $(this).attr('disabled', true);
-        }
-      }
-    } else {
-      input.val(0);
-    }
+
+  $("#add_to_trip_btn, #tour_persons, #tour_extras").hide();
+
+  $('#selected_date').on('changeDate', function (ev) {
+    update_tour_availability();
+  });
+  $(".datepicker_icon").click(function() {
+    $("#selected_date").datepicker( "show" );
+  });
+  $(document).on('click', '.tour_time', function (event) {
+    $(".tour_time").removeClass('active');
+    $(this).addClass('active');
+    $("#tour_persons, #tour_extras").show();
+    set_total_price();
+    $("#add_to_trip_btn").show();
+    $('.main-input-number').attr('max', $(this).find('span').html());
+    $(".btn-number[data-type='plus']").removeAttr('disabled');
+    $(".btn-number[data-type='minus']").attr('disabled', true);
+  });
+  $("#add_to_trip_btn").click(function() {
     var total = 0;
     $(".main-input-number").each(function() {
       total += +($(this).val());
     });
-    if(total == input.attr('max')){
-      $(".main-btn-number[data-type='plus']").attr('disabled', true);
+    if(total > 0){
+      $(".extra-input-number").each(function() {
+        $("#tour_extra_"+$(this).attr('data-type')+"_"+$(this).attr('data-id')).val($(this).val());
+      });
+      $("#tour_selected_date").val($("#selected_date").val());
+      $("#tour_selected_time").val($(".tour_time.active").attr('value'));
+      $("#tour_system").val($(".tour_time.active").attr('system'));
+      $("#tour_adults").val($("#adults").val());
+      $("#tour_children").val($("#children").val());
+      $("#tour_children2").val($("#children2").val());
+      $("#cart-form").submit();
     } else {
-      $(".main-btn-number[data-type='plus']").removeAttr('disabled');
+      alert("Acrescente pessoas");
     }
   });
-  $('.input-number').focusin(function() {
-    $(this).data('oldValue', $(this).val());
-  });
-  $('.input-number').change(function() {
-    minValue =  parseInt($(this).attr('min'));
-    maxValue =  parseInt($(this).attr('max'));
-    valueCurrent = parseInt($(this).val());
-    name = $(this).attr('name');
-    if(valueCurrent >= minValue) {
-      $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
-    } else {
-      alert('Sorry, the minimum value was reached');
-      $(this).val($(this).data('oldValue'));
-    }
-    if(valueCurrent <= maxValue) {
-      $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
-    } else {
-      alert('Sorry, the maximum value was reached');
-      $(this).val($(this).data('oldValue'));
-    }
-  });
-  $(".input-number").keydown(function (e) {
-    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
-    (e.keyCode == 65 && e.ctrlKey === true) ||
-    (e.keyCode >= 35 && e.keyCode <= 39)) {
-      return;
-    }
-    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-      e.preventDefault();
-    }
-  });
-}
-function set_total_price() {
-	var sum = 0;
-  $(".input-number").each(function() {
-		sum += +($(this).val() * $(this).attr('data-value'));
-  });
-  $("#price").html(to_brl(sum));
-  $("#tour_final_price").val(sum);
-  if(sum > 0){
-    $("#add_to_trip_btn").show();
-  } else {
-    $("#add_to_trip_btn").hide();
+  function update_tour_availability() {
+    $(".tour_time").removeClass('active');
+    $(".tour_time, #add_to_trip_btn").hide();
+    $("#tour_price, #tour_persons, #tour_extras").html('');
+    $("#tour_availability_loading").show();
+    $('form#selected_date_frm').submit();
   }
-}
-assign_input_number_btn_functions();
+  function assign_input_number_btn_functions() {
+    $('.btn-number').click(function(e){
+      e.preventDefault();
+      fieldName = $(this).attr('data-field');
+      type      = $(this).attr('data-type');
+      var input = $("input[name='"+fieldName+"']");
+      var currentVal = parseInt(input.val());
+      if (!isNaN(currentVal)) {
+        if(type == 'minus') {
+          if(currentVal > input.attr('min')) {
+            input.val(currentVal - 1).change();
+            set_total_price();
+          }
+          if(parseInt(input.val()) == input.attr('min')) {
+            $(this).attr('disabled', true);
+          }
+        } else if(type == 'plus') {
+          if(currentVal < input.attr('max')) {
+            input.val(currentVal + 1).change();
+            set_total_price();
+          }
+          if(parseInt(input.val()) == input.attr('max')) {
+            $(this).attr('disabled', true);
+          }
+        }
+      } else {
+        input.val(0);
+      }
+      var total = 0;
+      $(".main-input-number").each(function() {
+        total += +($(this).val());
+      });
+      if(total == input.attr('max')){
+        $(".main-btn-number[data-type='plus']").attr('disabled', true);
+      } else {
+        $(".main-btn-number[data-type='plus']").removeAttr('disabled');
+      }
+    });
+    $('.input-number').focusin(function() {
+      $(this).data('oldValue', $(this).val());
+    });
+    $('.input-number').change(function() {
+      minValue =  parseInt($(this).attr('min'));
+      maxValue =  parseInt($(this).attr('max'));
+      valueCurrent = parseInt($(this).val());
+      name = $(this).attr('name');
+      if(valueCurrent >= minValue) {
+        $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+      } else {
+        alert('Sorry, the minimum value was reached');
+        $(this).val($(this).data('oldValue'));
+      }
+      if(valueCurrent <= maxValue) {
+        $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+      } else {
+        alert('Sorry, the maximum value was reached');
+        $(this).val($(this).data('oldValue'));
+      }
+    });
+    $(".input-number").keydown(function (e) {
+      if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+      (e.keyCode == 65 && e.ctrlKey === true) ||
+      (e.keyCode >= 35 && e.keyCode <= 39)) {
+        return;
+      }
+      if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+      }
+    });
+  }
+  function set_total_price() {
+    var sum = 0;
+    $(".input-number").each(function() {
+      sum += +($(this).val() * $(this).attr('data-value'));
+    });
+    $("#price").html(to_brl(sum));
+    $("#tour_final_price").val(sum);
+    if(sum > 0){
+      $("#add_to_trip_btn").show();
+    } else {
+      $("#add_to_trip_btn").hide();
+    }
+  }
+  assign_input_number_btn_functions();
 </script>
+

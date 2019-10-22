@@ -23,8 +23,14 @@
     <%= render 'layouts/google_tag_manager_body' if Rails.env.production? %>
 
     <%= render :partial => 'flash_messages', :flash => flash %>
-    <%= render "home_header" %>
-  	<%= yield %>
-  	<%= render "home_footer" %>
+    <% if params[:controller] == "tours" && params[:action] == "show"%>
+      <%= render "tour_header" %>
+      <%= yield %>
+      <%= render "tour_footer" %>
+    <%else%>
+      <%= render "home_header" %>
+      <%= yield %>
+      <%= render "home_footer" %>
+    <%end%>
   </body>
 </html>

@@ -1,0 +1,604 @@
+body {
+	font-family: 'Dosis', sans-serif;
+}
+ul {
+	list-style: none;
+	padding: 0px;
+}
+h1 {
+	font-size:26px!important; 
+}
+hr {
+    margin-top: 0rem!important;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid #A6D053;
+}
+section {
+	margin-bottom: 50px;
+}
+section p {
+	font-size: 14px;
+}
+.header{
+	background: #A6D053;
+	padding: 40px 0px 15px;
+	margin-bottom: 0px;
+}
+.breadcrumb {
+	background-color: inherit;
+	margin-top: 1rem;
+	padding: 0.75rem 1rem 0.75rem 0;
+}
+.breadcrumb-item + .breadcrumb-item {
+    padding-left: 0rem;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+    display: inline-block;
+    padding-right: 0rem;
+}
+.breadcrumb li a {
+	color: #929292;
+}
+.breadcrumb li.breadcrumb-item.active {
+	color: #000;
+}
+.navigation ul {
+	padding:0px;
+	list-style: none; 
+}
+.navigation ul li {
+display: inline-block;
+padding-right: 30px;
+margin-top: 15px; 	
+}
+.navigation ul li a {
+ color:#fff;
+ padding: 0px 5px;
+}
+.search {
+	background: url(../assets/tour_images/search.png) 10px 10px no-repeat;
+    padding: 5px 5px 5px 35px;
+    background-color: #fff;
+}
+.call {
+	font-size: 14px; color:#fff; 
+}
+.cart, .cart:hover {
+	color:#fff;
+	line-height: 25px;
+	margin: 0px 30px; 
+}
+.cart img {
+	padding-right: 10px;
+}
+.flag {
+	margin-top: 10px;
+}
+.login .btn {
+padding:5px 30px;
+margin: 0px 5px; 
+}
+.flag a {
+ margin: 0px 5px;
+}
+h2 {
+	font-weight: 600;
+font-size: 34px;
+margin-bottom: 30px;
+}
+h3 {
+	font-weight: 600;
+font-size: 18px;
+display: block;
+width: 100%;
+margin-bottom: 12px;
+}
+.info {
+	padding: 0px;
+}
+.info li {
+	display: inline-block;
+	text-align: center;
+    padding: 0px 15px;
+}
+.btn-dark {
+	padding: 10px 35px;
+}
+.mt40 {
+	margin-top: 30px;
+}
+section.carousel {
+font-weight: 500;
+font-size: 18px;
+}
+section.carousel .col-md-3 img, section.carousel .col-md-9 img {
+ padding-right: 6px;
+}
+.slick-prev {
+background: url(../assets/tour_images/arrow-1.png) 0px 0px no-repeat;	
+}
+.slick-next {
+background: url(../assets/tour_images/arrow-2.png) 0px 0px no-repeat;	
+}
+.slick-prev:before, .slick-next:before {
+	display: none;
+}
+.slick-slide img {
+    display: block; width: 93%;
+}
+.slick-next {
+    right: 10px!important;
+}
+.slick-dots li button {
+border: 1px solid #A6D053!important;
+background-color:#fff;
+border-radius: 15px; 	
+}
+.slick-dots li.slick-active button {
+border: 1px solid #A6D053!important;
+border-radius: 15px;
+background-color:#A6D053; 	
+}
+.slick-dots li button:before {
+	display: none;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:not(:disabled):not(.disabled):active {
+background: #FFFFFF;
+border-radius:5px;
+border-color:#fff;
+color:#383336;
+box-shadow:none!important;   	
+}
+ 
+.btn-outline-primary, .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:not(:disabled):not(.disabled):active {
+border: 1px solid #FFFFFF;
+box-sizing: border-box;
+border-radius: 5px;
+color:#fff;
+background-color: inherit;
+    border-color: inherit;
+    outline: none;
+    box-shadow:none!important; 	
+}
+.what-to .col-md-3, .what-to .col-md-8 {
+	font-size: 16px;
+	font-weight: 500;
+}
+.what-to .col-md-3 img, .what-to .col-md-8 img {
+	padding-right: 10px;
+}
+.mt40 {
+	margin-top: 40px;
+}
+.mb30 {
+	margin-bottom: 30px;
+}
+.mb20 {
+	margin-bottom: 20px;
+}
+.mb15 {
+	margin-bottom: 15px;
+}
+.additional-services li {
+margin-bottom: 20px;
+}
+.product {
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+.product img {
+	width: 100%;
+}
+.product h4 {
+font-weight: 600;
+font-size: 18px;
+margin-bottom: 0px;
+padding-left: 15px;
+padding-top: 15px;
+}
+.product h4 a {
+	color:#000;
+}
+.product p {
+	padding-left: 15px;
+}
+.product .brl {
+font-weight: 500;
+font-size: 24px;
+}
+.btn-success {
+background: #A6D053;
+border-radius: 20px 0px 0px 0px;
+font-weight: bold;
+font-size: 20px;
+border: 1px solid #A6D053; 
+}
+.btn-success:hover {
+    color: #A6D053;
+    background-color: #fff;
+    border-color: #A6D053;
+}
+footer {
+	background: #383336;
+	padding: 40px 0px 0px 0px;
+}
+footer ul li a {
+	font-size: 18px;
+	color:#fff; 
+}
+footer ul li a:hover {
+	color:#fff;	
+}
+.follow {
+	font-weight: 600;
+font-size: 18px;
+color:#fff;
+}
+.social {
+	padding-left: 30px;
+}
+.social li {
+padding:0px 10px 0px 0px; }
+.footer_small {
+	background:#A6D053;
+	padding: 15px 0px 1px 0px;
+}
+.footer_small p {
+	color:#383336; 
+}
+.footer-mobile {
+ display: none; 
+}
+.panel-title a {
+ color:#000;
+ text-decoration: none;
+ cursor: inherit;
+ pointer-events: none; 
+}
+.facilities {
+	display: none;
+}
+.collapse:not(.show) {
+    display: block;
+}
+.navbar-toggler {
+	display: none;
+}
+
+@media (min-width: 150px) and (max-width: 576px) {
+.panel-title > a:before {
+    float: right !important;
+    font-family: FontAwesome;
+    content:"\f068";
+    padding-right: 5px;
+}
+.panel-title > a.collapsed:before {
+    float: right !important;
+    content:"\f067";
+}
+.panel-title > a:hover, 
+.panel-title > a:active, 
+.panel-title > a:focus  {
+    text-decoration:none;
+}
+.panel-title hr {
+	display: none;
+}
+section {
+    margin-bottom: 15px;
+}
+.panel-title {
+	margin-bottom: 0px;
+}
+.panel-title > a {
+	background:#A6D053;
+	padding: 15px; 
+	display: block;
+	color:#fff;
+	text-decoration: none;
+ 	cursor: pointer;
+ 	pointer-events:auto;
+ 	font-size: 18px;  
+}
+.panel-title > a.collapsed {
+	background:#F4F4F4;
+	padding: 15px; 
+	display: block;
+	color:#000;
+}
+
+.collapse:not(.show) {
+    display: none;
+}
+.panel-collapse {
+	background:#fff;
+	border:1px solid #F4F4F4;
+	padding: 15px;  
+}
+.panel-collapse img {
+	    padding-right: 10px;
+}
+.facilities-detail {
+display: none;
+}
+.trip {
+	display: none;
+}
+.slick-slide img {
+    width: 100%;
+}
+.slick-prev {
+    left: 15px!important;
+    z-index: 999;
+}
+.slick-dotted.slick-slider {
+    margin-bottom: 60px;
+}
+.footer-mobile {
+ display: block;
+ padding:10px 0px 0px 0px; 
+}
+.footer {
+	display: none;
+}
+.footer-mobile .col-md-6 {
+	width: 50%;
+}
+.footer-mobile .social {
+	text-align: right;
+}
+.footer-mobile .social ul {
+	width: 100%;
+    display: block;
+    margin-bottom: 0px;
+}
+.footer-mobile .social li {
+    padding: 0px 10px 0px 0px;
+    text-align: right;
+    display: inline-block;
+}
+.book-online {
+	display: none;
+}
+.facilities {
+	display: block;
+}
+.navbar-toggler, .navbar-toggler:focus {
+	display: block;
+	outline: none;
+}
+.navigation ul li {
+    display: block;
+}
+.navigation ul li a {
+    color: #000;
+    padding: 0px 5px 0px 17px;
+    display: block;
+}
+.header {
+background: #FFFFFF;
+box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+padding: 15px 0px 10px;
+}
+.logo, .flag, .search-col, .breadcrumb {
+	display: none;
+}
+.slick-dotted.slick-slider {
+    margin-bottom: 60px!important;
+}
+section.carousel {
+    margin-top: 20px;
+} 
+}
+
+
+
+@media (min-width: 576px) and (max-width: 991px) { 
+.panel-title > a:before {
+    float: right !important;
+    font-family: FontAwesome;
+    content:"\f068";
+    padding-right: 5px;
+}
+.panel-title > a.collapsed:before {
+    float: right !important;
+    content:"\f067";
+}
+.panel-title > a:hover, 
+.panel-title > a:active, 
+.panel-title > a:focus  {
+    text-decoration:none;
+}
+.panel-title hr {
+	display: none;
+}
+section {
+    margin-bottom: 15px;
+}
+.panel-title {
+	margin-bottom: 0px;
+}
+.panel-title > a {
+	background:#A6D053;
+	padding: 15px; 
+	display: block;
+	color:#fff;
+	text-decoration: none;
+ 	cursor: pointer;
+ 	pointer-events:auto;
+ 	font-size: 18px;  
+}
+.panel-title > a.collapsed {
+	background:#F4F4F4;
+	padding: 15px; 
+	display: block;
+	color:#000;
+}
+
+.collapse:not(.show) {
+    display: none;
+}
+.panel-collapse {
+	background:#fff;
+	border:1px solid #F4F4F4;
+	padding: 15px;  
+}
+.panel-collapse img {
+	    padding-right: 10px;
+}
+.facilities-detail {
+display: none;
+}
+.trip {
+	display: none;
+}
+.slick-slide img {
+    width: 100%;
+}
+.slick-prev {
+    left: 15px!important;
+    z-index: 999;
+}
+.slick-dotted.slick-slider {
+    margin-bottom: 60px;
+}
+.footer-mobile {
+ display: block;
+ padding:10px 0px 0px 0px; 
+}
+.footer {
+	display: none;
+}
+.footer-mobile .col-md-6 {
+	width: 50%;
+}
+.footer-mobile .social {
+	text-align: right;
+}
+.footer-mobile .social ul {
+	width: 100%;
+    display: block;
+    margin-bottom: 0px;
+}
+.footer-mobile .social li {
+    padding: 0px 10px 0px 0px;
+    text-align: right;
+    display: inline-block;
+}
+.book-online {
+	display: none;
+}
+.facilities {
+	display: block;
+}
+.navbar-toggler, .navbar-toggler:focus {
+	display: block;
+	outline: none;
+}
+.navigation ul li {
+    display: block;
+}
+.navigation ul li a {
+    color: #000;
+    padding: 0px 5px 0px 17px;
+    display: block;
+}
+.header {
+background: #FFFFFF;
+box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+padding: 15px 0px 10px;
+}
+.logo, .flag, .search-col, .breadcrumb {
+	display: none;
+}
+.slick-dotted.slick-slider {
+    margin-bottom: 60px!important;
+}
+section.carousel {
+    margin-top: 20px;
+}
+
+}
+
+@media (min-width: 992px) and (max-width: 1024px) {
+section.carousel {
+    font-weight: 500;
+    font-size: 13px;
+}
+.call {
+	max-width: 19%!important;
+	flex: 0 0 19%;
+}
+.cart, .cart:hover {
+    color: #fff;
+    line-height: 25px;
+    margin: 0px 20px;
+}
+.login .btn {
+    padding: 5px 15px;
+    margin: 0px 5px;
+}
+.navigation ul li {
+    display: inline-block;
+    padding-right: 10px;
+    margin-top: 15px;
+}
+.slick-next {
+    right: 2px!important;
+}
+h2 {
+	margin-bottom: 15px;
+}
+.facilities-detail .mt40 {
+    margin-top: 10px;
+}
+.carousel .mb20 {
+    margin-bottom: 10px;
+}
+.login {
+	max-width: 39%!important;
+}
+
+}
+
+
+@media (min-width: 1025px) and (max-width: 1200px) {
+	section.carousel {
+    font-weight: 500;
+    font-size: 13px;
+}
+.call {
+	max-width: 19%!important;
+	flex: 0 0 19%;
+}
+.cart, .cart:hover {
+    color: #fff;
+    line-height: 25px;
+    margin: 0px 20px;
+}
+.login .btn {
+    padding: 5px 15px;
+    margin: 0px 5px;
+}
+.navigation ul li {
+    display: inline-block;
+    padding-right: 10px;
+    margin-top: 15px;
+}
+.slick-next {
+    right: 2px!important;
+}
+h2 {
+	margin-bottom: 15px;
+}
+.facilities-detail .mt40 {
+    margin-top: 10px;
+}
+.carousel .mb20 {
+    margin-bottom: 10px;
+}
+.login {
+	max-width: 39%!important;
+}
+} 

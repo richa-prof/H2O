@@ -16,7 +16,10 @@
  *= require flexslider
  *= require bootstrap-slider
  *= require fonts
+ *= require tour_fonts
  *= require style
+ *= require slick
+ *= require slick-theme
  *= require custom
  *= require easy-autocomplete
  *= require toastr.min
