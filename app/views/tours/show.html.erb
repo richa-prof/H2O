@@ -61,10 +61,7 @@
     <div class="col-md-12">
       <h3>Facilities</h3>
     </div>
-    <div class="col-md-3 mb15"> <img src="/assets/tour_images/dinner.png"> Restauran </div>
-    <div class="col-md-9 mb15"> <img src="/assets/tour_images/shop.png">Souvenirs shop </div>
-    <div class="col-md-3 mb15"> <img src="/assets/tour_images/hammock.png">Hammocks </div>
-    <div class="col-md-9 mb15"> <img src="/assets/tour_images/shower-water-running.png">Bathrooms with showers </div>
+    <%= render 'facilities' %>
     <div class="col-md-8 text-center mt40">
       <button type="button" class="btn btn-dark">BOOK NOW</button>
     </div>
@@ -176,21 +173,6 @@
       </div>
     </div>
   </section>
-  <section class="facilities">
-    <div class="container">
-      <h1 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false">Facilities</a>
-        <hr>
-      </h1>
-      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel">
-        <div class="row">
-          <div class="col-md-6 mb15"> <img src="/assets/tour_images/dinner.png"> Restaurant </div>
-          <div class="col-md-6 mb15"> <img src="/assets/tour_images/shop.png">Souvenirs shop </div>
-          <div class="col-md-6 mb15"> <img src="/assets/tour_images/hammock.png">Hammocks </div>
-          <div class="col-md-6 mb15"> <img src="/assets/tour_images/shower-water-running.png">Bathrooms with showers </div>
-        </div>
-      </div>
-    </div>
-  </section>
   <section class="what-to">
     <div class="container">
       <h1 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false">What to bring </a>
@@ -198,17 +180,14 @@
       </h1>
       <div id="collapseFour" class="panel-collapse collapse" role="tabpanel">
         <div class="row mb20">
-          <div class="col-md-3"><img src="/assets/tour_images/slippers.png"> Swimwear, slippers</div>
-          <div class="col-md-3"><img  src="/assets/tour_images/towel-warmer.png"> Towel</div>
-        </div>
-        <div class="row mb20">
-          <div class="col-md-3"><img src="/assets/tour_images/camera-retro.png"> Underwater camera</div>
-          <div class="col-md-3"><img  src="/assets/tour_images/cash.png"> Cash for general expenses</div>
-        </div>
-        <div class="row">
-          <div class="col-md-8"> <img src="/assets/tour_images/sunscreen.png">Insect repellent and sun lotion<br>
-            <p>(Even though they are not allowed while snorkeling in itself, you may want them during your time at the main areas, before and/or after snorkeling)</p>
-          </div>
+          <% @tour_brings.each do |b| %>
+            <div class="col-md-3"><img src="/assets/tour_images/slippers.png"> <%= b.bring_locales.first.nome %></div>
+            <!-- <div class="col-md-3"><img  src="/assets/tour_images/towel-warmer.png"> Towel</div>
+            </div>
+            <div class="row mb20">
+            <div class="col-md-3"><img src="/assets/tour_images/camera-retro.png"> Underwater camera</div>
+            <div class="col-md-3"><img  src="/assets/tour_images/cash.png"> Cash for general expenses</div> -->
+          <% end %>
         </div>
       </div>
     </div>

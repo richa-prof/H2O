@@ -1,0 +1,9 @@
+
+<% @tour_facilities.each do |fac| %>
+  <% name_this_thing = fac.facility_locales.first.nome %>
+  <% if fac.facility.icon_name.blank? %>
+    <%= image_tag 'blank-icon.png', alt: name_this_thing, title: name_this_thing %>
+  <% elsif name_this_thing %>
+    <div class="col-md-6 mb15"> <img src="/assets/tour_images/<%=name_this_thing%>.png"> <%= name_this_thing%> </div>
+  <% end %>
+<%end%>
