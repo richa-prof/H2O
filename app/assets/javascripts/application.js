@@ -14,9 +14,7 @@
 //  require turbolinks
 //= require jquery
 //= require jquery_ujs
-//= require jquery.min
 //= require bootstrap
-//= require bootstrap.min
 //= require slick.min
 //= require owl.carousel
 //= require jquery.flexslider

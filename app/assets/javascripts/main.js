@@ -98,7 +98,7 @@ $(document).ready(function() {
     autoplayHoverPause: true
   });
 
-  $('.grid').masonry();
+  // $('.grid').masonry();
 
   $("#price_range, #duration, #distance, #rooms").slider();
 
