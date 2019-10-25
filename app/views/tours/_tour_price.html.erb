@@ -15,7 +15,7 @@
       <% end %>
       <span><%= number_to_currency @tour_price.preco_adulto %></span>
     </div>
-    <div class="col-lg-9 inactive">
+    <div class="col-lg-5 inactive">
       <div id="" class="row tour_persons">
         <div class="col-12 col-lg-12">
           <div class="form-group">
@@ -34,42 +34,11 @@
             </div>
           </div>
         </div>
-        
-
       </div>
      </div>
-   </div>
-    <% if @tour_price.preco_crianca2 %>
-    <div class="row">
-      <div class="col-lg-3">
-      <div class="form-group tour_persons">
-        <i class="fas fa-child"></i> <%= t 'children' %>
-        <small>(<%= t 'up_to' %> <%= @tour_price.idade_crianca2 %> <%= t 'yrs_old' %>)</small>
-        <span class="price"><%= number_to_currency @tour_price.preco_crianca2 %></span>
-      </div>
-    </div>
-      <div class="col-12 col-lg-5 inactive">
-         <div class="form-group tour_persons">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button type="button" class="btn btn-default main-btn-number btn-number" disabled="disabled" data-type="minus" data-field="children2">
-                <span class="fas fa-minus"></span>
-              </button>
-            </span>
-            <input type="text" id="children2" name="children2" class="form-control input-number main-input-number mt-0 text-center" value="0" data-value="<%= @tour_price.preco_crianca2 %>" min="0" max="10">
-            <span class="input-group-btn">
-              <button type="button" class="btn btn-default main-btn-number btn-number" data-type="plus" data-field="children2">
-                <span class="fas fa-plus"></span>
-              </button>
-            </span>
-          </div>
-        </div>
-      </div>
+     <% if @tour_price.idade_crianca2.blank? %>
       <div class="col-12 col-lg-2 inactive">
-       
-            
-            <h5>Total: <span id="price">0</span></h5>
-          
+        <h5>Total: <span id="price">0</span></h5>
       </div>
       <div class="col-lg-2 inactive">
         <div class=" text-right">
@@ -79,8 +48,67 @@
           </div>
         </div>
       </div>
-      </div>
-    <% end %>
+    <%end%>
+
+   </div>
+    
+    <div class="row">
+      <% if @tour_price.preco_crianca2 %>
+        <div class="col-lg-3">
+          <div class="form-group tour_persons">
+            <i class="fas fa-child"></i> <%= t 'children' %>
+            <small>(<%= t 'up_to' %> <%= @tour_price.idade_crianca2 %> <%= t 'yrs_old' %>)</small>
+            <span class="price"><%= number_to_currency @tour_price.preco_crianca2 %></span>
+          </div>
+        </div>
+        <div class="col-12 col-lg-5 inactive">
+          <div class="form-group tour_persons">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default main-btn-number btn-number" disabled="disabled" data-type="minus" data-field="children2">
+                  <span class="fas fa-minus"></span>
+                </button>
+              </span>
+              <input type="text" id="children2" name="children2" class="form-control input-number main-input-number mt-0 text-center" value="0" data-value="<%= @tour_price.preco_crianca2 %>" min="0" max="10">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default main-btn-number btn-number" data-type="plus" data-field="children2">
+                  <span class="fas fa-plus"></span>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-2 inactive">
+          <h5>Total: <span id="price">0</span></h5>
+        </div>
+        <div class="col-lg-2 inactive">
+          <div class=" text-right">
+            <div class="availability-box">
+              <div id="add_to_trip_box"><%= render 'add_to_trip_box' %></div>
+              <a id="add_to_trip_btn" class="btn btn-dark"><%= t 'buy_now' %></a>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="col-lg-3">
+        </div>
+        <div class="col-12 col-lg-5 inactive">
+        </div>
+        <% unless @tour_price.idade_crianca2.blank? %>
+          <div class="col-12 col-lg-2 inactive">
+            <h5>Total: <span id="price">0</span></h5>
+          </div>
+          <div class="col-lg-2 inactive">
+            <div class=" text-right">
+              <div class="availability-box">
+                <div id="add_to_trip_box"><%= render 'add_to_trip_box' %></div>
+                <a id="add_to_trip_btn" class="btn btn-dark"><%= t 'buy_now' %></a>
+              </div>
+            </div>
+          </div>
+        <%end%>
+      <% end %>
+    </div>
 
     <% if @tour_price.preco_crianca %>
       <div class="col-12 col-lg-12">

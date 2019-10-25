@@ -10,9 +10,9 @@
       </div>
       <div class="col-md-2 call"> +55 (67) 3255-3535<br>
         +55 (67) 9 9931-8257 </div>
-      <div class="col-md-5 text-right login"> <a class="cart" href=""><img src="/assets/tour_images/cart.png"> Cart</a>
-        <button type="button" class="btn btn-outline-primary">Log in</button>
-        <button type="button" class="btn btn-primary">Sign up</button>
+      <div class="col-md-5 text-right login"> <a class="cart" href="<%= add_to_cart_carts_path %>"><img src="/assets/tour_images/cart.png"> Cart</a>
+        <a class="btn btn-outline-primary" href="<%= new_user_session_path %>">Log in</a>
+        <a class="btn btn-primary" href="<%= new_user_session_path %>">Sign up</a>
       </div>
     </div>
     <div class="row">
@@ -21,13 +21,15 @@
         <div class="navbar-collapse collapse" id="navbarCollapse" style="">
           <div class="navigation">
             <ul>
-              <li><a href="">Home</a></li>
-              <li><a href="">Day by day suggestions</a></li>
-              <li><a href="">Special deals</a></li>
-              <li><a href="">Tours</a></li>
-              <li><a href="">Hotels</a></li>
-              <li><a href="">Events</a></li>
-              <li><a href="">Contact us</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="<%= personas_path %>">Day by day suggestions</a></li>
+              <li><a href="<%= special_deals_path %>">Special deals</a></li>
+              <li><a href="<%= tours_path %>">Tours</a></li>
+              <li><a href="<%= hotels_path %>">Hotels</a></li>
+              <li><a href="<%= events_path %>">Events</a></li>
+              <% if @contact_us.present? %>
+                <li><a href="<%= institutional_path(@contact_us) %>">Contact us</a></li>
+              <% end %>
             </ul>
           </div>
         </div>
