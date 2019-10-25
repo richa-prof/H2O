@@ -69,6 +69,11 @@ class Tour < ApplicationRecord
     Array(remove_images).each { |id| images.find_by_id(id).try(:purge) }
   end
 
+  WHAT_TO_BRING = {"Roupa de Banho"=> "Swimsuit", "Dinheiro"=> "Money", "Protetor Solar"=> "Sunscreen", "Repelente"=> "Repellent", "Tênis"=> "Sneakers", "Chapéu/Boné"=> "Hat Cap", "Toalha"=> "Towel", "Água"=> "Water"}
+
+  FACILITIES = {"Banheiros"=> "Toilets", "Piscina"=> "Pool", "Restaurante"=> "restaurant", "Redário"=> "Redário", "Armários"=> "Cabinets", "Chuveiros"=> "Showers", "Pista de Pouso"=> "Airstrip", "Espreguiçadeiras"=> "Sun loungers"}
+
+
   def related_tours(locale)
     Tour.display_on_webiste.includes(:tour_locales, :tour_prices, images_attachments: [:blob]).where('produtos_locales.locale = ? AND produtos_passeiotarifas.inicio <= ? AND produtos_passeiotarifas.fim >= ?', locale, Date.current, Date.current).references(:tour_locales).where(id: TourCategory.where(categoria_id: categories.pluck(:id)).pluck(:produto_id)).where.not(id: id).sample(6)
   end

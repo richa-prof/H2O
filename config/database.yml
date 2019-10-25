@@ -5,22 +5,4 @@ development:
   username: root
   password: root
   host: localhost
-  port: 3306
 
-production:
-  adapter: mysql2
-  encoding: utf8
-  database: ENV['DATABASE_URL']
-  username: 
-  password:  
-  host: localhost
-  port: 3306
-
-test:
-  adapter: mysql2
-  encoding: utf8
-  database: ENV['CLEARDB_DATABASE_URL']
-  username: root
-  password: root
-  host: localhost
-  port: 3306

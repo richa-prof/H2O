@@ -104,6 +104,7 @@ margin-bottom: 12px;
 }
 .btn-dark {
 	padding: 10px 35px;
+	color: #fff!important;
 }
 .mt40 {
 	margin-top: 30px;
@@ -263,6 +264,89 @@ padding:0px 10px 0px 0px; }
     display: block;
 }
 .navbar-toggler {
+	display: none;
+}
+ul.time li {
+    display: inline-block;
+    margin-right:10px; 
+}
+ul.time li a.tour_time {
+    padding: 5px 25px;
+    display: block;
+    position: relative;
+    color:#383336;
+    border-radius: 40px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); 
+}
+ul.time li a:hover, ul.time li a.active  {
+	background: #A6D053;
+}
+ul.time li a:hover span, ul.time li a.active span {
+	background: #fff;
+	color: #000;
+}
+ul.time li a span {
+position: absolute;
+    background: #A6D053;
+    padding: 0px 9px;
+    border-radius: 50px;
+    color: #fff;
+    top: -10px;
+    right: -5px;
+    font-size: 14px;
+}
+.tour_persons .btn-number {
+    border-radius: 25px;
+    background: #A6D053;
+    color: #fff;
+}
+.input-number {
+    border: none;
+    flex: inherit;
+    width: 50px;
+    font-size: 28px;
+    line-height: 15px;
+    padding: 0px;
+}
+.datepicker_icon {
+cursor: pointer;
+    position: relative;
+    margin: -29px 0px 0px 10px;
+    display: block;
+    color: #A6D053;
+}
+#selected_date {
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+.btn:focus, .btn.focus {
+    outline: 0;
+    box-shadow: none;
+}
+.cdsROW.narrow.border {
+    padding: 0px;
+    border: none!important;
+}
+h2 {
+    font-weight: 600;
+    font-size: 34px;
+    margin-bottom: 20px!important;
+}
+.facilities-detail .mb15 {
+    margin-bottom: 10px;
+}
+.facilities-detail .mt40 {
+    margin-top: 20px;
+}
+.cdsROW .cdsLocName a {
+    font-weight: 700;
+    color: #000;
+    font-size: 9px;
+}
+.tour_persons .input-group {
+	width: 170px;
+}
+.inactive {
 	display: none;
 }
 

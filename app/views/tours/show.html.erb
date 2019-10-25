@@ -100,7 +100,7 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row mb30">
             <div class="col-12 col-lg-3">
               <div class="form-group">
                 <label for="selected_date"><%=t 'tour_date' %></label>
@@ -116,29 +116,12 @@
                 <%= render 'tour_availability' %>
               </div>
             </div>
+          </div>
 
-            <div class="col-12">
+          <div class="row">
+            <div class="col-lg-12">
               <div id="tour_price">
                 <%= render 'tour_price' %>
-              </div>
-            </div>
-
-            <div class="col-12">
-              <div id="tour_persons" class="row tour_persons">
-                <%= render 'tour_persons' if @tour_price %>
-              </div>
-            </div>
-
-            <div class="col-12">
-              <div id="tour_extras" class="row tour_persons">
-                <%= render 'tour_extras' if @tour_extras %>
-              </div>
-            </div>
-
-            <div class="col-12 text-right">
-              <div class="availability-box">
-                <div id="add_to_trip_box"><%= render 'add_to_trip_box' %></div>
-                <a id="add_to_trip_btn" class="btn btn-primary btn-md pointer hide"><%= t 'buy_now' %></a>
               </div>
             </div>
           </div>
@@ -183,7 +166,7 @@
       <div id="collapseFour" class="panel-collapse collapse" role="tabpanel">
         <div class="row mb20">
           <% @tour_brings.each do |b| %>
-            <div class="col-md-3"><img src="/assets/tour_images/slippers.png"> <%= b.bring_locales.first.nome %></div>
+            <div class="col-md-3"><img src="/assets/<%= Tour::WHAT_TO_BRING[b.bring_locales.first.nome]%>.png"> <%= b.bring_locales.first.nome %></div>
             <!-- <div class="col-md-3"><img  src="/assets/tour_images/towel-warmer.png"> Towel</div>
             </div>
             <div class="row mb20">
@@ -254,7 +237,7 @@
   $(document).on('click', '.tour_time', function (event) {
     $(".tour_time").removeClass('active');
     $(this).addClass('active');
-    $("#tour_persons, #tour_extras").show();
+    $("#tour_persons, #tour_extras, .inactive").show();
     set_total_price();
     $("#add_to_trip_btn").show();
     $('.main-input-number').attr('max', $(this).find('span').html());
@@ -275,7 +258,7 @@
       $("#tour_system").val($(".tour_time.active").attr('system'));
       $("#tour_adults").val($("#adults").val());
       $("#tour_children").val($("#children").val());
-      $("#tour_children2").val($("#children2").val());
+      // $("#tour_children2").val($("#children2").val());
       $("#cart-form").submit();
     } else {
       alert("Acrescente pessoas");
