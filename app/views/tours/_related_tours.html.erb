@@ -4,7 +4,7 @@
     <div class="row">
       <% @related_tours.each do |tour| %>
         <div class="col-md-4 mb30">
-          <div class="product"> <%= image_tag tour.face_image_url, :height => "125", :style => 'object-fit: cover;', lazy: true %>
+          <div class="product"> <%= image_tag tour.face_image_url, :height => "125", :style => 'object-fit: cover;' %>
             <h4><a href=""><%= tour.tour_locales.first.nome %></a></h4>
             <p><%= tour.localidade %></p>
             <div class="row">
