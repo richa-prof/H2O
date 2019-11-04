@@ -1,6 +1,0 @@
-en:
-  activerecord:
-    models:
-      transportation:
-        one: Transportation
-        other: Transportations

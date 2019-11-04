@@ -1,8 +1,0 @@
-development:
-  adapter: mysql2
-  encoding: utf8
-  database: h2o_ror_front_end_development
-  username: root
-  password: root
-  host: localhost
-

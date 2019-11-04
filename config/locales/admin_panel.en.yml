@@ -1,7 +1,0 @@
-en:
-  admin:
-    scopes:
-      display_on_webiste: 100% Online
-      all: All
-    table_headers:
-      created_at: Date
